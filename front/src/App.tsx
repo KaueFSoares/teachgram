@@ -1,9 +1,9 @@
+import LoginPage from "./components/pages/LoginPage.tsx"
 
 function App() {
-
   return (
     <>
-      <p className="text-red-400 text-4xl">test</p>
+      <LoginPage />
     </>
   )
 }
