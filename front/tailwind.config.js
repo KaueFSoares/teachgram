@@ -9,7 +9,8 @@ export default {
       colors: {
         "orange": "#F37671",
         "gray": "#A09F9F",
-        "white": "#FFFFFF"
+        "white": "#FFFFFF",
+        "black": "#303030",
       },
     },
   },
