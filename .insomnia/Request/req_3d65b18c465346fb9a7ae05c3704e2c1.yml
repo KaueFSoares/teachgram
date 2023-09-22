@@ -1,0 +1,32 @@
+_id: req_3d65b18c465346fb9a7ae05c3704e2c1
+type: Request
+parentId: wrk_423719d1ed8249a0a8d7644fe14c7b6a
+modified: 1695389254703
+created: 1695388377091
+url: http://localhost:8080/user
+name: update user
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"phone": "122345"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTUzOTYzNTh9._9DQna_0w8OPJcEQi_9FIaUnDxmsuHmJgIimt3BNuew
+metaSortKey: -1695388377091
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
