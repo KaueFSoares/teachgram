@@ -13,7 +13,8 @@ const Input = ({ name, type, placeholder, className }: InputProps) => {
     >
       <label 
         htmlFor={name}
-        className="text-base font-medium"
+        className="text-base font-medium
+                  lg:text-sm"
       >
         {name}
       </label>
@@ -23,7 +24,8 @@ const Input = ({ name, type, placeholder, className }: InputProps) => {
         name={name} 
         id={name}
         placeholder={placeholder} 
-        className={`border border-solid border-gray rounded-lg py-4 px-5 outline-orange ${className}`}
+        className={`border border-solid border-gray rounded-lg py-4 px-5 outline-orange ${className}
+                    lg:py-2 lg:px-4`}
       />
     </div>
   )
