@@ -1,6 +1,7 @@
 package br.com.teachgram.api.domain.user.validation;
 
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
+import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ public class UserDataValidationService {
     }
 
     public void validate(SignupRequestDTO data) {
+        validations.forEach(validation -> validation.validate(data));
+    }
+
+    public void validate(UpdateRequestDTO data) {
         validations.forEach(validation -> validation.validate(data));
     }
 }

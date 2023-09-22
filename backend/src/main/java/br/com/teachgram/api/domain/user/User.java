@@ -2,12 +2,14 @@ package br.com.teachgram.api.domain.user;
 
 import br.com.teachgram.api.domain.post.Post;
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
+import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -105,5 +107,35 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void update(UpdateRequestDTO dto) {
+
+        if (dto.email() != null) {
+            this.email = dto.email();
+        }
+
+        if (dto.name() != null) {
+            this.name = dto.name();
+        }
+
+        if (dto.bio() != null) {
+            this.bio = dto.bio();
+        }
+
+        if (dto.phone() != null) {
+            this.phone = dto.phone();
+        }
+
+        if (dto.photo() != null) {
+            this.photo = dto.photo();
+        }
+
+        if (dto.password() != null) {
+            this.password = new BCryptPasswordEncoder().encode(dto.password());
+        }
+
+        this.updatedAt = LocalDateTime.now();
+
     }
 }
