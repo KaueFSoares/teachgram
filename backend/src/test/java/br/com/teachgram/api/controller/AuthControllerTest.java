@@ -29,10 +29,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureJsonTesters
-@ActiveProfiles("test")
 class AuthControllerTest extends TestsBase {
 
     private final UserRepository userRepository;
