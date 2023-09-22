@@ -93,7 +93,7 @@ const LoginPage = () => {
 
       <button 
         type="button"
-        className="w-full flex gap-6 shadow-xl py-4 justify-center rounded-lg text-gray"
+        className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
       >
         <img src="/icon/google_icon.svg" alt="Google" />
         <p>Entrar com Google</p>
@@ -101,7 +101,7 @@ const LoginPage = () => {
 
       <button 
         type="button"
-        className="w-full flex gap-6 shadow-xl py-4 justify-center rounded-lg text-gray"
+        className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
       >
         <img src="/icon/apple_icon.svg" alt="Apple" />
         <p>Entrar com Apple</p>
