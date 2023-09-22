@@ -1,0 +1,31 @@
+_id: req_cbe3a58f155c447fadbf120243d45801
+type: Request
+parentId: wrk_bf8f03d90a734fcba0d6907bbae93a8f
+modified: 1695380679835
+created: 1695342368488
+url: http://localhost:8080/auth/login
+name: Login
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "seed@seed",
+    	"password": "seed"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1695292339067
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

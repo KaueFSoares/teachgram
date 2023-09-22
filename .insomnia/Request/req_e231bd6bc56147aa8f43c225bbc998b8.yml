@@ -1,0 +1,34 @@
+_id: req_e231bd6bc56147aa8f43c225bbc998b8
+type: Request
+parentId: wrk_bf8f03d90a734fcba0d6907bbae93a8f
+modified: 1695345194546
+created: 1695342140844
+url: http://localhost:8080/auth/signup
+name: Sign up
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "test223@test.com",
+    	"password": "test",
+    	"name": "test",
+    	"bio": "test",
+    	"phone": "1234"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1695342140844
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
