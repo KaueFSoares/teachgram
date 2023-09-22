@@ -1,0 +1,25 @@
+_id: req_76ede2501d0443eebe4f1f8379f70eb8
+type: Request
+parentId: wrk_423719d1ed8249a0a8d7644fe14c7b6a
+modified: 1695390577486
+created: 1695390564646
+url: http://localhost:8080/user/details
+name: get user details
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTUzOTc3NDZ9.59HgfYD5Jx_NLcGRyRf1KZ-_A1iC9DVMS9rFZZRh3Jo
+metaSortKey: -1695376818029.25
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
