@@ -68,9 +68,29 @@ public class UserService {
         return new FriendDetailsDTO(friend, friendsCount);
     }
 
-    public Page<FriendShortDetailsDTO> getFriends(Pageable pageable) {
+    public Page<FriendShortDetailsDTO> getManyFriends(Pageable pageable) {
         var user = getAuthenticatedUser();
 
         return userRepository.getFriends(user.getId(), pageable).map(FriendShortDetailsDTO::new);
+    }
+
+    public FriendDetailsDTO getSingleFriend(String id) {
+        var user = getAuthenticatedUser();
+
+        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new AuthException("Friend not found."));
+
+        var friendsCount = userRepository.countFriendsForUser(friend.getId());
+
+        return new FriendDetailsDTO(friend, friendsCount);
+    }
+
+    public DeleteResponseDTO deleteFriend(String id) {
+        var user = userRepository.findByIdWithPosts(getAuthenticatedUser().getId()).orElseThrow(() -> new AuthException("User not found."));
+
+        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new AuthException("Friend not found."));
+
+        user.getFriends().remove(friend);
+
+        return new DeleteResponseDTO("Friend deleted successfully.");
     }
 }

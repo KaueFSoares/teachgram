@@ -46,11 +46,18 @@ public class UserController {
 
     @GetMapping("/friends")
     public ResponseEntity<Page<FriendShortDetailsDTO>> getFriends(Pageable pageable) {
-        return ResponseEntity.ok().body(userService.getFriends(pageable));
+        return ResponseEntity.ok().body(userService.getManyFriends(pageable));
     }
 
-    //remove friend
-    //friend details
+    @GetMapping("/friends/{id}")
+    public ResponseEntity<FriendDetailsDTO> getFriend(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.getSingleFriend(id));
+    }
 
+    @DeleteMapping("/friends/{id}")
+    @Transactional
+    public ResponseEntity<DeleteResponseDTO> deleteFriend(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.deleteFriend(id));
+    }
 
 }
