@@ -1,6 +1,7 @@
 package br.com.teachgram.api.domain.user;
 
 import br.com.teachgram.api.domain.post.Post;
+import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,8 @@ public class User implements UserDetails {
 
     private String phone;
 
+    private String bio;
+
     private String password;
 
     @Size(max = 2000)
@@ -57,6 +60,19 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "friend_id"))
     private Set<User> friends = new HashSet<>();
 
+    public User(SignupRequestDTO dto) {
+        this.name = dto.name();
+        this.email = dto.email();
+        this.bio = dto.bio();
+        this.phone = dto.phone();
+        this.photo = dto.photo();
+    }
+
+    public User(String id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -91,5 +107,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
