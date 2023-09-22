@@ -6,6 +6,7 @@ import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.UserRepository;
+import br.com.teachgram.api.service.AuthService;
 import br.com.teachgram.api.service.TokenService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,67 +25,29 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserRepository userRepository;
-    private final UserDataValidationService userDataValidationService;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
+    private final AuthService authService;
 
     @Autowired
-    public AuthController(
-            UserRepository userRepository,
-            UserDataValidationService userDataValidationService,
-            PasswordEncoder passwordEncoder,
-            AuthenticationManager authenticationManager,
-            TokenService tokenService
-    ) {
-        this.userRepository = userRepository;
-        this.userDataValidationService = userDataValidationService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.tokenService = tokenService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
-        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException("User not found."));
-
-        if (user.getDeleted()) throw new DeletedAccountException("Deleted account.");
-
-        var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
-
-        var authentication = authenticationManager.authenticate(token);
-
-        var data = tokenService.generateToken(authentication.getName());
-
-        return ResponseEntity.ok(data);
+        return ResponseEntity.ok(authService.login(dto));
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponseDTO> refreshToken(@RequestBody @Valid RefreshTokenRequestDTO dto) {
-
-        var token = dto.refresh_token().replace("Bearer ", "");
-
-        var subject = tokenService.validateToken(token);
-
-        var data = tokenService.generateToken(subject);
-
-        return ResponseEntity.ok(data);
+        return ResponseEntity.ok(authService.refreshToken(dto));
     }
 
     @Transactional
     @PostMapping("/signup")
     public ResponseEntity<UserDetailsDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+        var user = authService.signup(dto);
 
-        userDataValidationService.validate(dto);
-
-        var user = new User(dto);
-
-        user.setPassword(passwordEncoder.encode(dto.password()));
-
-       userRepository.save(user);
-
-        var uri = uriComponentsBuilder.path("/api/users/{id}").buildAndExpand(user.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new UserDetailsDTO(user));
     }
