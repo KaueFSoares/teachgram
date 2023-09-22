@@ -5,6 +5,7 @@ import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.UserSeeder;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
 import br.com.teachgram.api.domain.user.dto.RefreshTokenRequestDTO;
+import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -37,6 +40,7 @@ class AuthControllerTest extends TestsBase {
     private final PasswordEncoder passwordEncoder;
 
     private final JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO;
+    private final JacksonTester<SignupRequestDTO> signupRequestDTO;
 
     @Autowired
     public AuthControllerTest(
@@ -47,7 +51,8 @@ class AuthControllerTest extends TestsBase {
             UserSeeder userSeeder,
             PasswordEncoder passwordEncoder,
 
-            JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO
+            JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO,
+            JacksonTester<SignupRequestDTO> signupRequestDTO
     ) {
         super(mockMvc, jsonLoginRequestDTO);
 
@@ -56,6 +61,7 @@ class AuthControllerTest extends TestsBase {
         this.passwordEncoder = passwordEncoder;
 
         this.refreshTokenRequestDTO = refreshTokenRequestDTO;
+        this.signupRequestDTO = signupRequestDTO;
     }
 
     @AfterEach
@@ -86,6 +92,27 @@ class AuthControllerTest extends TestsBase {
         user.setDeleted(true);
 
         return user;
+    }
+
+    private String getJsonContent(String mail, String password, String name, String phone, String bio) throws IOException {
+        return signupRequestDTO.write(
+                new SignupRequestDTO(
+                        name,
+                        mail,
+                        password,
+                        bio,
+                        phone,
+                        "test"
+                )
+        ).getJson();
+    }
+
+
+    @Test
+    @DisplayName("Wake up test")
+    void wakeUp() throws Exception {
+        // Just for cleaning the time from the first test
+        System.out.println("-----AuthControllerTest: wakeUp-----");
     }
 
     @Test
@@ -219,6 +246,111 @@ class AuthControllerTest extends TestsBase {
         ).andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @Test
+    @DisplayName("Must return 201 when signup with valid credentials")
+    public void signup1() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "test", "test", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    @Test
+    @DisplayName("Must return 400 when signup with invalid email")
+    public void signup2() throws Exception {
+
+        var jsonContent = getJsonContent("test", "test", "test", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Must return 400 when signup with invalid password")
+    public void signup3() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "", "test", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Must return 400 when signup with invalid name")
+    public void signup4() throws Exception {
+
+        var jsonContent = getJsonContent("test@test.com", "test", "", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Must return 400 when signup with invalid bio")
+    public void signup5() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "test", "test", "test", "");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Must return 409 when signup with already registered email")
+    public void signup6() throws Exception {
+
+        var jsonContent = getJsonContent("seed@seed", "test", "test", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    @DisplayName("Must return 409 when signup with already registered phone")
+    public void signup7() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "test", "test", "seed", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CONFLICT.value());
     }
 
 }
