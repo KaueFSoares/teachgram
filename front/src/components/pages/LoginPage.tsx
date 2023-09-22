@@ -37,14 +37,15 @@ const LoginPage = () => {
           className="flex justify-between text-sm text-black/70 mb-12"
         >
           <div 
-            className="flex gap-2"
+            className="flex gap-2 relative items-center"
           >
             <input 
               type="checkbox" 
               name="remember_password" 
               id="remember_password"
-              className="accent-orange outline-none" 
+              className="accent-orange outline-none h-4 w-4" 
             />
+            <label htmlFor="remember_password" className="absolute h-4 w-4 border-orange border-solid border rounded-[.250rem]"></label>
             <label htmlFor="remember_password">Lembrar senha</label>
           </div>
 
