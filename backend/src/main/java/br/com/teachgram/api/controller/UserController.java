@@ -33,4 +33,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.delete());
     }
 
+    @GetMapping("/details")
+    public ResponseEntity<UserDetailsDTO> details() {
+        return ResponseEntity.ok().body(userService.details());
+    }
+
 }

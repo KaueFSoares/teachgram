@@ -49,4 +49,10 @@ public class UserService {
 
         return new DeleteResponseDTO("User deleted successfully.");
     }
+
+    public UserDetailsDTO details() {
+        var user = getAuthenticatedUser();
+
+        return new UserDetailsDTO(user);
+    }
 }
