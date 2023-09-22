@@ -138,4 +138,8 @@ public class User implements UserDetails {
         this.updatedAt = LocalDateTime.now();
 
     }
+
+    public void addFriend(User user) {
+        this.friends.add(user);
+    }
 }

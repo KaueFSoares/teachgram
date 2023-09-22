@@ -1,13 +1,13 @@
 package br.com.teachgram.api.service;
 
 import br.com.teachgram.api.domain.user.User;
-import br.com.teachgram.api.domain.user.dto.DeleteResponseDTO;
-import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
-import br.com.teachgram.api.domain.user.dto.UserDetailsDTO;
+import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -54,5 +54,23 @@ public class UserService {
         var user = getAuthenticatedUser();
 
         return new UserDetailsDTO(user);
+    }
+
+    public FriendDetailsDTO addFriend(String id) {
+        var user = getAuthenticatedUser();
+
+        var friend = userRepository.findByIdWithPosts(id).orElseThrow(() -> new AuthException("Friend not found."));
+
+        user.getFriends().add(friend);
+
+        var friendsCount = userRepository.countFriendsForUser(friend.getId());
+
+        return new FriendDetailsDTO(friend, friendsCount);
+    }
+
+    public Page<FriendShortDetailsDTO> getFriends(Pageable pageable) {
+        var user = getAuthenticatedUser();
+
+        return userRepository.getFriends(user.getId(), pageable).map(FriendShortDetailsDTO::new);
     }
 }

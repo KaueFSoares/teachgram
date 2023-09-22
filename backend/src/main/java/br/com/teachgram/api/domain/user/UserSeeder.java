@@ -21,20 +21,36 @@ public class UserSeeder {
     @PostConstruct
     public void seed() {
         if (userRepository.count() == 0) {
-            var user = new User();
 
-            user.setName("seed");
-            user.setEmail("seed@seed");
-            user.setPhone("seed");
-            user.setBio("seed");
-            user.setPassword(passwordEncoder.encode("seed"));
 
-            userRepository.save(user);
+            var seed = userRepository.save(makeUser("seed"));
+
+            var friendOfSeed1 = userRepository.save(makeUser("friendOfSeed1"));
+            var friendOfSeed2 = userRepository.save(makeUser("friendOfSeed2"));
+            var friendOfSeed3 = userRepository.save(makeUser("friendOfSeed3"));
+
+            seed.addFriend(friendOfSeed1);
+            seed.addFriend(friendOfSeed2);
+            seed.addFriend(friendOfSeed3);
+
+            userRepository.save(seed);
 
             System.out.println("-----UserSeeder: users created-----");
         } else {
             System.out.println("-----UserSeeder: users already created-----");
         }
+    }
+
+    private User makeUser(String name) {
+        var user = new User();
+
+        user.setName(name);
+        user.setEmail(name + "@" + name);
+        user.setPhone(name);
+        user.setBio(name);
+        user.setPassword(passwordEncoder.encode(name));
+
+        return user;
     }
 
 }

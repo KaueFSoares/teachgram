@@ -1,12 +1,12 @@
 package br.com.teachgram.api.controller;
 
-import br.com.teachgram.api.domain.user.dto.DeleteResponseDTO;
-import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
-import br.com.teachgram.api.domain.user.dto.UserDetailsDTO;
+import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,9 +33,24 @@ public class UserController {
         return ResponseEntity.ok().body(userService.delete());
     }
 
-    @GetMapping("/details")
+    @GetMapping("/profile")
     public ResponseEntity<UserDetailsDTO> details() {
         return ResponseEntity.ok().body(userService.details());
     }
+
+    @PostMapping("/add/{id}")
+    @Transactional
+    public ResponseEntity<FriendDetailsDTO> addFriend(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.addFriend(id));
+    }
+
+    @GetMapping("/friends")
+    public ResponseEntity<Page<FriendShortDetailsDTO>> getFriends(Pageable pageable) {
+        return ResponseEntity.ok().body(userService.getFriends(pageable));
+    }
+
+    //remove friend
+    //friend details
+
 
 }
