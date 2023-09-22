@@ -1,4 +1,4 @@
-package br.com.teachgram.api.service;
+package br.com.teachgram.api.infra.security;
 
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
