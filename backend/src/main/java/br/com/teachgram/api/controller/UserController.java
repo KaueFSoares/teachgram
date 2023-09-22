@@ -1,5 +1,6 @@
 package br.com.teachgram.api.controller;
 
+import br.com.teachgram.api.domain.user.dto.DeleteResponseDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UserDetailsDTO;
 import br.com.teachgram.api.service.UserService;
@@ -7,10 +8,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -27,6 +25,12 @@ public class UserController {
     @Transactional
     public ResponseEntity<UserDetailsDTO> update(@RequestBody @Valid UpdateRequestDTO dto) {
         return ResponseEntity.ok(userService.update(dto));
+    }
+
+    @DeleteMapping
+    @Transactional
+    public ResponseEntity<DeleteResponseDTO> delete() {
+        return ResponseEntity.ok().body(userService.delete());
     }
 
 }

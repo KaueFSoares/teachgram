@@ -1,6 +1,7 @@
 package br.com.teachgram.api.service;
 
 import br.com.teachgram.api.domain.user.User;
+import br.com.teachgram.api.domain.user.dto.DeleteResponseDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UserDetailsDTO;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
@@ -39,5 +40,13 @@ public class UserService {
         user.update(dto);
 
         return new UserDetailsDTO(user);
+    }
+
+    public DeleteResponseDTO delete() {
+        var user = getAuthenticatedUser();
+
+        user.setDeleted(true);
+
+        return new DeleteResponseDTO("User deleted successfully.");
     }
 }
