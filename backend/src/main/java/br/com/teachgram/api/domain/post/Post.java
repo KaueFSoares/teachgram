@@ -41,6 +41,8 @@ public class Post {
 
     private String videoLink;
 
+    private Integer likes = 0;
+
     @ManyToOne
     private User user;
 
