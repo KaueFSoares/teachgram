@@ -48,10 +48,10 @@ public class User implements UserDetails {
     @Size(max = 2000)
     private String photo;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "friends",
             joinColumns = @JoinColumn(name = "user_id"),

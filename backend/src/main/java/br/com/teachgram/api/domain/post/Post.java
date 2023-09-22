@@ -43,7 +43,7 @@ public class Post {
 
     private Integer likes = 0;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 }
