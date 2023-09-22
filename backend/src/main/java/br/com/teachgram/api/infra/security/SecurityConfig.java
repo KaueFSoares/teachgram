@@ -1,6 +1,8 @@
 package br.com.teachgram.api.infra.security;
 
 import br.com.teachgram.api.infra.exception.AuthException;
+import br.com.teachgram.api.infra.filter.ExceptionHandlerFilter;
+import br.com.teachgram.api.infra.filter.PerformanceFilter;
 import br.com.teachgram.api.infra.filter.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,12 +23,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
+    private final PerformanceFilter performanceFilter;
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
 
     @Autowired
     public SecurityConfig(
-            SecurityFilter securityFilter
+            SecurityFilter securityFilter,
+            PerformanceFilter performanceFilter,
+            ExceptionHandlerFilter exceptionHandlerFilter
     ) {
         this.securityFilter = securityFilter;
+        this.performanceFilter = performanceFilter;
+        this.exceptionHandlerFilter = exceptionHandlerFilter;
     }
 
     @Bean
@@ -43,6 +51,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(performanceFilter, SecurityFilter.class)
+                .addFilterBefore(exceptionHandlerFilter, PerformanceFilter.class)
                 .build();
     }
 
