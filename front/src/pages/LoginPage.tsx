@@ -10,7 +10,7 @@ const LoginPage = () => {
         className="flex-grow h-full min-h-screen flex flex-col items-center justify-center text-black
                   "
       >
-        <div className="h-full flex flex-col p-12 items-start justify-start gap-8 text-black
+        <div className="h-full flex w-full flex-col p-12 items-start justify-start gap-8 text-black
                         lg:w-2/3 lg:gap-6 lg:pt-0 lg:px-6 lg:pb-6  lg:overflow-auto lg:max-h-[calc(100vh-6rem)]
                         xl:w-1/2
                         2xl:w-1/3">
