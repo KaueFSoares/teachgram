@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 public record UpdateRequestDTO(
         String name,
+        @Email
         String email,
         String password,
         String bio,
