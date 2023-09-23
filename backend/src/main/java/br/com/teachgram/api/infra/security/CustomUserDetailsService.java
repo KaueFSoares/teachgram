@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
+import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findTopByEmail(username);
+        return userRepository.findUserDetailsByEmail(username).orElseThrow(() -> new AuthException("User not found."));
     }
 }

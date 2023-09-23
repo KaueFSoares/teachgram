@@ -10,13 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, String> {
-    @Query("select u from User u where u.email = ?1")
-    Optional<UserDetails> findDetailsByEmail(String email);
 
     Optional<User> findByEmail(String email);
 
     @Query("select new User(u.id, u.email, u.password) from User u where u.email = :email")
-    UserDetails findTopByEmail(String email);
+    Optional<UserDetails> findUserDetailsByEmail(String email);
 
     Boolean existsByEmail(String email);
 
