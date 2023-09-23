@@ -4,6 +4,7 @@ import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
+import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,7 +60,7 @@ public class UserService {
     public FriendDetailsDTO addFriend(String id) {
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findByIdWithPosts(id).orElseThrow(() -> new AuthException("Friend not found."));
+        var friend = userRepository.findFriendById(id).orElseThrow(() -> new NotFoundException("Friend not found."));
 
         user.getFriends().add(friend);
 
@@ -85,7 +86,7 @@ public class UserService {
     }
 
     public DeleteResponseDTO deleteFriend(String id) {
-        var user = userRepository.findByIdWithPosts(getAuthenticatedUser().getId()).orElseThrow(() -> new AuthException("User not found."));
+        var user = userRepository.findFriendById(getAuthenticatedUser().getId()).orElseThrow(() -> new AuthException("User not found."));
 
         var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new AuthException("Friend not found."));
 
