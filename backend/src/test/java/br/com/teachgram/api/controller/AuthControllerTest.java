@@ -31,9 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 class AuthControllerTest extends TestsBase {
 
-    private final UserRepository userRepository;
     private final UserSeeder userSeeder;
-    private final PasswordEncoder passwordEncoder;
 
     private final JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO;
     private final JacksonTester<SignupRequestDTO> signupRequestDTO;
@@ -42,19 +40,17 @@ class AuthControllerTest extends TestsBase {
     public AuthControllerTest(
             MockMvc mockMvc,
             JacksonTester<LoginRequestDTO> jsonLoginRequestDTO,
-
             UserRepository userRepository,
-            UserSeeder userSeeder,
             PasswordEncoder passwordEncoder,
+
+            UserSeeder userSeeder,
 
             JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO,
             JacksonTester<SignupRequestDTO> signupRequestDTO
     ) {
-        super(mockMvc, jsonLoginRequestDTO);
+        super(mockMvc, jsonLoginRequestDTO, userRepository, passwordEncoder);
 
-        this.userRepository = userRepository;
         this.userSeeder = userSeeder;
-        this.passwordEncoder = passwordEncoder;
 
         this.refreshTokenRequestDTO = refreshTokenRequestDTO;
         this.signupRequestDTO = signupRequestDTO;
@@ -81,7 +77,7 @@ class AuthControllerTest extends TestsBase {
         user.setEmail("deleted@deleted");
         user.setPhone("deleted");
         user.setBio("deleted");
-        user.setPassword(passwordEncoder.encode("deleted"));
+        user.setPassword(super.passwordEncoder.encode("deleted"));
 
         userRepository.save(user);
 
