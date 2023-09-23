@@ -1,12 +1,14 @@
-import { HTMLProps } from "react"
+import { Dispatch, HTMLProps, SetStateAction } from "react"
 
 interface InputProps extends HTMLProps<HTMLInputElement>{
     name: string
     type: string
     placeholder: string
+    state: string
+    setState: Dispatch<SetStateAction<string>>
 }
 
-const Input = ({ name, type, placeholder, className }: InputProps) => {
+const Input = ({ name, type, placeholder, className, state, setState }: InputProps) => {
   return (
     <div 
       className="flex flex-col w-full gap-2"
@@ -20,6 +22,8 @@ const Input = ({ name, type, placeholder, className }: InputProps) => {
       </label>
 
       <input 
+        onChange={(e) => setState(e.target.value)}
+        value={state}
         type={type} 
         name={name} 
         id={name}

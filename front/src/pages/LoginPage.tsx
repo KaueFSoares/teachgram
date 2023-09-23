@@ -1,7 +1,15 @@
+import { Dispatch, SetStateAction } from "react"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
-const LoginPage = () => {
+interface LoginPageProps {
+  email: string
+  password: string
+  setEmail: Dispatch<SetStateAction<string>>
+  setPassword: Dispatch<SetStateAction<string>>
+}
+
+const LoginPage = ({ email, password, setEmail, setPassword }: LoginPageProps) => {
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -35,12 +43,16 @@ const LoginPage = () => {
               type="email" 
               placeholder="Digite seu e-mail" 
               className="mb-2"
+              state={email}
+              setState={setEmail}
             />
 
             <Input 
               name="Senha" 
               type="password" 
               placeholder="Digite sua senha" 
+              state={password}
+              setState={setPassword}
             />
 
             <div 

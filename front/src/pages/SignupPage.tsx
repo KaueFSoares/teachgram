@@ -1,7 +1,21 @@
+import { Dispatch, SetStateAction } from "react"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
-const SignupPage = () => {
+interface SignupPageProps {
+  name: string
+  email: string
+  bio: string
+  phone: string
+  password: string
+  setName: Dispatch<SetStateAction<string>>
+  setEmail: Dispatch<SetStateAction<string>>
+  setBio: Dispatch<SetStateAction<string>>
+  setPhone: Dispatch<SetStateAction<string>>
+  setPassword: Dispatch<SetStateAction<string>>
+}
+
+const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setBio, setPhone, setPassword }: SignupPageProps) => {
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -34,24 +48,32 @@ const SignupPage = () => {
               name="Nome"
               type="text"
               placeholder="Digite seu nome"
+              state={name}
+              setState={setName}
             />
 
             <Input
               name="E-mail"
               type="email"
               placeholder="Digite seu e-mail"
+              state={email}
+              setState={setEmail}
             />
 
             <Input
               name="Descrição"
               type="text"
               placeholder="Faça uma descrição"
+              state={bio}
+              setState={setBio}
             />
 
             <Input
               name="Celular"
               type="text"
               placeholder="Digite seu número de celular"
+              state={phone}
+              setState={setPhone}
             />
 
             <Input
@@ -59,6 +81,8 @@ const SignupPage = () => {
               type="password"
               placeholder="Digite sua senha"
               className="mb-8"
+              state={password}
+              setState={setPassword}
             />
 
             <Button
