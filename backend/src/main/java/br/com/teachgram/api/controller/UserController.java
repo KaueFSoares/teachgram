@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.details());
     }
 
-    @PostMapping("/add/{id}")
+    @PostMapping("/friends/{id}")
     @Transactional
     public ResponseEntity<FriendDetailsDTO> addFriend(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.addFriend(id));
