@@ -33,8 +33,10 @@ public class Post {
     @Column(name = "private")
     private Boolean privatePost = false;
 
+    @Size(max = 50)
     private String title;
 
+    @Size(max = 200)
     private String description;
 
     private String photoLink;
