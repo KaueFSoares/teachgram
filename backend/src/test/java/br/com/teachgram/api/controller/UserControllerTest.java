@@ -261,7 +261,7 @@ class UserControllerTest extends TestsBase {
         super.createTestUser();
 
         MockHttpServletResponse response = mockMvc.perform(
-                get("/user/profile")
+                get("/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer " + super.login("test@test", "test").access_token())
         ).andReturn().getResponse();
@@ -275,7 +275,7 @@ class UserControllerTest extends TestsBase {
         super.createTestUser();
 
         MockHttpServletResponse response = mockMvc.perform(
-                get("/user/profile")
+                get("/user")
                         .contentType(MediaType.APPLICATION_JSON)
         ).andReturn().getResponse();
 
@@ -288,7 +288,7 @@ class UserControllerTest extends TestsBase {
         super.createTestUser();
 
         MockHttpServletResponse response = mockMvc.perform(
-                get("/user/profile")
+                get("/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer " + super.login("test@test", "test").access_token() + "invalid")
         ).andReturn().getResponse();
