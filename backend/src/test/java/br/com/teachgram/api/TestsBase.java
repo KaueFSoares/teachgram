@@ -1,6 +1,7 @@
 package br.com.teachgram.api;
 
 import br.com.teachgram.api.domain.user.User;
+import br.com.teachgram.api.domain.user.UserSeeder;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
 import br.com.teachgram.api.repository.UserRepository;
@@ -28,17 +29,20 @@ public abstract class TestsBase {
     protected final JacksonTester<LoginRequestDTO> jsonLoginRequestDTO;
     protected final UserRepository userRepository;
     protected final PasswordEncoder passwordEncoder;
+    protected final UserSeeder userSeeder;
 
     public TestsBase(
             MockMvc mockMvc,
             JacksonTester<LoginRequestDTO> jsonLoginRequestDTO,
             UserRepository userRepository,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            UserSeeder userSeeder
     ) {
         this.mockMvc = mockMvc;
         this.jsonLoginRequestDTO = jsonLoginRequestDTO;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userSeeder = userSeeder;
     }
 
     protected User createTestUser() {

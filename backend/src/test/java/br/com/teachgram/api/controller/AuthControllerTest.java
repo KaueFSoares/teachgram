@@ -31,8 +31,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 class AuthControllerTest extends TestsBase {
 
-    private final UserSeeder userSeeder;
-
     private final JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO;
     private final JacksonTester<SignupRequestDTO> signupRequestDTO;
 
@@ -42,15 +40,12 @@ class AuthControllerTest extends TestsBase {
             JacksonTester<LoginRequestDTO> jsonLoginRequestDTO,
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
-
             UserSeeder userSeeder,
 
             JacksonTester<RefreshTokenRequestDTO> refreshTokenRequestDTO,
             JacksonTester<SignupRequestDTO> signupRequestDTO
     ) {
-        super(mockMvc, jsonLoginRequestDTO, userRepository, passwordEncoder);
-
-        this.userSeeder = userSeeder;
+        super(mockMvc, jsonLoginRequestDTO, userRepository, passwordEncoder, userSeeder);
 
         this.refreshTokenRequestDTO = refreshTokenRequestDTO;
         this.signupRequestDTO = signupRequestDTO;
@@ -58,8 +53,8 @@ class AuthControllerTest extends TestsBase {
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
-        userSeeder.seed();
+        super.userRepository.deleteAll();
+        super.userSeeder.seed();
     }
 
     private MockHttpServletResponse getResponse(String jsonContent) throws Exception {
@@ -79,7 +74,7 @@ class AuthControllerTest extends TestsBase {
         user.setBio("deleted");
         user.setPassword(super.passwordEncoder.encode("deleted"));
 
-        userRepository.save(user);
+        super.userRepository.save(user);
 
         user.setDeleted(true);
 
@@ -190,7 +185,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 403 when login with inactive account")
     void login6() throws Exception {
 
-        userRepository.save(createDeletedUser());
+        super.userRepository.save(createDeletedUser());
 
         var jsonContent = super.jsonLoginRequestDTO.write(
                 new LoginRequestDTO(
