@@ -44,12 +44,10 @@ public class AuthController {
 
     @Transactional
     @PostMapping("/signup")
-    public ResponseEntity<UserDetailsDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
-        var user = authService.signup(dto);
+    public ResponseEntity<LoginResponseDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+        var uri = uriComponentsBuilder.path("/user").buildAndExpand().toUri();
 
-        var uri = uriComponentsBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(new UserDetailsDTO(user));
+        return ResponseEntity.created(uri).body(authService.signup(dto));
     }
 
 }

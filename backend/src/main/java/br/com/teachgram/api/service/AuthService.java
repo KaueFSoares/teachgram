@@ -58,13 +58,13 @@ public class AuthService {
     }
 
 
-    public User signup(SignupRequestDTO dto) {
+    public LoginResponseDTO signup(SignupRequestDTO dto) {
         userDataValidationService.validate(dto);
 
         var user = new User(dto);
 
         user.setPassword(passwordEncoder.encode(dto.password()));
 
-        return userRepository.save(user);
+        return tokenService.generateToken(userRepository.save(user).getEmail());
     }
 }
