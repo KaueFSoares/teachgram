@@ -9,6 +9,19 @@
     font-family: "Inter";
 }
 
+*::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+*::-webkit-scrollbar-track{
+    background: #fff
+}
+
+*::-webkit-scrollbar-thumb{
+    background: #F37671;
+    border-radius: 0.5rem;
+}
+
 input[type="checkbox"]:not(:checked) {
     -webkit-appearance: none;
     -moz-appearance: none;

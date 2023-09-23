@@ -4,20 +4,20 @@ import Input from "../components/layout/form/Input.tsx"
 const LoginPage = () => {
   return (
     <main 
-      className="w-full min-h-screen flex justify-between"
+      className="w-full max-w-full min-h-screen flex justify-between"
     >
       <div
         className="flex-grow h-full min-h-screen flex flex-col items-center justify-center text-black
                   "
       >
-        <div className="h-full flex flex-col p-12 items-start justify-center gap-8 text-black
-                        lg:w-2/3 lg:gap-6 lg:p-6
+        <div className="h-full flex flex-col p-12 items-start justify-start gap-8 text-black
+                        lg:w-2/3 lg:gap-6 lg:pt-0 lg:px-6 lg:pb-6  lg:overflow-auto lg:max-h-[calc(100vh-6rem)]
                         xl:w-1/2
                         2xl:w-1/3">
           <img 
             src="/images/full_logo.svg" 
             alt="Teachgram"
-            className="self-center mb-4"
+            className="self-center mb-4 flex"
           />
 
           <h2 className="font-semibold text-xl
