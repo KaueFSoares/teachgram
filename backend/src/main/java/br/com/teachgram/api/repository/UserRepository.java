@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     Boolean existsByPhone(String phone);
 
     @Query("select u from User  u where u.id = :id")
-    Optional<User> findByIdWithPosts(String id);
+    Optional<User> findFriendById(String id);
 
     @Query("select count(f) from User u join u.friends f where u.id = :userId")
     Long countFriendsForUser(String userId);
