@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.delete());
     }
 
-    @GetMapping("/profile")
+    @GetMapping()
     public ResponseEntity<UserDetailsDTO> details() {
         return ResponseEntity.ok().body(userService.details());
     }
