@@ -1,9 +1,10 @@
-import LoginPage from "./components/pages/LoginPage.tsx"
+import LoginPage from "./pages/LoginPage.tsx"
+import SignupPage from "./pages/SignupPage.tsx"
 
 function App() {
   return (
     <>
-      <LoginPage />
+      <SignupPage />
     </>
   )
 }

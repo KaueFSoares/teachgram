@@ -1,5 +1,5 @@
-import Button from "../layout/form/Button.tsx"
-import Input from "../layout/form/Input.tsx"
+import Button from "../components/layout/form/Button.tsx"
+import Input from "../components/layout/form/Input.tsx"
 
 const LoginPage = () => {
   return (
