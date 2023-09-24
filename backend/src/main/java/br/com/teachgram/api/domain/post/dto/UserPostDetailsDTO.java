@@ -2,7 +2,7 @@ package br.com.teachgram.api.domain.post.dto;
 
 import br.com.teachgram.api.domain.post.Post;
 
-public record PostDetailsDTO(
+public record UserPostDetailsDTO(
         String id,
         String title,
         String description,
@@ -14,7 +14,7 @@ public record PostDetailsDTO(
         String username,
         String userPhotoLink
 ) {
-    public PostDetailsDTO(Post post) {
+    public UserPostDetailsDTO(Post post) {
         this(
                 post.getId(),
                 post.getTitle(),

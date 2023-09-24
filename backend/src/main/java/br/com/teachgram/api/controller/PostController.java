@@ -2,11 +2,14 @@ package br.com.teachgram.api.controller;
 
 import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
 import br.com.teachgram.api.domain.post.dto.DeletePostResponseDTO;
-import br.com.teachgram.api.domain.post.dto.PostDetailsDTO;
+import br.com.teachgram.api.domain.post.dto.ShortUserPostDetailsDTO;
+import br.com.teachgram.api.domain.post.dto.UserPostDetailsDTO;
 import br.com.teachgram.api.service.PostService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,7 +27,7 @@ public class PostController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PostDetailsDTO> createPost(@RequestBody @Valid CreatePostRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<UserPostDetailsDTO> createPost(@RequestBody @Valid CreatePostRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
         var data = postService.createPost(dto);
 
         var uri = uriComponentsBuilder.path("/post/{id}").buildAndExpand(data.id()).toUri();
@@ -36,6 +39,16 @@ public class PostController {
     @Transactional
     public ResponseEntity<DeletePostResponseDTO> deletePost(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.deletePost(id));
+    }
+
+    @GetMapping("/me/{id}")
+    public ResponseEntity<UserPostDetailsDTO> getUserPost(@PathVariable String id) {
+        return ResponseEntity.ok().body(postService.getUserPost(id));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Page<ShortUserPostDetailsDTO>> getUserPosts(Pageable pageable) {
+        return ResponseEntity.ok().body(postService.getUserPosts(pageable));
     }
 
 }
