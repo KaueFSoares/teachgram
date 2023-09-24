@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, FormEvent, SetStateAction } from "react"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -8,14 +8,21 @@ interface SignupPageProps {
   bio: string
   phone: string
   password: string
+  photo: string
   setName: Dispatch<SetStateAction<string>>
   setEmail: Dispatch<SetStateAction<string>>
   setBio: Dispatch<SetStateAction<string>>
   setPhone: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
+  setPhoto: Dispatch<SetStateAction<string>>
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
-const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setBio, setPhone, setPassword }: SignupPageProps) => {
+const SignupPage = ({ 
+  name, email, bio, phone, password, photo,
+  setName, setEmail, setBio, setPhone, setPassword, setPhoto, 
+  handleSubmit, 
+}: SignupPageProps) => {
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -43,6 +50,7 @@ const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setB
             action=""
             className="w-full flex flex-col gap-4
                           lg:gap-4"
+            onSubmit={handleSubmit}
           >
             <Input
               name="Nome"
@@ -76,6 +84,15 @@ const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setB
               setState={setPhone}
             />
 
+            {/* remove */}
+            <Input
+              name="Foto"
+              type="text"
+              placeholder="Digite o link da sua foto"
+              state={photo}
+              setState={setPhoto}
+            />
+
             <Input
               name="Senha"
               type="password"
@@ -84,6 +101,7 @@ const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setB
               state={password}
               setState={setPassword}
             />
+
 
             <Button
               text="Entrar"
@@ -102,7 +120,7 @@ const SignupPage = ({ name, email, bio, phone, password, setName, setEmail, setB
               role="button"
               className="underline text-orange font-bold"
             >
-              Entrar
+              Próximo
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, FormEvent, SetStateAction } from "react"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -7,9 +7,10 @@ interface LoginPageProps {
   password: string
   setEmail: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
-const LoginPage = ({ email, password, setEmail, setPassword }: LoginPageProps) => {
+const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: LoginPageProps) => {
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -37,6 +38,7 @@ const LoginPage = ({ email, password, setEmail, setPassword }: LoginPageProps) =
             action=""
             className="w-full flex flex-col gap-4
                         lg:gap-2"
+            onSubmit={handleSubmit}
           >
             <Input 
               name="E-mail" 

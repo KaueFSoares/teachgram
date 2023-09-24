@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import LoginPage from "../pages/LoginPage"
 
 const LoginPageContainer = () => {
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
 
   return (
     <LoginPage
@@ -11,6 +15,7 @@ const LoginPageContainer = () => {
       password={password}
       setEmail={setEmail}
       setPassword={setPassword} 
+      handleSubmit={handleSubmit}
     />
   )
 }
