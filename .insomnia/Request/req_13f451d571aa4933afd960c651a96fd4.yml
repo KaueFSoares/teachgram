@@ -1,0 +1,25 @@
+_id: req_13f451d571aa4933afd960c651a96fd4
+type: Request
+parentId: wrk_dd747402fa8445f980be54fcceff392a
+modified: 1695594919828
+created: 1695590933734
+url: http://localhost:8080/posts
+name: get all posts
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTgxODY4NDF9.yFqUdtqcNyeo4ATWUE1dq2Z9XOlUFxuVmwIy_ylknGk
+metaSortKey: -1695514734932.875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
