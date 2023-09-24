@@ -21,18 +21,51 @@ public class UserSeeder {
     @PostConstruct
     public void seed() {
         if (userRepository.count() == 0) {
+            var seed = userRepository.save(makeUser("seed", "seed@seed", "seed", "seed", "seed", "seed"));
 
+            var julia = userRepository.save(makeUser(
+                    "Julia da Silva",
+                    "julia@julia",
+                    "(51) 123456789",
+                    "Oi, eu sou Júlia",
+                    "https://images.pexels.com/photos/18362110/pexels-photo-18362110/free-photo-of-preto-e-branco-p-b-jaqueta-casaco.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "julia"
+            ));
 
-            var seed = userRepository.save(makeUser("seed"));
+            var matheus = userRepository.save(makeUser(
+                    "Matheus da Silva",
+                    "matheus@matheus",
+                    "(51) 123456789",
+                    "Oi, eu sou Matheus",
+                    "https://images.pexels.com/photos/5220075/pexels-photo-5220075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "matheus"
+            ));
 
-            var friendOfSeed1 = userRepository.save(makeUser("friendOfSeed1"));
-            var friendOfSeed2 = userRepository.save(makeUser("friendOfSeed2"));
-            var friendOfSeed3 = userRepository.save(makeUser("friendOfSeed3"));
+            var maria = userRepository.save(makeUser(
+                    "Maria da Silva",
+                    "maria@maria",
+                    "(51) 123456789",
+                    "Oi, eu sou Maria",
+                    "https://images.pexels.com/photos/18344916/pexels-photo-18344916/free-photo-of-tiro-individual.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "maria"
+            ));
 
-            seed.addFriend(friendOfSeed1);
-            seed.addFriend(friendOfSeed2);
-            seed.addFriend(friendOfSeed3);
+            var joao = userRepository.save(makeUser(
+                    "João da Silva",
+                    "joao@joao",
+                    "(51) 123456789",
+                    "Oi, eu sou João",
+                    "https://images.pexels.com/photos/6781228/pexels-photo-6781228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "joao"
+            ));
 
+            julia.getFriends().add(matheus);
+            julia.getFriends().add(maria);
+
+            matheus.getFriends().add(joao);
+
+            userRepository.save(julia);
+            userRepository.save(matheus);
             userRepository.save(seed);
 
             System.out.println("-----UserSeeder: users created-----");
@@ -41,14 +74,22 @@ public class UserSeeder {
         }
     }
 
-    private User makeUser(String name) {
+    private User makeUser(
+            String name,
+            String email,
+            String phone,
+            String bio,
+            String photo,
+            String password
+    ) {
         var user = new User();
 
         user.setName(name);
-        user.setEmail(name + "@" + name);
-        user.setPhone(name);
-        user.setBio(name);
-        user.setPassword(passwordEncoder.encode(name));
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setBio(bio);
+        user.setPhoto(photo);
+        user.setPassword(passwordEncoder.encode(password));
 
         return user;
     }
