@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios"
-import { useContext } from "react"
-import AuthContext from "../../context/AuthContext"
+import { Dispatch, SetStateAction } from "react"
 import { useAuth } from "../auth.service"
+import { AuthData } from "../../interface/AuthData"
 import { URL } from "./url"
 
 export const OPENED_API = (): AxiosInstance => {
@@ -16,9 +16,13 @@ export const OPENED_API = (): AxiosInstance => {
   return instance
 }
 
-const useApi = (): AxiosInstance => {
-  const { authData, setAuthData } = useContext(AuthContext)
+interface Props {
+  authData: AuthData
+  setAuthData: Dispatch<SetStateAction<AuthData>>
+  setAuthenticated: Dispatch<SetStateAction<boolean>>
+}
 
+const useApi = ({ authData, setAuthData, setAuthenticated }: Props): AxiosInstance => {
   const auth = useAuth()
 
   const instance = axios.create({
@@ -32,13 +36,26 @@ const useApi = (): AxiosInstance => {
   instance.interceptors.request.use(async (req) => {
     const isExpired = new Date(authData.accessTokenExpiresAt) < new Date()
 
-    if (!isExpired) return req
+    if (!isExpired){
+      req.headers.Authorization = `${authData.tokenType} ${authData.accessToken}`
+      
+      return req
+    } 
 
-    const newData = await auth.onRefresh(authData.refreshToken)
+    // eslint-disable-next-line no-console
+    console.log("Token expired, refreshing...")
 
-    setAuthData(newData)
+    await auth.onRefresh(authData.refreshToken)
+      .then((res) => {
+        setAuthData(res)
 
-    req.headers.Authorization = `Bearer ${newData.accessToken}`
+        req.headers.Authorization = `${authData.tokenType} ${res.accessToken}`
+      })
+      .catch((err) => {
+      // eslint-disable-next-line no-console
+        console.log(err)
+        setAuthenticated(false)
+      })
 
     return req
   })

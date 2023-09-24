@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react"
+import { Dispatch, SetStateAction, createContext } from "react"
 import { AuthData } from "../interface/AuthData"
 
 const AuthContext = createContext<{
@@ -14,14 +14,3 @@ const AuthContext = createContext<{
 })
 
 export default AuthContext
-
-export const AuthProvider = ({ children }: {children: ReactNode}) => {
-  const [ authenticated, setAuthenticated ] = useState(false)
-  const [ authData, setAuthData ] = useState<AuthData>({} as AuthData)
-
-  return (
-    <AuthContext.Provider value={{ authenticated, authData, setAuthenticated, setAuthData }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
