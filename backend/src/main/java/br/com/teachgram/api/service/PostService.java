@@ -1,10 +1,7 @@
 package br.com.teachgram.api.service;
 
 import br.com.teachgram.api.domain.post.Post;
-import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
-import br.com.teachgram.api.domain.post.dto.DeletePostResponseDTO;
-import br.com.teachgram.api.domain.post.dto.ShortUserPostDetailsDTO;
-import br.com.teachgram.api.domain.post.dto.UserPostDetailsDTO;
+import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
@@ -33,6 +30,18 @@ public class PostService {
 
         return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException("User not authorized."));
     }
+
+    private Post getPost(String id) {
+        var user = getAuthenticatedUser();
+
+        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
+
+        if (!post.getUser().equals(user)) {
+            throw new AuthException("User not authorized.");
+        }
+        return post;
+    }
+
     public UserPostDetailsDTO createPost(CreatePostRequestDTO dto) {
         var user = getAuthenticatedUser();
 
@@ -42,13 +51,7 @@ public class PostService {
     }
 
     public DeletePostResponseDTO deletePost(String id) {
-        var user = getAuthenticatedUser();
-
-        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
-
-        if (!post.getUser().equals(user)) {
-            throw new AuthException("User not authorized.");
-        }
+        var post = getPost(id);
 
         post.setDeleted(true);
 
@@ -56,13 +59,7 @@ public class PostService {
     }
 
     public UserPostDetailsDTO getUserPost(String id) {
-        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
-
-        var user = getAuthenticatedUser();
-
-        if (!post.getUser().equals(user)) {
-            throw new AuthException("User not authorized.");
-        }
+        var post = getPost(id);
 
         return new UserPostDetailsDTO(post);
     }
@@ -71,5 +68,45 @@ public class PostService {
         var user = getAuthenticatedUser();
 
         return postRepository.findAllByUserAndDeletedFalse(user, pageable).map(ShortUserPostDetailsDTO::new);
+    }
+
+    public PostDetailsDTO getPostDetails(String id) {
+        return new PostDetailsDTO(postRepository.findByIdAndDeletedFalse(id ));
+    }
+
+    public Page<PostDetailsDTO> getAllPosts(Pageable pageable) {
+        return postRepository.getAllPostsByTimeDesc(pageable).map(PostDetailsDTO::new);
+    }
+
+    public UserPostDetailsDTO updatePost(String id, UpdatePostRequestDTO dto) {
+        var post = getPost(id);
+
+        post.update(dto);
+
+        return new UserPostDetailsDTO(postRepository.save(post));
+    }
+
+    public UserPostDetailsDTO updatePostPrivate(String id) {
+        var post = getPost(id);
+
+        post.setPrivatePost(!post.getPrivatePost());
+
+        return new UserPostDetailsDTO(postRepository.save(post));
+    }
+
+    public UserPostDetailsDTO likePost(String id) {
+        var post = getPost(id);
+
+        post.setLikes(post.getLikes() + 1);
+
+        return new UserPostDetailsDTO(postRepository.save(post));
+    }
+
+    public UserPostDetailsDTO dislikePost(String id) {
+        var post = getPost(id);
+
+        post.setLikes(post.getLikes() - 1);
+
+        return new UserPostDetailsDTO(postRepository.save(post));
     }
 }

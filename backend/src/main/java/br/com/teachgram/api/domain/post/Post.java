@@ -1,6 +1,7 @@
 package br.com.teachgram.api.domain.post;
 
 import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
+import br.com.teachgram.api.domain.post.dto.UpdatePostRequestDTO;
 import br.com.teachgram.api.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -53,5 +54,33 @@ public class Post {
         this.photoLink = dto.photoLink();
         this.videoLink = dto.videoLink();
         this.user = user;
+    }
+
+    public void update(UpdatePostRequestDTO dto) {
+        if (dto.title() != null) {
+            this.title = dto.title();
+        }
+
+        if (dto.description() != null) {
+            this.description = dto.description();
+        }
+
+        if (dto.photoLink() != null) {
+            this.photoLink = dto.photoLink();
+        }
+
+        if (dto.videoLink() != null) {
+            this.videoLink = dto.videoLink();
+        }
+
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void setLikes(Integer likes) {
+        if (likes < 0) {
+            this.likes = 0;
+        } else {
+            this.likes = likes;
+        }
     }
 }

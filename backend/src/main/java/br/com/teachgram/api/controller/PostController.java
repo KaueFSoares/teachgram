@@ -1,9 +1,6 @@
 package br.com.teachgram.api.controller;
 
-import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
-import br.com.teachgram.api.domain.post.dto.DeletePostResponseDTO;
-import br.com.teachgram.api.domain.post.dto.ShortUserPostDetailsDTO;
-import br.com.teachgram.api.domain.post.dto.UserPostDetailsDTO;
+import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.service.PostService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/posts")
 public class PostController {
 
     private final PostService postService;
@@ -35,8 +32,19 @@ public class PostController {
         return ResponseEntity.created(uri).body(data);
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}")
     @Transactional
+    public ResponseEntity<UserPostDetailsDTO> updatePost(@PathVariable String id, @RequestBody @Valid UpdatePostRequestDTO dto) {
+        return ResponseEntity.ok().body(postService.updatePost(id, dto));
+    }
+
+    @PutMapping("/{id}/private")
+    @Transactional
+    public ResponseEntity<UserPostDetailsDTO> updatePostPrivate(@PathVariable String id) {
+        return ResponseEntity.ok().body(postService.updatePostPrivate(id));
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<DeletePostResponseDTO> deletePost(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.deletePost(id));
     }
@@ -49,6 +57,28 @@ public class PostController {
     @GetMapping("/me")
     public ResponseEntity<Page<ShortUserPostDetailsDTO>> getUserPosts(Pageable pageable) {
         return ResponseEntity.ok().body(postService.getUserPosts(pageable));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<PostDetailsDTO>> getAllPosts(Pageable pageable) {
+        return ResponseEntity.ok().body(postService.getAllPosts(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDetailsDTO> getPostDetails(@PathVariable String id) {
+        return ResponseEntity.ok().body(postService.getPostDetails(id));
+    }
+
+    @PutMapping("/{id}/like")
+    @Transactional
+    public ResponseEntity<UserPostDetailsDTO> likePost(@PathVariable String id) {
+        return ResponseEntity.ok().body(postService.likePost(id));
+    }
+
+    @PutMapping("/{id}/dislike")
+    @Transactional
+    public ResponseEntity<UserPostDetailsDTO> dislikePost(@PathVariable String id) {
+        return ResponseEntity.ok().body(postService.dislikePost(id));
     }
 
 }
