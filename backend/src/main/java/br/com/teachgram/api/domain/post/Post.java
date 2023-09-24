@@ -1,18 +1,17 @@
 package br.com.teachgram.api.domain.post;
 
+import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
 import br.com.teachgram.api.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "posts")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -48,4 +47,11 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    public Post(CreatePostRequestDTO dto, User user) {
+        this.title = dto.title();
+        this.description = dto.description();
+        this.photoLink = dto.photoLink();
+        this.videoLink = dto.videoLink();
+        this.user = user;
+    }
 }
