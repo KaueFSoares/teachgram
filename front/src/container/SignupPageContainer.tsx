@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react"
-import SignupPage from "../pages/SignupPage"
 import { useAuth } from "../service/auth.service"
+import { SignupPage } from "../pages"
 
 const SignupPageContainer = () => {
   const auth = useAuth()
