@@ -75,7 +75,9 @@ public class PostService {
     }
 
     public Page<PostDetailsDTO> getAllPosts(Pageable pageable) {
-        return postRepository.getAllPostsByTimeDesc(pageable).map(PostDetailsDTO::new);
+        var user = getAuthenticatedUser();
+
+        return postRepository.getAllPostsByTimeDescWithoutOwnPosts(user.getId(), pageable).map(PostDetailsDTO::new);
     }
 
     public UserPostDetailsDTO updatePost(String id, UpdatePostRequestDTO dto) {
