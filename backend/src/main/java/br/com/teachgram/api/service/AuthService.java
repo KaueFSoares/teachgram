@@ -65,6 +65,6 @@ public class AuthService {
 
         user.setPassword(passwordEncoder.encode(dto.password()));
 
-        return tokenService.generateToken(userRepository.save(user).getEmail());
+        return tokenService.generateToken(userRepository.save(user).getId());
     }
 }
