@@ -1,7 +1,17 @@
+import Navbar from "../components/layout/navbar/Navbar.tsx"
 
-const HomePage = () => {
+interface Props {
+  imgSrc: string
+}
+
+const HomePage = ({ imgSrc }: Props) => {
   return (
-    <div>HomePage</div>
+    <main className="relative w-full h-screen">
+      Home page
+      <Navbar 
+        imgSrc={imgSrc}
+      />
+    </main>
   )
 }
 
