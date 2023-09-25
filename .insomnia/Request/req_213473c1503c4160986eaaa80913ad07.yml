@@ -1,29 +1,21 @@
-_id: req_f8d86b68ff774e078ea292b5a670cdcd
+_id: req_213473c1503c4160986eaaa80913ad07
 type: Request
 parentId: wrk_dd747402fa8445f980be54fcceff392a
-modified: 1695603256761
-created: 1695590832627
-url: http://localhost:8080/posts/122cedd3-0f55-42ad-9e84-8f22d6b6573f
-name: update post
+modified: 1695603363624
+created: 1695603290866
+url: http://localhost:8080/posts/me/122cedd3-0f55-42ad-9e84-8f22d6b6573f
+name: get single user posts
 description: ""
-method: PUT
-body:
-  mimeType: application/json
-  text: |-
-    {
-    	"photoLink": "teste",
-    	"videoLink": "teste"
-    }
+method: GET
+body: {}
 parameters: []
 headers:
-  - name: Content-Type
-    value: application/json
   - name: User-Agent
     value: insomnia/2023.5.8
 authentication:
   type: bearer
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTgxODI2ODd9.6LJ07UhB8YrX1jaSAPd-FMVVtJPvJUsYKZ7sV94cJQM
-metaSortKey: -1695489463364.5
+metaSortKey: -1695527370717.0625
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
