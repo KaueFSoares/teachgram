@@ -1,9 +1,14 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "../service/auth.service"
 import { SignupPage } from "../pages"
+import AuthContext from "../context/AuthContext"
 
 const SignupPageContainer = () => {
   const auth = useAuth()
+  const navigate = useNavigate()
+
+  const { setAuthenticated, setAuthData } = useContext(AuthContext)
 
   const [ name, setName ] = useState("")
   const [ email, setEmail ] = useState("")
@@ -16,6 +21,11 @@ const SignupPageContainer = () => {
     e.preventDefault()
 
     auth.onSignup(name, email, bio, phone, password, photo)
+      .then((data) => {
+        setAuthenticated(true)
+        setAuthData(data)
+        navigate("/")
+      })
   }
   
   return (
