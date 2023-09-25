@@ -46,7 +46,7 @@ public class AuthService {
 
         var authentication = authenticationManager.authenticate(token);
 
-        return tokenService.generateToken(authentication.getName());
+        return tokenService.generateToken(user.getId());
     }
 
     public LoginResponseDTO refreshToken(RefreshTokenRequestDTO dto) {

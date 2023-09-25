@@ -16,6 +16,9 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select new User(u.id, u.email, u.password) from User u where u.email = :email")
     Optional<UserDetails> findUserDetailsByEmail(String email);
 
+    @Query("select new User(u.id, u.email, u.password) from User u where u.id = :userId")
+    Optional<UserDetails> findUserDetailsById(String userId);
+
     Boolean existsByEmail(String email);
 
     Boolean existsByPhone(String phone);

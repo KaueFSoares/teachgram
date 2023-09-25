@@ -18,19 +18,19 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public LoginResponseDTO generateToken(String email) {
+    public LoginResponseDTO generateToken(String id) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             var accessToken =  JWT.create()
                     .withIssuer("Teachgram")
-                    .withSubject(email)
+                    .withSubject(id)
                     .withExpiresAt(getAccessTokenExpirationDate())
                     .sign(algorithm);
 
             var refreshToken =  JWT.create()
                     .withIssuer("Teachgram")
-                    .withSubject(email)
+                    .withSubject(id)
                     .withExpiresAt(getRefreshTokenExpirationDate())
                     .sign(algorithm);
 
