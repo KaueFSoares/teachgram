@@ -5,13 +5,13 @@ import { useAuth } from "../service/auth.service"
 import AuthContext from "../context/AuthContext"
 
 const LoginPageContainer = () => {
-  const [ email, setEmail ] = useState("")
-  const [ password, setPassword ] = useState("")
-
   const auth = useAuth()
   const navigate = useNavigate()
 
   const { setAuthenticated, setAuthData } = useContext(AuthContext)
+
+  const [ email, setEmail ] = useState("")
+  const [ password, setPassword ] = useState("")
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
