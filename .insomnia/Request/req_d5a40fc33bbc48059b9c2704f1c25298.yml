@@ -1,0 +1,25 @@
+_id: req_d5a40fc33bbc48059b9c2704f1c25298
+type: Request
+parentId: wrk_dd747402fa8445f980be54fcceff392a
+modified: 1695594960616
+created: 1695592289281
+url: http://localhost:8080/posts/1c5db5f5-b384-492f-933f-71a4c0a2d872
+name: get someone single post
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTgxODQwNzd9.ERPEoKj19p6ucHkSuy32Y_DZVNkf7refeDC6rxNx0aE
+metaSortKey: -1695502099148.6875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

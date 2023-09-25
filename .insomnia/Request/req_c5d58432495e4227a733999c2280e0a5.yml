@@ -1,0 +1,35 @@
+_id: req_c5d58432495e4227a733999c2280e0a5
+type: Request
+parentId: wrk_dd747402fa8445f980be54fcceff392a
+modified: 1695590824619
+created: 1695590549638
+url: http://localhost:8080/posts
+name: create post
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"title": "teste",
+    	"description": "teste",
+    	"photoLink": "teste",
+    	"videoLink": "teste"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWFjaGdyYW0iLCJzdWIiOiJzZWVkQHNlZWQiLCJleHAiOjE2OTgxODI2ODd9.6LJ07UhB8YrX1jaSAPd-FMVVtJPvJUsYKZ7sV94cJQM
+metaSortKey: -1695590549638
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
