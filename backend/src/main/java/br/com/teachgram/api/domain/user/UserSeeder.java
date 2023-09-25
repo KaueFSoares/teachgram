@@ -59,14 +59,14 @@ public class UserSeeder {
                     "joao"
             ));
 
-            julia.getFriends().add(matheus);
-            julia.getFriends().add(maria);
-
-            matheus.getFriends().add(joao);
-
+            julia.addFriend(matheus);
             userRepository.save(julia);
+
+            julia.addFriend(maria);
+            userRepository.save(julia);
+
+            matheus.addFriend(joao);
             userRepository.save(matheus);
-            userRepository.save(seed);
 
             System.out.println("-----UserSeeder: users created-----");
         } else {

@@ -62,7 +62,7 @@ public class UserService {
 
         var friend = userRepository.findFriendById(id).orElseThrow(() -> new NotFoundException("Friend not found."));
 
-        user.getFriends().add(friend);
+        user.addFriend(friend);
 
         var friendsCount = userRepository.countFriendsForUser(friend.getId());
 
@@ -90,7 +90,7 @@ public class UserService {
 
         var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new AuthException("Friend not found."));
 
-        user.getFriends().remove(friend);
+        user.removeFriend(friend);
 
         return new DeleteResponseDTO("Friend deleted successfully.");
     }

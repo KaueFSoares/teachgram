@@ -1,5 +1,6 @@
 package br.com.teachgram.api.domain.user;
 
+import br.com.teachgram.api.domain.friendship.Friendship;
 import br.com.teachgram.api.domain.post.Post;
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
@@ -53,12 +54,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "friends",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "friend_id"))
-    private Set<User> friends = new HashSet<>();
+    @OneToMany(mappedBy = "firstUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Friendship> friends = new HashSet<>();
 
     public User(SignupRequestDTO dto) {
         this.name = dto.name();
@@ -140,6 +137,14 @@ public class User implements UserDetails {
     }
 
     public void addFriend(User user) {
-        this.friends.add(user);
+        var friendship = new Friendship();
+        friendship.setFirstUser(this);
+        friendship.setSecondUser(user);
+
+        this.friends.add(friendship);
+    }
+
+    public void removeFriend(User friend) {
+        this.friends.removeIf(friendship -> friendship.getSecondUser().getId().equals(friend.getId()));
     }
 }
