@@ -24,6 +24,6 @@ public class UserEmailValidation implements UserDataValidationInterface{
 
     @Override
     public void validate(UpdateRequestDTO data) {
-        if (data.email() != null && userRepository.existsByEmail(data.email())) throw new DuplicateException("Email already exists.");
+        if (data.email() != null && userRepository.existsByEmailAndIdNot(data.email(), data.id())) throw new DuplicateException("Email already exists.");
     }
 }

@@ -24,6 +24,6 @@ public class UserPhoneValidation implements UserDataValidationInterface{
 
     @Override
     public void validate(UpdateRequestDTO data) {
-        if (data.phone() != null && userRepository.existsByPhone(data.phone())) throw new DuplicateException("Phone already exists.");
+        if (data.phone() != null && userRepository.existsByPhoneAndIdNot(data.phone(), data.id())) throw new DuplicateException("Phone already exists.");
     }
 }

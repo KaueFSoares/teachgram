@@ -36,9 +36,11 @@ public class UserService {
     public UserDetailsDTO update(UpdateRequestDTO dto) {
         var user = getAuthenticatedUser();
 
-        userDataValidationService.validate(dto);
+        var newDTO = dto.withId(user.getId());
 
-        user.update(dto);
+        userDataValidationService.validate(newDTO);
+
+        user.update(newDTO);
 
         return new UserDetailsDTO(user);
     }

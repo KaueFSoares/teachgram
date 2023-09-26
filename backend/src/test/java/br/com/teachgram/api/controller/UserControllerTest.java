@@ -54,6 +54,7 @@ class UserControllerTest extends TestsBase {
     private String getJsonContent(String mail, String password, String name, String phone, String bio, String photo) throws IOException {
         return updateRequestDTO.write(
                 new UpdateRequestDTO(
+                        "",
                         name,
                         mail,
                         password,
