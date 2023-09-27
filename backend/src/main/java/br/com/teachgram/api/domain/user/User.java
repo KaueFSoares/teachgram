@@ -65,10 +65,11 @@ public class User implements UserDetails {
         this.photo = dto.photo();
     }
 
-    public User(String id, String email, String password) {
+    public User(String id, String email, String password, Boolean deleted) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.deleted = deleted;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !deleted;
     }
 
     public void update(UpdateRequestDTO dto) {

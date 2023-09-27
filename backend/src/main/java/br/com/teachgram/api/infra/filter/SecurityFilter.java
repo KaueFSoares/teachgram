@@ -35,6 +35,8 @@ public class SecurityFilter extends OncePerRequestFilter {
             var subject = tokenService.validateToken(token);
             var user = userRepository.findUserDetailsById(subject).orElseThrow(() -> new AuthException("Invalid token!"));
 
+            if (!user.isEnabled()) throw new AuthException("Deleted user");
+
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

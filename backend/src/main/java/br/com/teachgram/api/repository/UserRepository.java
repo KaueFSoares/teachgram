@@ -13,10 +13,10 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByEmail(String email);
 
-    @Query("select new User(u.id, u.email, u.password) from User u where u.email = :email")
+    @Query("select new User(u.id, u.email, u.password, u.deleted) from User u where u.email = :email")
     Optional<UserDetails> findUserDetailsByEmail(String email);
 
-    @Query("select new User(u.id, u.email, u.password) from User u where u.id = :userId")
+    @Query("select new User(u.id, u.email, u.password, u.deleted) from User u where u.id = :userId")
     Optional<UserDetails> findUserDetailsById(String userId);
 
     Boolean existsByEmail(String email);
