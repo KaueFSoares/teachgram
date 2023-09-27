@@ -14,7 +14,7 @@ public class CustomLocaleResolver implements LocaleResolver {
         String language = request.getHeader("Accept-Language");
 
         if (language == null || language.isEmpty()) {
-            return Locale.forLanguageTag("en");
+            return Locale.forLanguageTag("pt");
         }
 
         var locale = Locale.forLanguageTag(language);
@@ -23,7 +23,7 @@ public class CustomLocaleResolver implements LocaleResolver {
             return locale;
         }
 
-        return Locale.forLanguageTag("en");
+        return Locale.forLanguageTag("pt");
     }
 
     @Override
