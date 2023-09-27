@@ -1,5 +1,61 @@
 {
     "translation": {
-        "homepage.test": "morango"
+        "loading": "Carregando...",
+        "navbar": {
+            "feed": "Feed",
+            "friends": "Amigos",
+            "create": "Criar",
+            "config": "Configurações",
+            "profile": "Perfil"
+        },
+        "login": {
+            "makelogin": "Faça seu login",
+            "forgotpassword": "Esqueci minha senha",
+            "enter": "Entrar",
+            "remember": "Lembrar senha",
+            "donthaveaccount": "Não possui uma conta?",
+            "signup": "Cadastre-se",
+            "enterwith": "Entrar com",
+            "google": "  Google",
+            "apple": " Apple",
+            "input": {
+                "placeholder": {
+                    "email": "Digite seu e-mail",
+                    "password": "Digite sua senha"
+                },
+                "label": {
+                    "email": "E-mail",
+                    "password": "Senha"
+                }
+            }
+        },
+        "signup": {
+            "createaccount": "Crie sua conta",
+            "next": "Próximo",
+            "insertlink": "Insira o link da sua foto de perfil",
+            "save": "Salvar",
+            "alreadyhaveaccount": "Já possui uma conta?",
+            "login": "Entrar",
+            "input": {
+                "placeholder": {
+                    "name": "Digite seu nome",
+                    "email": "Digite seu e-mail",
+                    "username": "@seu_username",
+                    "bio": "Faça uma descrição",
+                    "phone": "Digite seu número de celular",
+                    "password": "Digite sua senha",
+                    "link": "Insira seu link"
+                },
+                "label": {
+                    "name": "Nome",
+                    "email": "E-mail",
+                    "username": "Username",
+                    "bio": "Descrição",
+                    "phone": "Celular",
+                    "password": "Senha",
+                    "link": "Link"
+                }
+            }
+        }
     }
 }

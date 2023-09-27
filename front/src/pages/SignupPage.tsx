@@ -1,5 +1,6 @@
 import { Dispatch, FormEvent, SetStateAction } from "react"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -24,6 +25,8 @@ const SignupPage = ({
   setName, setEmail, setBio, setPhone, setPassword, setPhoto, 
   handleSubmit, 
 }: SignupPageProps) => {
+  const { t } = useTranslation()
+
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -44,7 +47,7 @@ const SignupPage = ({
 
           <h2 className="font-semibold text-xl
                             lg:text-lg">
-            Crie sua conta
+            {t("signup.createaccount")}
           </h2>
 
           <form
@@ -54,50 +57,49 @@ const SignupPage = ({
             onSubmit={handleSubmit}
           >
             <Input
-              name="Nome"
+              name={t("signup.input.label.name")}
               type="text"
-              placeholder="Digite seu nome"
+              placeholder={t("signup.input.placeholder.name")}
               state={name}
               setState={setName}
             />
 
             <Input
-              name="E-mail"
+              name={t("signup.input.label.email")}
               type="email"
-              placeholder="Digite seu e-mail"
+              placeholder={t("signup.input.placeholder.email")}
               state={email}
               setState={setEmail}
             />
 
             <Input
-              name="Descrição"
+              name={t("signup.input.label.username")}
               type="text"
-              placeholder="Faça uma descrição"
+              placeholder={t("signup.input.placeholder.username")}
               state={bio}
               setState={setBio}
             />
 
             <Input
-              name="Celular"
+              name={t("signup.input.label.bio")}
               type="text"
-              placeholder="Digite seu número de celular"
+              placeholder={t("signup.input.placeholder.bio")}
               state={phone}
               setState={setPhone}
             />
 
-            {/* remove */}
             <Input
-              name="Foto"
+              name={t("signup.input.label.phone")}
               type="text"
-              placeholder="Digite o link da sua foto"
+              placeholder={t("signup.input.placeholder.phone")}
               state={photo}
               setState={setPhoto}
             />
 
             <Input
-              name="Senha"
+              name={t("signup.input.label.password")}
               type="password"
-              placeholder="Digite sua senha"
+              placeholder={t("signup.input.placeholder.password")} 
               className="mb-8"
               state={password}
               setState={setPassword}
@@ -105,7 +107,7 @@ const SignupPage = ({
 
 
             <Button
-              text="Próximo"
+              text={t("signup.next")}
             />
 
           </form>
@@ -115,14 +117,14 @@ const SignupPage = ({
             className="w-full flex justify-center gap-2 text-sm"
           >
             <p>
-              Já possui conta?
+              {t("signup.alreadyhaveaccount")}
             </p>
 
             <p
               role="button"
               className="underline text-orange font-bold"
             >
-              Entrar
+              {t("signup.login")}
             </p>
           </Link>
         </div>

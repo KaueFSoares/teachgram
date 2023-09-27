@@ -1,5 +1,6 @@
 import { Dispatch, FormEvent, SetStateAction } from "react"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -12,6 +13,8 @@ interface LoginPageProps {
 }
 
 const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: LoginPageProps) => {
+  const { t } = useTranslation()
+  
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -32,7 +35,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
 
           <h2 className="font-semibold text-xl
                           lg:text-lg">
-            Faça seu login
+            {t("login.makelogin")}
           </h2>
 
           <form 
@@ -42,18 +45,18 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             onSubmit={handleSubmit}
           >
             <Input 
-              name="E-mail" 
+              name={t("login.input.label.email")} 
               type="email" 
-              placeholder="Digite seu e-mail" 
+              placeholder={t("login.input.placeholder.email")}
               className="mb-2"
               state={email}
               setState={setEmail}
             />
 
             <Input 
-              name="Senha" 
+              name={t("login.input.label.password")} 
               type="password" 
-              placeholder="Digite sua senha" 
+              placeholder={t("login.input.placeholder.password")}
               state={password}
               setState={setPassword}
             />
@@ -72,19 +75,21 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
                   className="accent-orange outline-none h-4 w-4" 
                 />
                 <label htmlFor="remember_password" className="absolute h-4 w-4 border-orange border-solid border rounded-[.250rem] cursor-pointer"></label>
-                <label htmlFor="remember_password" className=" cursor-pointer">Lembrar senha</label>
+                <label htmlFor="remember_password" className=" cursor-pointer">
+                  {t("login.remember")}
+                </label>
               </div>
 
               <p 
                 role="button"
                 className="underline"
               > 
-                Esqueci minha senha 
+                {t("login.forgotpassword")}
               </p>
             </div>
 
             <Button
-              text="Entrar"
+              text={t("login.enter")}
             />
 
           </form>
@@ -94,14 +99,14 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             className="w-full flex justify-center gap-2 text-sm"
           >
             <p>
-            Não possui uma conta?
+              {t("login.donthaveaccount")}
             </p>
 
             <p 
               role="button"
               className="underline text-orange font-bold"
             >
-          Cadastre-se
+              {t("login.signup")}
             </p>
           </Link>
 
@@ -113,7 +118,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             <p 
               className="flex-grow whitespace-nowrap text-center text-sm px-4"
             >
-          Entrar com
+              {t("login.enterwith")}
             </p>
 
             <hr className="flex-grow"/>
@@ -124,7 +129,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
           >
             <img src="/icon/google_icon.svg" alt="Google" />
-            <p>Entrar com Google</p>
+            <p>{t("login.enterwith")}{t("login.google")}</p>
           </button>
 
           <button 
@@ -132,7 +137,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
           >
             <img src="/icon/apple_icon.svg" alt="Apple" />
-            <p>Entrar com Apple</p>
+            <p>{t("login.enterwith")}{t("login.apple")}</p>
           </button>
         </div>
       </div>

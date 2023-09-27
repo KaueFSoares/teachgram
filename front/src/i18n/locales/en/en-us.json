@@ -1,5 +1,12 @@
 {
     "translation": {
-        "homepage.test": "abacaxi"
+        "loading": "Loading...",
+        "navbar": {
+            "feed": "Feed",
+            "friends": "Friends",
+            "create": "Create",
+            "config": "Settings",
+            "profile": "Profile"
+        }
     }
 }
