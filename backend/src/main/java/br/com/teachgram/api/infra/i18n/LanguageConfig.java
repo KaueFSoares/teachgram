@@ -11,8 +11,12 @@ import java.util.Locale;
 public class LanguageConfig {
 
     public static final List<Locale> LOCALES = Arrays.asList(
-            new Locale("en"),
-            new Locale("pt")
+            new Locale.Builder()
+                    .setLanguage("en")
+                    .build(),
+            new Locale.Builder()
+                    .setLanguage("pt")
+                    .build()
     );
 
 }
