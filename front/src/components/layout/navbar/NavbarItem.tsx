@@ -1,12 +1,15 @@
 import { ReactNode } from "react"
 
 interface Props {
-    children: ReactNode
+    children: ReactNode,
+    order: string
 }
 
-const NavbarItem = ({ children }: Props) => {
+const NavbarItem = ({ children, order }: Props) => {
   return (
-    <li className="w-8 h-8 flex items-center justify-center">
+    <li className={`w-full flex items-center justify-center
+                    lg:justify-start lg:border lg:border-solid lg:border-gray lg:rounded-xl
+                    ${order}`}>
       {children}
     </li>
   )
