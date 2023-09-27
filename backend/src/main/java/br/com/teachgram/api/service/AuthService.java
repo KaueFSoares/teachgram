@@ -3,6 +3,7 @@ package br.com.teachgram.api.service;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
+import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.UserRepository;
@@ -44,7 +45,7 @@ public class AuthService {
 
         var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
 
-        var authentication = authenticationManager.authenticate(token);
+        authenticationManager.authenticate(token);
 
         return tokenService.generateToken(user.getId());
     }
@@ -53,6 +54,8 @@ public class AuthService {
         var token = dto.refresh_token().replace("Bearer ", "");
 
         var subject = tokenService.validateToken(token);
+
+        if (userRepository.findById(subject).orElseThrow(() -> new AuthException("User not found.")).getDeleted()) throw new DeletedAccountException("Deleted account.");
 
         return tokenService.generateToken(subject);
     }
