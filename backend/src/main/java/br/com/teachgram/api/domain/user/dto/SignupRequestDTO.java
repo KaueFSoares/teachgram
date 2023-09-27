@@ -4,14 +4,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 public record SignupRequestDTO(
-        @NotEmpty(message = "Name is required.")
+        @NotEmpty(message = "{validation.user.name.not-empty}")
         String name,
-        @NotEmpty(message = "Email is required.")
-        @Email(message = "Email must be valid.")
+        @NotEmpty(message = "{validation.user.email.not-empty}")
+        @Email(message = "{validation.user.email.invalid}")
         String email,
-        @NotEmpty(message = "Password is required.")
+        @NotEmpty(message = "{validation.user.password.not-empty}")
         String password,
-        @NotEmpty(message = "Bio is required.")
+        @NotEmpty(message = "{validation.user.bio.not-empty}")
         String bio,
         String phone,
         String photo

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 public record UpdateRequestDTO(
         String id,
         String name,
-        @Email
+        @Email(message = "{validation.user.email.invalid}")
         String email,
         String password,
         String bio,

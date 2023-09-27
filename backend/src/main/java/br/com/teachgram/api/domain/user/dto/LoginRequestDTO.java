@@ -3,9 +3,9 @@ package br.com.teachgram.api.domain.user.dto;
 import jakarta.validation.constraints.NotEmpty;
 
 public record LoginRequestDTO(
-        @NotEmpty(message = "{test}")
+        @NotEmpty(message = "{validation.user.email.not-empty}")
         String email,
-        @NotEmpty(message = "Password is required.")
+        @NotEmpty(message = "{validation.user.password.not-empty}")
         String password
 ) {
 }
