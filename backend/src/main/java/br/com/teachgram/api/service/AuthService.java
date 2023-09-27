@@ -6,8 +6,11 @@ import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
+import br.com.teachgram.api.infra.i18n.CustomLocaleResolver;
 import br.com.teachgram.api.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +25,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final MessageSource messageSource;
+    private final CustomLocaleResolver customLocaleResolver;
 
     @Autowired
     public AuthService(
@@ -29,17 +34,21 @@ public class AuthService {
             UserDataValidationService userDataValidationService,
             PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager,
-            TokenService tokenService
+            TokenService tokenService,
+            MessageSource messageSource,
+            CustomLocaleResolver customLocaleResolver
     ) {
         this.userRepository = userRepository;
         this.userDataValidationService = userDataValidationService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
+        this.messageSource = messageSource;
+        this.customLocaleResolver = customLocaleResolver;
     }
 
-    public LoginResponseDTO login(LoginRequestDTO dto) {
-        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException("User not found."));
+    public LoginResponseDTO login(LoginRequestDTO dto, HttpServletRequest request) {
+        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageSource.getMessage("user", null, customLocaleResolver.resolveLocale(request))));
 
         if (user.getDeleted()) throw new DeletedAccountException("Deleted account.");
 
