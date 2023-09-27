@@ -3,11 +3,13 @@ package br.com.teachgram.api.service;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
 import br.com.teachgram.api.infra.exception.AuthException;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.auth0.jwt.algorithms.Algorithm;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,6 +17,14 @@ import java.time.ZoneOffset;
 
 @Service
 public class TokenService {
+
+    private final MessageService messageService;
+
+    @Autowired
+    public TokenService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
     @Value("${api.security.token.secret}")
     private String secret;
 
@@ -44,7 +54,7 @@ public class TokenService {
             );
 
         } catch (JWTCreationException exception){
-            throw new AuthException("Error while creating token!");
+            throw new AuthException(messageService.getMessage("error.token.creation"));
         }
     }
 
@@ -59,7 +69,7 @@ public class TokenService {
                     .getSubject();
 
         } catch (JWTVerificationException exception){
-            throw new AuthException("Invalid token!");
+            throw new AuthException(messageService.getMessage("error.token.validation"));
         }
     }
 

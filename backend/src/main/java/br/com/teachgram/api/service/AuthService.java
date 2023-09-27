@@ -1,17 +1,17 @@
 package br.com.teachgram.api.service;
 
 import br.com.teachgram.api.domain.user.User;
-import br.com.teachgram.api.domain.user.dto.*;
+import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
+import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
+import br.com.teachgram.api.domain.user.dto.RefreshTokenRequestDTO;
+import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
-import br.com.teachgram.api.infra.i18n.CustomLocaleResolver;
 import br.com.teachgram.api.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,8 +25,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
-    private final MessageSource messageSource;
-    private final CustomLocaleResolver customLocaleResolver;
+    private final MessageService messageService;
 
     @Autowired
     public AuthService(
@@ -35,22 +34,20 @@ public class AuthService {
             PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager,
             TokenService tokenService,
-            MessageSource messageSource,
-            CustomLocaleResolver customLocaleResolver
+            MessageService messageService
     ) {
         this.userRepository = userRepository;
         this.userDataValidationService = userDataValidationService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
-        this.messageSource = messageSource;
-        this.customLocaleResolver = customLocaleResolver;
+        this.messageService = messageService;
     }
 
-    public LoginResponseDTO login(LoginRequestDTO dto, HttpServletRequest request) {
-        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageSource.getMessage("user", null, customLocaleResolver.resolveLocale(request))));
+    public LoginResponseDTO login(LoginRequestDTO dto) {
+        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.user.not-found")));
 
-        if (user.getDeleted()) throw new DeletedAccountException("Deleted account.");
+        if (user.getDeleted()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
 
         var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
 
@@ -64,7 +61,7 @@ public class AuthService {
 
         var subject = tokenService.validateToken(token);
 
-        if (userRepository.findById(subject).orElseThrow(() -> new AuthException("User not found.")).getDeleted()) throw new DeletedAccountException("Deleted account.");
+        if (userRepository.findById(subject).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.not-found"))).getDeleted()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
 
         return tokenService.generateToken(subject);
     }

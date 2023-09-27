@@ -34,8 +34,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto, HttpServletRequest request) {
-        return ResponseEntity.ok(authService.login(dto, request));
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
+        return ResponseEntity.ok(authService.login(dto));
     }
 
     @PostMapping("/refresh")

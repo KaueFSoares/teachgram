@@ -7,6 +7,7 @@ import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.PostRepository;
 import br.com.teachgram.api.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,26 +19,32 @@ public class PostService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final MessageService messageService;
 
     @Autowired
-    public PostService(UserRepository userRepository, PostRepository postRepository) {
+    public PostService(
+            UserRepository userRepository,
+            PostRepository postRepository,
+            MessageService messageService
+    ) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
+        this.messageService = messageService;
     }
 
     private User getAuthenticatedUser() {
         var auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException("User not authorized."));
+        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.unauthorized")));
     }
 
     private Post getPost(String id) {
         var user = getAuthenticatedUser();
 
-        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
+        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.post.not-found")));
 
         if (!post.getUser().equals(user)) {
-            throw new AuthException("User not authorized.");
+            throw new AuthException(messageService.getMessage("error.post.unauthorized"));
         }
         return post;
     }
@@ -55,7 +62,7 @@ public class PostService {
 
         post.setDeleted(true);
 
-        return new DeletePostResponseDTO("Post deleted successfully.");
+        return new DeletePostResponseDTO(messageService.getMessage("message.deleted.post"));
     }
 
     public UserPostDetailsDTO getUserPost(String id) {

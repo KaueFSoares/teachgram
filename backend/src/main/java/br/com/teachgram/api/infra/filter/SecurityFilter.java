@@ -1,7 +1,9 @@
 package br.com.teachgram.api.infra.filter;
 
 import br.com.teachgram.api.infra.exception.AuthException;
+import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.repository.UserRepository;
+import br.com.teachgram.api.service.MessageService;
 import br.com.teachgram.api.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,11 +22,17 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
     private final UserRepository userRepository;
+    private final MessageService messageService;
 
     @Autowired
-    public SecurityFilter(TokenService tokenService, UserRepository userRepository) {
+    public SecurityFilter(
+            TokenService tokenService,
+            UserRepository userRepository,
+            MessageService messageService
+    ) {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
+        this.messageService = messageService;
     }
 
     @Override
@@ -33,9 +41,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (token != null) {
             var subject = tokenService.validateToken(token);
-            var user = userRepository.findUserDetailsById(subject).orElseThrow(() -> new AuthException("Invalid token!"));
+            var user = userRepository.findUserDetailsById(subject).orElseThrow(() -> new AuthException(messageService.getMessage("error.token.invalid")));
 
-            if (!user.isEnabled()) throw new AuthException("Deleted user");
+            if (!user.isEnabled()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
