@@ -1,10 +1,13 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import AuthContext from "../context/AuthContext"
 import { HomePage } from "../pages"
 import { useUser } from "../service/user.service.ts"
+import Loading from "../components/layout/util/Loading.tsx"
 
 const HomePageContainer = () => {
   const { authData, setAuthenticated, setAuthData } = useContext(AuthContext)
+
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
     if (authData.accessToken) {
@@ -18,13 +21,18 @@ const HomePageContainer = () => {
       home.getPostList().then((res) => {
         // eslint-disable-next-line no-console
         console.log(res)
+        setLoading(false)
       })
     }
   }, [ authData, setAuthData, setAuthenticated ])
 
 
   return (
-    <HomePage />
+    loading ? (
+      <Loading />
+    ) : (
+      <HomePage />
+    )
   )
 }
 
