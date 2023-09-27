@@ -1,4 +1,4 @@
-package br.com.teachgram.api.infra.i18n;
+package br.com.teachgram.api.infra.locale;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

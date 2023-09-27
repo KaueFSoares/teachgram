@@ -1,4 +1,4 @@
-package br.com.teachgram.api.infra.i18n;
+package br.com.teachgram.api.infra.locale;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,7 +1,6 @@
 package br.com.teachgram.api.service;
 
-import br.com.teachgram.api.infra.i18n.CustomLocaleResolver;
-import jakarta.servlet.http.HttpServletRequest;
+import br.com.teachgram.api.infra.locale.CustomLocaleResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
