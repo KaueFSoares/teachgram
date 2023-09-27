@@ -1,4 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction } from "react"
+import { Link } from "react-router-dom"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -104,12 +105,13 @@ const SignupPage = ({
 
 
             <Button
-              text="Entrar"
+              text="Próximo"
             />
 
           </form>
 
-          <div
+          <Link
+            to={"/login"}
             className="w-full flex justify-center gap-2 text-sm"
           >
             <p>
@@ -120,9 +122,9 @@ const SignupPage = ({
               role="button"
               className="underline text-orange font-bold"
             >
-              Próximo
+              Entrar
             </p>
-          </div>
+          </Link>
         </div>
       </div>
       <div

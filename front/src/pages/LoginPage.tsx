@@ -1,4 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction } from "react"
+import { Link } from "react-router-dom"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 
@@ -88,7 +89,8 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
 
           </form>
 
-          <div
+          <Link
+            to={"/signup"}
             className="w-full flex justify-center gap-2 text-sm"
           >
             <p>
@@ -101,7 +103,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             >
           Cadastre-se
             </p>
-          </div>
+          </Link>
 
           <div
             className="w-full flex justify-around items-center text-gray"
