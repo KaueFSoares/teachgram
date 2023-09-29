@@ -15,17 +15,14 @@ function isValidEmail(email: string): boolean {
 const useValidation = () => {
   const validate = (items: Item[]) => {
     for (const item of items) {
-      let valid = true
-
-      if (item.email) {
-        valid = isValidEmail(item.tag)
+      if (item.email && !isValidEmail(item.tag)) {
+        return {
+          flag: false,
+          item: item,
+        }
       }
 
-      if (valid) {
-        valid = item.value.length > 0
-      }
-
-      if (!valid) {
+      if (item.value.length <= 0) {
         return {
           flag: false,
           item: item,
