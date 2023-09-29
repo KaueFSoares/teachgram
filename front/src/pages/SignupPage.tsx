@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react"
-import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 import LinkModal from "../components/layout/form/LinkModal.tsx"
+import { validate } from "../service/validation.service.ts"
 
 interface SignupPageProps {
   name: string
@@ -29,7 +30,52 @@ const SignupPage = ({
   const { t } = useTranslation()
 
   const [ showModal, setShowModal ] = useState(false)
+  const [ showMessage, setShowMessage ] = useState(false)
 
+  const toogleShowMessage = () => {
+    setShowMessage(true)
+
+    setTimeout(() => {
+      setShowMessage(false)
+    }, 5000)
+  }
+
+  const makeValidation = () => {
+    const result = validate(
+      [
+        {
+          tag: "Nome",
+          value: name,
+        },
+        {
+          tag: "E-mail",
+          value: email,
+          email: true,
+        },
+        {
+          tag: "Descrição",
+          value: bio,
+        },
+        {
+          tag: "Telefone",
+          value: phone,
+        },
+        {
+          tag: "Senha",
+          value: password,
+        },
+      ],
+    )
+
+    if (!result.flag) {
+      toogleShowMessage()
+
+      return false
+    }
+
+    return true
+  }
+  
   return (
     <main 
       className="w-full max-w-full min-h-screen flex justify-between"
@@ -119,9 +165,14 @@ const SignupPage = ({
                   setState={setPassword}
                 />
 
+                {showMessage && <p>faltou algo</p>}
 
                 <Button
-                  onClick={() => setShowModal(true)}
+                  onClick={() => {
+                    if(makeValidation()){
+                      setShowModal(true)
+                    }
+                  }}
                   type="button"
                   text={t("signup.next")}
                 />

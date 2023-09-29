@@ -1,8 +1,8 @@
-import { FormEvent, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../service/auth.service"
-import { SignupPage } from "../pages"
 import AuthContext from "../context/AuthContext"
+import { SignupPage } from "../pages"
+import { useAuth } from "../service/auth.service"
 
 const SignupPageContainer = () => {
   const auth = useAuth()
@@ -17,9 +17,7 @@ const SignupPageContainer = () => {
   const [ password, setPassword ] = useState("")
   const [ photo, setPhoto ] = useState("")
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const handleSubmit = () => {
     auth.onSignup(name, email, bio, phone, password, photo)
       .then((data) => {
         setAuthenticated(true)

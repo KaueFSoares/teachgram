@@ -12,33 +12,25 @@ function isValidEmail(email: string): boolean {
 }
 
 
-const useValidation = () => {
-  const validate = (items: Item[]) => {
-    for (const item of items) {
-      if (item.email && !isValidEmail(item.tag)) {
-        return {
-          flag: false,
-          item: item,
-        }
-      }
-
-      if (item.value.length <= 0) {
-        return {
-          flag: false,
-          item: item,
-        }
+export const validate = (items: Item[]) => {
+  for (const item of items) {
+    if (item.email && !isValidEmail(item.value)) {
+      return {
+        flag: false,
+        item: item,
       }
     }
 
-    return {
-      flag: true,
-      item: {} as Item,
+    if (item.value.length <= 0) {
+      return {
+        flag: false,
+        item: item,
+      }
     }
   }
 
   return {
-    validate,
+    flag: true,
+    item: {} as Item,
   }
 }
-
-export default useValidation
