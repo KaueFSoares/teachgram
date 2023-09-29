@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
+import { useTranslation } from "react-i18next"
 import Input from "./Input.tsx"
 import Button from "./Button.tsx"
 
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className="absolute w-full h-full box-border flex flex-col items-center justify-start z-10 bg-white">
       <div className="w-full px-8 mb-4">
@@ -25,21 +28,21 @@ const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
       </div>
       <div className="w-full px-12 mb-16">
         <h3 className="text-xl font-semibold">
-          Insira o link da sua foto de perfil
+          {t("signup.link.insertlink")}
         </h3>
       </div>
-      <div className="px-12 w-full mb-8">
+      <div className="px-12 w-full mb-12">
         <Input
           type="text"
-          name="Link"
-          placeholder="Insira seu link"
+          name={t("signup.link.link")}
+          placeholder={t("signup.link.placeholder")}
           setState={setState}
           state={state}
         />
       </div>
       <div className="w-full px-12">
         <Button 
-          text="Salvar"
+          text={t("signup.link.save")}
           type="button"
           onClick={onSubmit}
         />

@@ -55,6 +55,12 @@
                     "password": "Senha",
                     "link": "Link"
                 }
+            },
+            "link": {
+                "insertlink": "Insira o link da sua foto de perfil",
+                "link": "Link",
+                "placeholder": "Insira seu link",
+                "save": "Salvar"
             }
         }
     }
