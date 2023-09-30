@@ -155,4 +155,8 @@ public class User implements UserDetails {
     public void removeFriend(User friend) {
         this.friends.removeIf(friendship -> friendship.getSecondUser().getId().equals(friend.getId()));
     }
+
+    public String getActualUsername(){
+        return this.username;
+    }
 }

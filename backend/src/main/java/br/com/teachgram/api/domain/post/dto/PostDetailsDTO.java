@@ -29,7 +29,7 @@ public record PostDetailsDTO(
                 post.getLikes(),
                 post.getPrivatePost(),
                 post.getUser().getId(),
-                post.getUser().getUsername(),
+                post.getUser().getActualUsername(),
                 post.getUser().getPhoto(),
                 post.getCreatedAt().toInstant(ZoneOffset.of("-03:00")).toEpochMilli()
         );
