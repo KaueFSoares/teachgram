@@ -42,6 +42,8 @@ public class User implements UserDetails {
 
     private String email;
 
+    private String username;
+
     private String phone;
 
     private String bio;
@@ -60,6 +62,7 @@ public class User implements UserDetails {
     public User(SignupRequestDTO dto) {
         this.name = dto.name();
         this.email = dto.email();
+        this.username = dto.username();
         this.bio = dto.bio();
         this.phone = dto.phone();
         this.photo = dto.photo();
@@ -115,6 +118,10 @@ public class User implements UserDetails {
 
         if (dto.name() != null) {
             this.name = dto.name();
+        }
+
+        if (dto.username() != null) {
+            this.username = dto.username();
         }
 
         if (dto.bio() != null) {
