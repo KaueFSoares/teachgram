@@ -27,6 +27,10 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Boolean existsByPhone(String phone);
 
+    Boolean existsByUsername(String username);
+
+    Boolean existsByUsernameAndIdNot(String username, String id);
+
     @Query("select u from User  u where u.id = :id")
     Optional<User> findFriendById(String id);
 
