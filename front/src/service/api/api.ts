@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import axios, { AxiosInstance } from "axios"
-import { onRefresh } from "../auth.service"
+import { onLogout, onRefresh } from "../auth.service"
 import AuthContext from "../../context/AuthContext"
 import { AuthData } from "../../interface/AuthData"
 import { URL } from "./url"
@@ -38,6 +38,7 @@ const useApi = (): AxiosInstance => {
       .catch((err) => {
       // eslint-disable-next-line no-console
         console.log(err)
+        onLogout()
         setAuthenticated(false)
       })
 
