@@ -12,6 +12,7 @@ const SignupPageContainer = () => {
 
   const [ name, setName ] = useState("")
   const [ email, setEmail ] = useState("")
+  const [ username, setUsername ] = useState("")
   const [ bio, setBio ] = useState("")
   const [ phone, setPhone ] = useState("")
   const [ password, setPassword ] = useState("")
@@ -30,11 +31,13 @@ const SignupPageContainer = () => {
     <SignupPage
       name={name}
       email={email}
+      username={username}
       bio={bio}
       phone={phone}
       password={password}
       setName={setName}
       setEmail={setEmail}
+      setUsername={setUsername}
       setBio={setBio}
       setPhone={setPhone}
       setPassword={setPassword}
