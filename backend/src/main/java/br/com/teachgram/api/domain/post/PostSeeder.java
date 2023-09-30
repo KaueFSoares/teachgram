@@ -32,8 +32,8 @@ public class PostSeeder {
             var post1 = new Post(
                     new CreatePostRequestDTO(
                             "Post da julia",
-                            "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             "Look at this beautiful view",
+                            "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     julia
@@ -42,8 +42,8 @@ public class PostSeeder {
             var post2 = new Post(
                     new CreatePostRequestDTO(
                             "Post do matheus",
-                            "https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             "Look at this beautiful view",
+                            "https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     matheus
@@ -52,8 +52,8 @@ public class PostSeeder {
             var post3 = new Post(
                     new CreatePostRequestDTO(
                             "Post da maria",
-                            "https://images.pexels.com/photos/325807/pexels-photo-325807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             "Look at this beautiful view",
+                            "https://images.pexels.com/photos/325807/pexels-photo-325807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     maria
@@ -62,8 +62,8 @@ public class PostSeeder {
             var post4 = new Post(
                     new CreatePostRequestDTO(
                             "Post do joao",
-                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             "Look at this beautiful view",
+                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     joao
@@ -72,8 +72,8 @@ public class PostSeeder {
             var post5 = new Post(
                     new CreatePostRequestDTO(
                             "Post da julia",
-                            "https://images.pexels.com/photos/551851/pexels-photo-551851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             "Look at this beautiful view",
+                            "https://images.pexels.com/photos/551851/pexels-photo-551851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     julia
