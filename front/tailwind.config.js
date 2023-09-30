@@ -13,7 +13,7 @@ export default {
         "black": "#303030",
       },
       boxShadow: {
-        full: "0 0 20px rgba(0, 0, 0, 0.2)",
+        full: "0 0 5px rgba(0, 0, 0, 0.2)",
       },
     },
   },
