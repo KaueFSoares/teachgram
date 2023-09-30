@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { LoginPage } from "../pages"
 import { useAuth } from "../service/auth.service"
@@ -16,9 +16,7 @@ const LoginPageContainer = () => {
 
   const [ loading, setLoading ] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const handleSubmit = () => {
     setLoading(true)
 
     auth.onLogin(email, password)

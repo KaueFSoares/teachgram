@@ -1,19 +1,77 @@
-import { Dispatch, FormEvent, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
+import { emailValidation, emptyValidation } from "../service/validation.service.ts"
+import Message from "../components/layout/form/Message.tsx"
 
 interface LoginPageProps {
   email: string
   password: string
   setEmail: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+  handleSubmit: () => void
 }
 
 const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: LoginPageProps) => {
   const { t } = useTranslation()
+
+  const [ showEmptyMessage, setShowEmptyMessage ] = useState(false)
+  const [ showEmailMessage, setShowEmailMessage ] = useState(false)
+
+  const toogleShowMessage = (set: Dispatch<SetStateAction<boolean>>) => {
+    set(true)
+
+    setTimeout(() => {
+      set(false)
+    }, 5000)
+  }
+
+  const itemsList = emptyValidation([
+    {
+      flag: true,
+      item:{
+        tag: "email",
+        value: email,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "password",
+        value: password,
+      },
+    },
+  ])
+
+  const makeEmptyValidation = () => {
+    emptyValidation(itemsList)
+
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
+    }
+
+    return valid
+  }
+
+  const makeEmailValidation = () => {
+    emailValidation(itemsList)
+
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
+    }
+
+    return valid
+  }
   
   return (
     <main 
@@ -42,13 +100,13 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
             action=""
             className="w-full flex flex-col gap-4
                         lg:gap-2"
-            onSubmit={handleSubmit}
           >
             <Input 
               name={t("login.input.label.email")} 
               type="email" 
               placeholder={t("login.input.placeholder.email")}
-              className="mb-2"
+              className={`${((showEmptyMessage && !itemsList[0].flag)) ? "border-orange" : ""}
+                            ${((showEmailMessage && itemsList[0].flag)) ? "border-orange" : ""}`}
               state={email}
               setState={setEmail}
             />
@@ -59,11 +117,12 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
               placeholder={t("login.input.placeholder.password")}
               state={password}
               setState={setPassword}
+              className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange" : ""}`}
             />
 
             <div 
-              className="flex justify-between text-sm text-black/70 mb-12
-                          lg:mb-8"
+              className="flex justify-between text-sm text-black/70 mb-4
+                          lg:mb-4"
             >
               <div 
                 className="flex gap-2 relative items-center"
@@ -88,7 +147,22 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
               </p>
             </div>
 
+            {showEmptyMessage && <Message text="Campo não preenchido" />}
+            {showEmailMessage && <Message text="E-mail inválido" />}
+
             <Button
+              type="button"
+              onClick={() => {
+                if (makeEmptyValidation()) {
+                  if (makeEmailValidation()) {
+                    handleSubmit()
+                  } else {
+                    toogleShowMessage(setShowEmailMessage)
+                  }
+                } else {
+                  toogleShowMessage(setShowEmptyMessage)
+                }
+              }}
               text={t("login.enter")}
             />
 
