@@ -4,17 +4,20 @@ import { Link } from "react-router-dom"
 import Button from "../components/layout/form/Button.tsx"
 import Input from "../components/layout/form/Input.tsx"
 import LinkModal from "../components/layout/form/LinkModal.tsx"
-import { validate } from "../service/validation.service.ts"
+import { emailValidation, emptyValidation, phoneValidation } from "../service/validation.service.ts"
+import Message from "../components/layout/form/Message.tsx"
 
 interface SignupPageProps {
   name: string
   email: string
+  username: string
   bio: string
   phone: string
   password: string
   photo: string
   setName: Dispatch<SetStateAction<string>>
   setEmail: Dispatch<SetStateAction<string>>
+  setUsername: Dispatch<SetStateAction<string>>
   setBio: Dispatch<SetStateAction<string>>
   setPhone: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
@@ -23,57 +26,110 @@ interface SignupPageProps {
 }
 
 const SignupPage = ({ 
-  name, email, bio, phone, password, photo,
-  setName, setEmail, setBio, setPhone, setPassword, setPhoto, 
+  name, email, username, bio, phone, password, photo, 
+  setName, setEmail, setUsername, setBio, setPhone, setPassword, setPhoto, 
   handleSubmit, 
 }: SignupPageProps) => {
   const { t } = useTranslation()
 
   const [ showModal, setShowModal ] = useState(false)
-  const [ showMessage, setShowMessage ] = useState(false)
+  const [ showEmptyMessage, setShowEmptyMessage ] = useState(false)
+  const [ showEmailMessage, setShowEmailMessage ] = useState(false)
+  const [ showPhoneMessage, setShowPhoneMessage ] = useState(false)
 
-  const toogleShowMessage = () => {
-    setShowMessage(true)
+  const toogleShowMessage = (set: Dispatch<SetStateAction<boolean>>) => {
+    set(true)
 
     setTimeout(() => {
-      setShowMessage(false)
+      set(false)
     }, 5000)
   }
 
-  const makeValidation = () => {
-    const result = validate(
-      [
-        {
-          tag: "Nome",
-          value: name,
-        },
-        {
-          tag: "E-mail",
-          value: email,
-          email: true,
-        },
-        {
-          tag: "Descrição",
-          value: bio,
-        },
-        {
-          tag: "Telefone",
-          value: phone,
-        },
-        {
-          tag: "Senha",
-          value: password,
-        },
-      ],
-    )
+  const itemsList = emptyValidation([
+    {
+      flag: true,
+      item: {
+        tag: "name",
+        value: name,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "email",
+        value: email,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "username",
+        value: username,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "description",
+        value: bio,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "phone",
+        value: phone,
+      },
+    },
+    {
+      flag: true,
+      item:{
+        tag: "password",
+        value: password,
+      },
+    },
+  ])
 
-    if (!result.flag) {
-      toogleShowMessage()
+  const makeEmptyValidation = () => {
+    emptyValidation(itemsList)
 
-      return false
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
     }
 
-    return true
+    return valid
+  }
+
+  const makeEmailValidation = () => {
+    emailValidation(itemsList)
+
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
+    }
+
+    return valid
+  }
+
+  const makePhoneValidation = () => {
+    phoneValidation(itemsList)
+
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
+    }
+
+    return valid
   }
   
   return (
@@ -87,8 +143,7 @@ const SignupPage = ({
         <div className={`relative h-full w-full flex flex-col p-12 items-center justify-start gap-8 text-black
                         lg:w-2/3 lg:gap-6 lg:pt-0 lg:px-6 lg:pb-6   lg:max-h-[calc(100vh-6rem)]
                         xl:w-1/2
-                        2xl:w-1/3
-                        ${showModal ? "overflow-hidden h-[calc(100vh)]" : "lg:overflow-auto"}`}>
+                        ${showModal ? "overflow-hidden h-screen" : "lg:overflow-auto"}`}>
           
 
           { showModal ? (
@@ -122,6 +177,7 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.name")}
                   state={name}
                   setState={setName}
+                  className={(showEmptyMessage && !itemsList[0].flag) ? "border-orange" : ""}
                 />
 
                 <Input
@@ -130,47 +186,65 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.email")}
                   state={email}
                   setState={setEmail}
+                  className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange" : ""}
+                                ${((showEmailMessage && itemsList[1].flag)) ? "border-orange" : ""}`}
                 />
 
                 <Input
                   name={t("signup.input.label.username")}
                   type="text"
                   placeholder={t("signup.input.placeholder.username")}
-                  state={bio}
-                  setState={setBio}
+                  state={username}
+                  setState={setUsername}
+                  className={(showEmptyMessage && !itemsList[2].flag) ? "border-orange" : ""}
                 />
 
                 <Input
                   name={t("signup.input.label.bio")}
                   type="text"
                   placeholder={t("signup.input.placeholder.bio")}
-                  state={phone}
-                  setState={setPhone}
+                  state={bio}
+                  setState={setBio}
+                  className={(showEmptyMessage && !itemsList[3].flag) ? "border-orange" : ""}
                 />
 
                 <Input
                   name={t("signup.input.label.phone")}
                   type="text"
                   placeholder={t("signup.input.placeholder.phone")}
-                  state={photo}
-                  setState={setPhoto}
+                  state={phone}
+                  setState={setPhone}
+                  className={`${((showEmptyMessage && !itemsList[4].flag)) ? "border-orange" : ""}
+                                ${((showPhoneMessage && itemsList[4].flag)) ? "border-orange" : ""}`}
                 />
 
                 <Input
                   name={t("signup.input.label.password")}
                   type="password"
                   placeholder={t("signup.input.placeholder.password")} 
-                  className="mb-8"
+                  className={`mb-4 ${(showEmptyMessage && !itemsList[5].flag) ? "border-orange" : ""}`}
                   state={password}
                   setState={setPassword}
                 />
 
-                {showMessage && <p>faltou algo</p>}
+                {showEmptyMessage && <Message text="Campo não preenchido" />}
+                {showEmailMessage && <Message text="E-mail inválido" />}
+                {showPhoneMessage && <Message text="Telefone deve ser (00) 0 0000-0000" />}
 
                 <Button
                   onClick={() => {
-                    if(makeValidation()){
-                      setShowModal(true)
+                    if(makeEmptyValidation()){
+                      if (makeEmailValidation()) {
+                        if(makePhoneValidation()){
+                          setShowModal(true)
+                        } else {
+                          toogleShowMessage(setShowPhoneMessage)
+                        }
+                      } else {
+                        toogleShowMessage(setShowEmailMessage)
+                      }
+                    } else {
+                      toogleShowMessage(setShowEmptyMessage)
                     }
                   }}
                   type="button"
