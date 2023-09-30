@@ -2,11 +2,14 @@ import { useContext } from "react"
 import axios, { AxiosInstance } from "axios"
 import { onRefresh } from "../auth.service"
 import AuthContext from "../../context/AuthContext"
+import { AuthData } from "../../interface/AuthData"
 import { URL } from "./url"
 
 
 const useApi = (): AxiosInstance => {
-  const { authData, setAuthData, setAuthenticated } = useContext(AuthContext)
+  const { setAuthenticated } = useContext(AuthContext)
+
+  const authData = JSON.parse(localStorage.getItem("authData") as string) as AuthData
 
   const instance = axios.create({
     baseURL: URL.BASE,
@@ -30,8 +33,6 @@ const useApi = (): AxiosInstance => {
 
     await onRefresh(authData.refreshToken)
       .then((res) => {
-        setAuthData(res)
-
         req.headers.Authorization = `${authData.tokenType} ${res.accessToken}`
       })
       .catch((err) => {

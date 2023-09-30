@@ -2,11 +2,9 @@ import { useEffect, useState } from "react"
 import AuthContext from "./context/AuthContext.tsx"
 import AppRoutes from "./routes/AppRoutes.tsx"
 import { onLoad } from "./service/auth.service.ts"
-import { AuthData } from "./interface/AuthData.ts"
 
 function App() {
   const [ authenticated, setAuthenticated ] = useState(true)
-  const [ authData, setAuthData ] = useState<AuthData>({} as AuthData)
 
 
   useEffect(() => {
@@ -14,7 +12,6 @@ function App() {
 
     if (data) {
       setAuthenticated(true)
-      setAuthData(data)
     } else {
       setAuthenticated(false)
     }
@@ -23,7 +20,7 @@ function App() {
   }, [ ])
 
   return (
-    <AuthContext.Provider value={{ authenticated, authData, setAuthenticated, setAuthData }}>
+    <AuthContext.Provider value={{ authenticated, setAuthenticated }}>
       <AppRoutes authenticated={authenticated} />
     </AuthContext.Provider>
   )

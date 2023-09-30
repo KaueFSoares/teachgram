@@ -8,7 +8,7 @@ import Loading from "../components/layout/util/Loading.tsx"
 const LoginPageContainer = () => {
   const navigate = useNavigate()
 
-  const { setAuthenticated, setAuthData } = useContext(AuthContext)
+  const { setAuthenticated } = useContext(AuthContext)
 
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
@@ -19,9 +19,8 @@ const LoginPageContainer = () => {
     setLoading(true)
 
     onLogin(email, password)
-      .then((data) => {
+      .then(() => {
         setAuthenticated(true)
-        setAuthData(data)
         navigate("/")
       })
       .catch((err) => {

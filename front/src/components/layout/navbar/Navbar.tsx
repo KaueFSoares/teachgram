@@ -1,27 +1,23 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useUser } from "../../../service/user.service.ts"
-import AuthContext from "../../../context/AuthContext.tsx"
 import NavbarItem from "./NavbarItem.tsx"
 
 
 const Navbar = () => {
-  const { authData } = useContext(AuthContext)
-
   const [ imgSrc, setImgSrc ] = useState<string>("")
 
   const { t } = useTranslation()
 
   const user = useUser()
+  
   useEffect(() => {
-    if (authData.accessToken) {
-      user.getUserPhoto().then((res) => {
-        setImgSrc(res)
-      })
-    }
+    user.getUserPhoto().then((res) => {
+      setImgSrc(res)
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ authData.accessToken ])
+  }, [ ])
 
   return (
     <nav className="w-full flex absolute bottom-0 left-0 shadow-full p-6

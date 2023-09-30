@@ -7,7 +7,7 @@ import { onSignup } from "../service/auth.service"
 const SignupPageContainer = () => {
   const navigate = useNavigate()
 
-  const { setAuthenticated, setAuthData } = useContext(AuthContext)
+  const { setAuthenticated } = useContext(AuthContext)
 
   const [ name, setName ] = useState("")
   const [ email, setEmail ] = useState("")
@@ -19,9 +19,8 @@ const SignupPageContainer = () => {
 
   const handleSubmit = () => {
     onSignup(name, email, bio, phone, password, photo)
-      .then((data) => {
+      .then(() => {
         setAuthenticated(true)
-        setAuthData(data)
         navigate("/")
       })
   }
