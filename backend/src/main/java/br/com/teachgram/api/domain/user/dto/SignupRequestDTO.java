@@ -9,6 +9,8 @@ public record SignupRequestDTO(
         @NotEmpty(message = "{validation.user.email.not-empty}")
         @Email(message = "{validation.user.email.invalid}")
         String email,
+        @NotEmpty(message = "{validation.user.username.not-empty}")
+        String username,
         @NotEmpty(message = "{validation.user.password.not-empty}")
         String password,
         @NotEmpty(message = "{validation.user.bio.not-empty}")
