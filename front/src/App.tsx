@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
 import AuthContext from "./context/AuthContext.tsx"
 import AppRoutes from "./routes/AppRoutes.tsx"
-import { useAuth } from "./service/auth.service.ts"
+import { onLoad } from "./service/auth.service.ts"
 import { AuthData } from "./interface/AuthData.ts"
 
 function App() {
-  const auth = useAuth()
   const [ authenticated, setAuthenticated ] = useState(true)
   const [ authData, setAuthData ] = useState<AuthData>({} as AuthData)
 
 
   useEffect(() => {
-    const data = auth.onLoad()
+    const data = onLoad()
 
     if (data) {
       setAuthenticated(true)

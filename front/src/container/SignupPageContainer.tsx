@@ -2,10 +2,9 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AuthContext from "../context/AuthContext"
 import { SignupPage } from "../pages"
-import { useAuth } from "../service/auth.service"
+import { onSignup } from "../service/auth.service"
 
 const SignupPageContainer = () => {
-  const auth = useAuth()
   const navigate = useNavigate()
 
   const { setAuthenticated, setAuthData } = useContext(AuthContext)
@@ -19,7 +18,7 @@ const SignupPageContainer = () => {
   const [ photo, setPhoto ] = useState("")
 
   const handleSubmit = () => {
-    auth.onSignup(name, email, bio, phone, password, photo)
+    onSignup(name, email, bio, phone, password, photo)
       .then((data) => {
         setAuthenticated(true)
         setAuthData(data)

@@ -1,12 +1,11 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { LoginPage } from "../pages"
-import { useAuth } from "../service/auth.service"
+import { onLogin } from "../service/auth.service"
 import AuthContext from "../context/AuthContext"
 import Loading from "../components/layout/util/Loading.tsx"
 
 const LoginPageContainer = () => {
-  const auth = useAuth()
   const navigate = useNavigate()
 
   const { setAuthenticated, setAuthData } = useContext(AuthContext)
@@ -19,7 +18,7 @@ const LoginPageContainer = () => {
   const handleSubmit = () => {
     setLoading(true)
 
-    auth.onLogin(email, password)
+    onLogin(email, password)
       .then((data) => {
         setAuthenticated(true)
         setAuthData(data)

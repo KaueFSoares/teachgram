@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios"
 import { Dispatch, SetStateAction } from "react"
-import { useAuth } from "../auth.service"
 import { AuthData } from "../../interface/AuthData"
+import { onRefresh } from "../auth.service"
 import { URL } from "./url"
 
 export const OPENED_API = (): AxiosInstance => {
@@ -23,8 +23,6 @@ interface Props {
 }
 
 const useApi = ({ authData, setAuthData, setAuthenticated }: Props): AxiosInstance => {
-  const auth = useAuth()
-
   const instance = axios.create({
     baseURL: URL.BASE,
     headers: {
@@ -45,7 +43,7 @@ const useApi = ({ authData, setAuthData, setAuthenticated }: Props): AxiosInstan
     // eslint-disable-next-line no-console
     console.log("Token expired, refreshing...")
 
-    await auth.onRefresh(authData.refreshToken)
+    await onRefresh(authData.refreshToken)
       .then((res) => {
         setAuthData(res)
 
