@@ -227,9 +227,9 @@ const SignupPage = ({
                   setState={setPassword}
                 />
 
-                {showEmptyMessage && <Message text="Campo não preenchido" />}
-                {showEmailMessage && <Message text="E-mail inválido" />}
-                {showPhoneMessage && <Message text="Telefone deve ser (00) 0 0000-0000" />}
+                {showEmptyMessage && <Message text={t("validation.empty")} />}
+                {showEmailMessage && <Message text={t("validation.email")} />}
+                {showPhoneMessage && <Message text={t("validation.phone")} />}
 
                 <Button
                   onClick={() => {

@@ -77,7 +77,7 @@ const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
           className={`mb-4
                       ${showMessage && !itemsList[0].flag ? "border-orange" : ""}`}
         />
-        {showMessage && <Message text="Campo não preenchido" />}
+        {showMessage && <Message text={t("validation.empty")} />}
       </div>
       <div className="w-full px-12">
         <Button 

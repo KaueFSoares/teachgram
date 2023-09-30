@@ -147,8 +147,8 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
               </p>
             </div>
 
-            {showEmptyMessage && <Message text="Campo não preenchido" />}
-            {showEmailMessage && <Message text="E-mail inválido" />}
+            {showEmptyMessage && <Message text={t("validation.empty")} />}
+            {showEmailMessage && <Message text={t("validation.email")} />}
 
             <Button
               type="button"
