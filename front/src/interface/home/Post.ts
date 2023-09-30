@@ -9,4 +9,5 @@ export interface Post {
   userId: string;
   username: string;
   userPhotoLink: string;
+  createdAt: number;
 }

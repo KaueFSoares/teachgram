@@ -31,6 +31,7 @@ const usePosts = () => {
         userId: post.userId,
         username: post.username,
         userPhotoLink: post.userPhotoLink,
+        createdAt: post.createdAt,
       }
     }) as Post[]
   }

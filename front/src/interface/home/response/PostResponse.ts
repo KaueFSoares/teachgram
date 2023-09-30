@@ -26,4 +26,5 @@ interface Content {
   userId: string;
   username: string;
   userPhotoLink: string;
+  createdAt: number;
 }
