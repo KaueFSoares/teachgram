@@ -5,12 +5,11 @@ import { useUser } from "../service/user.service.ts"
 import Loading from "../components/layout/util/Loading.tsx"
 
 const HomePageContainer = () => {
+  const [ loading, setLoading ] = useState(true)
+
   const home = useUser()
 
   const { authData } = useContext(AuthContext)
-
-  const [ loading, setLoading ] = useState(true)
-
 
   useEffect(() => {
     if (authData.accessToken) {
