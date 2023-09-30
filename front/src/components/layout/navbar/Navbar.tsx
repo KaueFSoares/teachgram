@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [ ])
 
   return (
-    <nav className="w-full flex absolute bottom-0 left-0 shadow-full p-6
+    <nav className="w-full flex fixed bottom-0 left-0 shadow-full p-6 bg-white
                     lg:w-1/4 lg:h-full lg:shadow-none lg:flex-col lg:gap-16 lg:py-12 lg:px-8 lg:left-8
                     xl:w-1/5
                     2xl:w-1/6 2xl:left-16">
