@@ -13,8 +13,8 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
   
   return (
     <main className="relative w-full min-h-screen flex items-center justify-start flex-col">
-      <div className="w-full flex flex-col h-full p-12 gap-8 mb-10">
-        <img src="/images/full_logo.svg" alt="" className="w-2/3 mb-4" />
+      <div className="w-full flex flex-col h-full p-12 gap-4 mb-10">
+        <img src="/images/full_logo.svg" alt="" className="w-2/3 mb-6" />
         {posts.length > 0 ? (
           <>
             {posts.map((post) => (
