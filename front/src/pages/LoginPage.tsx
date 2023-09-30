@@ -105,8 +105,8 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
               name={t("login.input.label.email")} 
               type="email" 
               placeholder={t("login.input.placeholder.email")}
-              className={`${((showEmptyMessage && !itemsList[0].flag)) ? "border-orange" : ""}
-                            ${((showEmailMessage && itemsList[0].flag)) ? "border-orange" : ""}`}
+              className={`${((showEmptyMessage && !itemsList[0].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}
+                            ${((showEmailMessage && itemsList[0].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}`}
               state={email}
               setState={setEmail}
             />
@@ -117,7 +117,7 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
               placeholder={t("login.input.placeholder.password")}
               state={password}
               setState={setPassword}
-              className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange" : ""}`}
+              className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}`}
             />
 
             <div 

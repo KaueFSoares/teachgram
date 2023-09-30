@@ -177,7 +177,7 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.name")}
                   state={name}
                   setState={setName}
-                  className={(showEmptyMessage && !itemsList[0].flag) ? "border-orange" : ""}
+                  className={(showEmptyMessage && !itemsList[0].flag) ? "border-orange text-orange placeholder:text-orange" : ""}
                 />
 
                 <Input
@@ -186,8 +186,8 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.email")}
                   state={email}
                   setState={setEmail}
-                  className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange" : ""}
-                                ${((showEmailMessage && itemsList[1].flag)) ? "border-orange" : ""}`}
+                  className={`${((showEmptyMessage && !itemsList[1].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}
+                                ${((showEmailMessage && itemsList[1].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}`}
                 />
 
                 <Input
@@ -196,7 +196,7 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.username")}
                   state={username}
                   setState={setUsername}
-                  className={(showEmptyMessage && !itemsList[2].flag) ? "border-orange" : ""}
+                  className={(showEmptyMessage && !itemsList[2].flag) ? "border-orange text-orange placeholder:text-orange" : ""}
                 />
 
                 <Input
@@ -205,7 +205,7 @@ const SignupPage = ({
                   placeholder={t("signup.input.placeholder.bio")}
                   state={bio}
                   setState={setBio}
-                  className={(showEmptyMessage && !itemsList[3].flag) ? "border-orange" : ""}
+                  className={(showEmptyMessage && !itemsList[3].flag) ? "border-orange text-orange placeholder:text-orange" : ""}
                 />
 
                 <Input
@@ -213,16 +213,17 @@ const SignupPage = ({
                   type="text"
                   placeholder={t("signup.input.placeholder.phone")}
                   state={phone}
+                  maxLength={16}
                   setState={setPhone}
-                  className={`${((showEmptyMessage && !itemsList[4].flag)) ? "border-orange" : ""}
-                                ${((showPhoneMessage && itemsList[4].flag)) ? "border-orange" : ""}`}
+                  className={`${((showEmptyMessage && !itemsList[4].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}
+                                ${((showPhoneMessage && itemsList[4].flag)) ? "border-orange text-orange placeholder:text-orange" : ""}`}
                 />
 
                 <Input
                   name={t("signup.input.label.password")}
                   type="password"
                   placeholder={t("signup.input.placeholder.password")} 
-                  className={`mb-4 ${(showEmptyMessage && !itemsList[5].flag) ? "border-orange" : ""}`}
+                  className={`mb-4 ${(showEmptyMessage && !itemsList[5].flag) ? "border-orange text-orange placeholder:text-orange" : ""}`}
                   state={password}
                   setState={setPassword}
                 />

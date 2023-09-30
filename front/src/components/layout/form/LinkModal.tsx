@@ -75,7 +75,7 @@ const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
           setState={setState}
           state={state}
           className={`mb-4
-                      ${showMessage && !itemsList[0].flag ? "border-orange" : ""}`}
+                      ${showMessage && !itemsList[0].flag ? "border-orange text-orange placeholder:text-orange" : ""}`}
         />
         {showMessage && <Message text={t("validation.empty")} />}
       </div>
