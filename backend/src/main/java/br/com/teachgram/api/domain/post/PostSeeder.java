@@ -24,10 +24,10 @@ public class PostSeeder {
     @PostConstruct
     public void seed() {
         if (postRepository.count() == 0) {
-            var julia = userRepository.findByEmail("julia@julia").orElse(null);
-            var matheus = userRepository.findByEmail("matheus@matheus").orElse(null);
-            var maria = userRepository.findByEmail("maria@maria").orElse(null);
-            var joao = userRepository.findByEmail("joao@joao").orElse(null);
+            var julia = userRepository.findByEmail("julia@julia.julia").orElse(null);
+            var matheus = userRepository.findByEmail("matheus@matheus.matheus").orElse(null);
+            var maria = userRepository.findByEmail("maria@maria.maria").orElse(null);
+            var joao = userRepository.findByEmail("joao@joao.joao").orElse(null);
 
             var post1 = new Post(
                     new CreatePostRequestDTO(

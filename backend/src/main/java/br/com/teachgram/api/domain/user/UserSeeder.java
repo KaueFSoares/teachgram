@@ -21,11 +21,11 @@ public class UserSeeder {
     @PostConstruct
     public void seed() {
         if (userRepository.count() == 0) {
-            userRepository.save(makeUser("seed", "seed@seed", "@seed", "seed", "seed", "seed", "seed"));
+            userRepository.save(makeUser("seed", "seed@seed.seed", "@seed", "seed", "seed", "seed", "seed"));
 
             var julia = userRepository.save(makeUser(
                     "Julia da Silva",
-                    "julia@julia",
+                    "julia@julia.julia",
                     "@julia",
                     "(51) 123456789",
                     "Oi, eu sou Júlia",
@@ -35,7 +35,7 @@ public class UserSeeder {
 
             var matheus = userRepository.save(makeUser(
                     "Matheus da Silva",
-                    "matheus@matheus",
+                    "matheus@matheus.matheus",
                     "@matheus",
                     "(51) 123456789",
                     "Oi, eu sou Matheus",
@@ -45,7 +45,7 @@ public class UserSeeder {
 
             var maria = userRepository.save(makeUser(
                     "Maria da Silva",
-                    "maria@maria",
+                    "maria@maria.maria",
                     "@maria",
                     "(51) 123456789",
                     "Oi, eu sou Maria",
@@ -55,7 +55,7 @@ public class UserSeeder {
 
             var joao = userRepository.save(makeUser(
                     "João da Silva",
-                    "joao@joao",
+                    "joao@joao.joao",
                     "@joao",
                     "(51) 123456789",
                     "Oi, eu sou João",
