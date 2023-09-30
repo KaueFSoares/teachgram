@@ -1,11 +1,25 @@
-import { PostList } from "../interface/home/PostList"
+import { Post } from "../interface/home/Post"
 import { PostResponse } from "../interface/home/response/PostResponse"
 import useApi from "./api/api"
 import { URL } from "./api/url"
 
-const makePostList = (postsResponse: PostResponse) => {
-  return {
-    posts: postsResponse.content.map((post) => {
+const usePosts = () => {
+  const api = useApi()
+
+  const getPostsFromApi = async (page: number) => {
+    const postsResponse = await api.get(`${URL.POSTS}?page=${page}&&size=1`)
+      .catch((error) => {
+        throw error
+      })
+    
+    return postsResponse.data as PostResponse
+  }
+
+  
+  const getPosts = async (page: number) => {
+    const postsData = await getPostsFromApi(page)
+
+    return postsData.content.map((post) => {
       return {
         id: post.id,
         title: post.title,
@@ -18,37 +32,11 @@ const makePostList = (postsResponse: PostResponse) => {
         username: post.username,
         userPhotoLink: post.userPhotoLink,
       }
-    }),
-    page: postsResponse.pageable.pageNumber,
-    size: postsResponse.pageable.pageSize,
-    totalPages: postsResponse.totalPages,
-    totalPosts: postsResponse.totalElements,
-    first: postsResponse.first,
-    last: postsResponse.last,
-  }
-}
-
-const usePosts = () => {
-  const api = useApi()
-
-  const getPostsFromApi = async () => {
-    const postsResponse = await api.get(URL.POSTS)
-      .catch((error) => {
-        throw error
-      })
-    
-    return postsResponse.data as PostResponse
-  }
-
-  
-  const getPostList = async () => {
-    const postsData = await getPostsFromApi()
-
-    return makePostList(postsData) as PostList
+    }) as Post[]
   }
 
   return {
-    getPostList: getPostList,    
+    getPosts: getPosts,    
   }
 }
 
