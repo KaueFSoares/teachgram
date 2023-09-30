@@ -2,6 +2,10 @@ package br.com.teachgram.api.domain.post.dto;
 
 import br.com.teachgram.api.domain.post.Post;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 public record PostDetailsDTO(
         String id,
         String title,
@@ -12,7 +16,8 @@ public record PostDetailsDTO(
         Boolean privatePost,
         String userId,
         String username,
-        String userPhotoLink
+        String userPhotoLink,
+        Long createdAt
 ) {
     public PostDetailsDTO(Post post) {
         this(
@@ -24,8 +29,9 @@ public record PostDetailsDTO(
                 post.getLikes(),
                 post.getPrivatePost(),
                 post.getUser().getId(),
-                post.getUser().getName(),
-                post.getUser().getPhoto()
+                post.getUser().getUsername(),
+                post.getUser().getPhoto(),
+                post.getCreatedAt().toInstant(ZoneOffset.of("-03:00")).toEpochMilli()
         );
     }
 }
