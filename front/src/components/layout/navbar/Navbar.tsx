@@ -13,10 +13,10 @@ const Navbar = () => {
 
   const { t } = useTranslation()
 
-  const home = useUser()
+  const user = useUser()
   useEffect(() => {
     if (authData.accessToken) {
-      home.getUserPhoto().then((res) => {
+      user.getUserPhoto().then((res) => {
         setImgSrc(res)
       })
     }

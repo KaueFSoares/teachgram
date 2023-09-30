@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../context/AuthContext"
 import { HomePage } from "../pages"
-import { useUser } from "../service/user.service.ts"
 import Loading from "../components/layout/util/Loading.tsx"
+import usePosts from "../service/post.service.ts"
 
 const HomePageContainer = () => {
   const [ loading, setLoading ] = useState(true)
 
-  const home = useUser()
+  const posts = usePosts()
 
   const { authData } = useContext(AuthContext)
 
   useEffect(() => {
     if (authData.accessToken) {
-      home.getPostList().then((res) => {
+      posts.getPostList().then((res) => {
         // eslint-disable-next-line no-console
         console.log(res)
         setLoading(false)
