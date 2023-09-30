@@ -76,11 +76,12 @@ class AuthControllerTest extends TestsBase {
         return user;
     }
 
-    private String getJsonContent(String mail, String password, String name, String phone, String bio) throws IOException {
+    private String getJsonContent(String mail, String password, String name, String username, String phone, String bio) throws IOException {
         return signupRequestDTO.write(
                 new SignupRequestDTO(
                         name,
                         mail,
+                        username,
                         password,
                         bio,
                         phone,
@@ -234,7 +235,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 201 when signup with valid credentials")
     public void signup1() throws Exception {
 
-        var jsonContent = getJsonContent("test@test", "test", "test", "test", "test");
+        var jsonContent = getJsonContent("test@test", "test", "test", "test", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -249,7 +250,22 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 400 when signup with invalid email")
     public void signup2() throws Exception {
 
-        var jsonContent = getJsonContent("test", "test", "test", "test", "test");
+        var jsonContent = getJsonContent("test", "test", "test", "test", "test", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Must return 400 when signup with invalid username")
+    public void signup8() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "test", "test", "", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -264,7 +280,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 400 when signup with invalid password")
     public void signup3() throws Exception {
 
-        var jsonContent = getJsonContent("test@test", "", "test", "test", "test");
+        var jsonContent = getJsonContent("test@test", "", "test", "test", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -279,7 +295,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 400 when signup with invalid name")
     public void signup4() throws Exception {
 
-        var jsonContent = getJsonContent("test@test.com", "test", "", "test", "test");
+        var jsonContent = getJsonContent("test@test.com", "test", "", "test", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -294,7 +310,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 400 when signup with invalid bio")
     public void signup5() throws Exception {
 
-        var jsonContent = getJsonContent("test@test", "test", "test", "test", "");
+        var jsonContent = getJsonContent("test@test", "test", "test", "test", "test", "");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -309,7 +325,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 409 when signup with already registered email")
     public void signup6() throws Exception {
 
-        var jsonContent = getJsonContent("seed@seed", "test", "test", "test", "test");
+        var jsonContent = getJsonContent("seed@seed", "test", "test", "test", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
@@ -324,7 +340,22 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 409 when signup with already registered phone")
     public void signup7() throws Exception {
 
-        var jsonContent = getJsonContent("test@test", "test", "test", "seed", "test");
+        var jsonContent = getJsonContent("test@test", "test", "test", "test", "seed", "test");
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    @DisplayName("Must return 409 when signup with already registered username")
+    public void signup9() throws Exception {
+
+        var jsonContent = getJsonContent("test@test", "test", "seed", "@seed", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")

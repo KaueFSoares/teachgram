@@ -51,12 +51,13 @@ class UserControllerTest extends TestsBase {
         super.userRepository.deleteAll();
     }
 
-    private String getJsonContent(String mail, String password, String name, String phone, String bio, String photo) throws IOException {
+    private String getJsonContent(String mail, String password, String username, String name, String phone, String bio, String photo) throws IOException {
         return updateRequestDTO.write(
                 new UpdateRequestDTO(
                         "",
                         name,
                         mail,
+                        username,
                         password,
                         bio,
                         phone,
@@ -78,6 +79,7 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "mail@mail",
                 "password",
+                "@username",
                 "name",
                 "phone",
                 "bio",
@@ -102,6 +104,7 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "mail@mail",
                 "password",
+                "@username",
                 "name",
                 "phone",
                 "bio",
@@ -125,6 +128,7 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "mail@mail",
                 "password",
+                "@username",
                 "name",
                 "phone",
                 "bio",
@@ -149,6 +153,7 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "mail@mail",
                 "password",
+                "@username",
                 "name",
                 "phone",
                 "bio",
@@ -173,6 +178,7 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "seed@seed",
                 "password",
+                "@username",
                 "name",
                 "phone",
                 "bio",
@@ -197,8 +203,34 @@ class UserControllerTest extends TestsBase {
         var jsonContent = getJsonContent(
                 "mail@mail",
                 "password",
+                "@username",
                 "name",
                 "seed",
+                "bio",
+                "photo"
+        );
+
+        super.createTestUser();
+
+        MockHttpServletResponse response = mockMvc.perform(
+                put("/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer " + super.login("test@test", "test").access_token())
+                        .content(jsonContent)
+        ).andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    @DisplayName("Must return 409 when updating a user with an username already in use")
+    void update7() throws Exception {
+        var jsonContent = getJsonContent(
+                "mail@mail",
+                "password",
+                "@seed",
+                "name",
+                "phone",
                 "bio",
                 "photo"
         );

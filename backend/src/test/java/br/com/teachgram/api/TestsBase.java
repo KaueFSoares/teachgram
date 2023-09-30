@@ -50,6 +50,7 @@ public abstract class TestsBase {
 
         user.setName("test");
         user.setEmail("test@test");
+        user.setUsername("test");
         user.setPhone("test");
         user.setPhoto("test");
         user.setBio("test");
