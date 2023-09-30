@@ -1,16 +1,8 @@
-import { Dispatch, SetStateAction } from "react"
-import { AuthData } from "../interface/AuthData"
 import { PostList } from "../interface/home/PostList"
 import { PostResponse } from "../interface/home/response/PostResponse"
 import { UserResponse } from "../interface/home/response/UserResponse"
 import useApi from "./api/api"
 import { URL } from "./api/url"
-
-interface Props {
-  authData: AuthData
-  setAuthData: Dispatch<SetStateAction<AuthData>>
-  setAuthenticated: Dispatch<SetStateAction<boolean>>
-}
 
 const makePostList = (postsResponse: PostResponse) => {
   return {
@@ -37,12 +29,8 @@ const makePostList = (postsResponse: PostResponse) => {
   }
 }
 
-export const useUser = ({ authData, setAuthData, setAuthenticated }: Props) => {
-  const api = useApi({
-    authData: authData,
-    setAuthData: setAuthData,
-    setAuthenticated: setAuthenticated,
-  })
+export const useUser = () => {
+  const api = useApi()
 
   const getUserFromApi = async () => {
     const userReponse = await api.get(URL.USER)

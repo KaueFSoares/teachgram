@@ -7,26 +7,22 @@ import NavbarItem from "./NavbarItem.tsx"
 
 
 const Navbar = () => {
-  const { authData, setAuthenticated, setAuthData } = useContext(AuthContext)
+  const { authData } = useContext(AuthContext)
 
   const [ imgSrc, setImgSrc ] = useState<string>("")
 
   const { t } = useTranslation()
 
+  const home = useUser()
   useEffect(() => {
     if (authData.accessToken) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const home = useUser({
-        authData,
-        setAuthenticated,
-        setAuthData,
-      })
-
       home.getUserPhoto().then((res) => {
         setImgSrc(res)
+        console.log(res)
       })
     }
-  }, [ authData, setAuthData, setAuthenticated ])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ authData.accessToken ])
 
   return (
     <nav className="w-full flex absolute bottom-0 left-0 shadow-full p-6

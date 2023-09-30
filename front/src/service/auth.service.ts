@@ -1,5 +1,5 @@
 import { AuthData } from "../interface/AuthData"
-import { OPENED_API } from "./api/api"
+import { OPENED_API } from "./api/opened_api"
 import { URL } from "./api/url"
 
 interface LoginReponse {

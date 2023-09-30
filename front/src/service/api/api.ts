@@ -1,28 +1,13 @@
+import { useContext } from "react"
 import axios, { AxiosInstance } from "axios"
-import { Dispatch, SetStateAction } from "react"
-import { AuthData } from "../../interface/AuthData"
 import { onRefresh } from "../auth.service"
+import AuthContext from "../../context/AuthContext"
 import { URL } from "./url"
 
-export const OPENED_API = (): AxiosInstance => {
-  const instance = axios.create({
-    baseURL: URL.BASE,
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  })
 
-  return instance
-}
+const useApi = (): AxiosInstance => {
+  const { authData, setAuthData, setAuthenticated } = useContext(AuthContext)
 
-interface Props {
-  authData: AuthData
-  setAuthData: Dispatch<SetStateAction<AuthData>>
-  setAuthenticated: Dispatch<SetStateAction<boolean>>
-}
-
-const useApi = ({ authData, setAuthData, setAuthenticated }: Props): AxiosInstance => {
   const instance = axios.create({
     baseURL: URL.BASE,
     headers: {
