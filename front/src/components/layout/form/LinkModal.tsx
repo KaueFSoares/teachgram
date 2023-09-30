@@ -1,7 +1,9 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { emptyValidation } from "../../../service/validation.service.ts"
 import Input from "./Input.tsx"
 import Button from "./Button.tsx"
+import Message from "./Message.tsx"
 
 interface Props {
   onClose: () => void
@@ -13,8 +15,42 @@ interface Props {
 const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
   const { t } = useTranslation()
 
+  const [ showMessage, setShowMessage ] = useState(false)
+
+  const toogleShowMessage = (set: Dispatch<SetStateAction<boolean>>) => {
+    set(true)
+
+    setTimeout(() => {
+      set(false)
+    }, 5000)
+  }
+
+  const itemsList = emptyValidation([
+    {
+      flag: true,
+      item: {
+        tag: "name",
+        value: state,
+      },
+    },
+  ])
+
+  const makeEmptyValidation = () => {
+    emptyValidation(itemsList)
+
+    let valid = true
+
+    for (const i of itemsList) {
+      if(!i.flag){
+        valid = false
+      }
+    }
+
+    return valid
+  }
+
   return (
-    <div className="absolute w-full h-full box-border flex flex-col items-center justify-start z-10 bg-white">
+    <div className="absolute w-full h-full box-border flex flex-col items-center justify-start z-10 bg-white border">
       <div className="w-full px-8 mb-4">
         <button
           type="button"
@@ -38,13 +74,22 @@ const LinkModal = ({ onClose, onSubmit, state, setState }: Props) => {
           placeholder={t("signup.link.placeholder")}
           setState={setState}
           state={state}
+          className={`mb-4
+                      ${showMessage && !itemsList[0].flag ? "border-orange" : ""}`}
         />
+        {showMessage && <Message text="Campo não preenchido" />}
       </div>
       <div className="w-full px-12">
         <Button 
           text={t("signup.link.save")}
           type="button"
-          onClick={onSubmit}
+          onClick={() => {
+            if (makeEmptyValidation()) {
+              onSubmit()
+            } else {
+              toogleShowMessage(setShowMessage)
+            }
+          }}
         />
       </div>
     </div>
