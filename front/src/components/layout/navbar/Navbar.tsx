@@ -18,7 +18,6 @@ const Navbar = () => {
     if (authData.accessToken) {
       home.getUserPhoto().then((res) => {
         setImgSrc(res)
-        console.log(res)
       })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
