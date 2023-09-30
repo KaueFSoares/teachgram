@@ -8,7 +8,7 @@ interface InputProps extends HTMLProps<HTMLInputElement>{
     setState: Dispatch<SetStateAction<string>>
 }
 
-const Input = ({ name, type, placeholder, className, state, setState }: InputProps) => {
+const Input = ({ name, type, placeholder, className, state, setState, maxLength }: InputProps) => {
   return (
     <div 
       className="flex flex-col w-full gap-2"
@@ -27,6 +27,7 @@ const Input = ({ name, type, placeholder, className, state, setState }: InputPro
         type={type} 
         name={name} 
         id={name}
+        maxLength={maxLength}
         placeholder={placeholder} 
         className={`border border-solid border-gray rounded-lg py-4 px-5 outline-orange ${className}
                     lg:py-2 lg:px-4`}
