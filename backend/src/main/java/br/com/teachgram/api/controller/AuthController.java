@@ -47,7 +47,7 @@ public class AuthController {
     @Transactional
     @PostMapping(ROUTE.SIGNUP)
     public ResponseEntity<LoginResponseDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
-        var uri = uriComponentsBuilder.path("/user").buildAndExpand().toUri();
+        var uri = uriComponentsBuilder.path(ROUTE.USER).buildAndExpand().toUri();
 
         return ResponseEntity.created(uri).body(authService.signup(dto));
     }
