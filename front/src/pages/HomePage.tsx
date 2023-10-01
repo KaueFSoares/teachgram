@@ -53,7 +53,7 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
         ) : (
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-4xl font-bold text-gray-800">
-              {t("noposts")}
+              {t("home.noposts")}
             </h1>
           </div>
         )}
@@ -61,7 +61,7 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
         <div id="load-more" className="w-10 h-4"></div>
 
         <Button 
-          text="Voltar ao topo"
+          text={t("home.backtotop")}
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />

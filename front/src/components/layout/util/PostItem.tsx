@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Post } from "../../../interface/home/Post"
 import { getTimeAgo } from "../../../util/getTimeAgo"
 
@@ -6,6 +7,8 @@ interface PostItemProps {
 }
 
 const PostItem = ({ post }: PostItemProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className="w-full shadow-full p-4 rounded-lg flex flex-col gap-4">
       <header className="w-full flex gap-4">
@@ -17,7 +20,12 @@ const PostItem = ({ post }: PostItemProps) => {
         <div className="flex justify-between flex-grow text-gray">
           <div className="flex flex-col lg:gap-1">
             <h1 className="text-base">{post.username}</h1>
-            <h2 className="text-sm">há {getTimeAgo(post.createdAt).value} {getTimeAgo(post.createdAt).unit}</h2>
+            <h2 className="text-sm">
+              {t("home.post.time", {
+                time: getTimeAgo(post.createdAt).value,
+                unit: t(`units.${getTimeAgo(post.createdAt).unit}`),
+              })}
+            </h2>
           </div>
 
           <button className="h-full flex w-4 justify-end">
@@ -43,7 +51,7 @@ const PostItem = ({ post }: PostItemProps) => {
       <footer className="w-full flex items-center text-gray text-sm">
         <button className="flex gap-4">
           <img src="/icon/outline_heart.svg" alt="" className="" />
-          <p>{post.likes} curtidas</p>
+          <p>{post.likes} {t("home.post.likes")}</p>
         </button>
       </footer>
     </div>

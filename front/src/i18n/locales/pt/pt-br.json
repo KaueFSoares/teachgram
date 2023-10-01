@@ -67,6 +67,21 @@
             "empty": "Campo não preenchido",
             "email": "E-mail inválido",
             "phone": "Telefone deve ser (00) 0 0000-0000"
+        },
+        "home": {
+            "noposts": "Nenhuma postagem",
+            "backtotop": "Voltar ao topo",
+            "post": {
+                "time": "há {{time}} {{unit}}",
+                "likes": "curtidas"
+            }
+        },
+        "units": {
+            "minute": "minutos",
+            "hour": "horas",
+            "day": "dias",
+            "week": "semanas"
         }
+        
     }
 }
