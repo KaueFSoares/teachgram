@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.filter;
 
+import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.repository.UserRepository;
@@ -56,7 +57,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = request.getHeader("Authorization");
 
         if (token != null) {
-            return token.replace("Bearer ", "");
+            return token.replace(VAR.TOKEN_TYPE + " ", "");
         }
 
         return null;
