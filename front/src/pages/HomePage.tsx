@@ -4,6 +4,7 @@ import Navbar from "../components/layout/navbar/Navbar.tsx"
 import { Post } from "../interface/home/Post.ts"
 import PostItem from "../components/layout/util/PostItem.tsx"
 import Button from "../components/layout/form/Button.tsx"
+import LeftImage from "../components/layout/util/LeftImage.tsx"
 
 interface HomePageProps {
   posts: Post[]
@@ -19,7 +20,6 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          console.log("intersecting")
           incrementPage()
         }
       },
@@ -35,8 +35,13 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
   
   return (
     <main className="relative w-full min-h-screen flex items-center justify-start flex-col">
-      <div className="w-full flex flex-col h-full p-12 gap-4 mb-12">
-        <img src="/images/full_logo.svg" alt="" className="w-2/3 mb-6" />
+      <div className="w-full flex flex-col h-full px-12 py-12 gap-4 mb-12
+                      lg:w-1/2
+                      xl:w-3/5 xl:px-[10%]
+                      2xl:w-4/6 2xl:px-[15%]">
+        <img src="/images/full_logo.svg" alt="" className="w-2/3 mb-6
+                                                            lg:opacity-0
+                                                            xl:w-1/2" />
         {posts.length > 0 ? (
           <>
             {posts.map((post) => (
@@ -61,6 +66,8 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </div>
+
+      <LeftImage />
       <Navbar />
     </main>
   )

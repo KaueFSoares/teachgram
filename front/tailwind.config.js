@@ -15,6 +15,9 @@ export default {
       boxShadow: {
         full: "0 0 5px rgba(0, 0, 0, 0.2)",
       },
+      backgroundImage: {
+        "repeated-pattern": "url('/images/right_image.svg')", // Substitua pelo caminho da sua imagem
+      },
     },
   },
   plugins: [],
