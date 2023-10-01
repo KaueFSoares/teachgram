@@ -37,7 +37,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select count(f) from Friendship f where f.firstUser.id = :userId")
     Long countFriendsForUser(String userId);
 
-    @Query("select u from User u join Friendship f on u.id = f.secondUser.id where f.firstUser.id = :id")
+    @Query("select f.secondUser from Friendship f where f.firstUser.id = :id")
     Page<User> getFriends(String id, Pageable pageable);
 
     @Query("select u from User u join Friendship f on (u.id = f.secondUser.id) where f.firstUser.id = :id and f.secondUser.username = :friendUsername")
