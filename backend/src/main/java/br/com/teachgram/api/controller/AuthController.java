@@ -1,5 +1,6 @@
 package br.com.teachgram.api.controller;
 
+import br.com.teachgram.api.constant.ROUTE;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(ROUTE.AUTH)
 public class AuthController {
 
     private final AuthService authService;
@@ -33,18 +34,18 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")
+    @PostMapping(ROUTE.LOGIN)
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
         return ResponseEntity.ok(authService.login(dto));
     }
 
-    @PostMapping("/refresh")
+    @PostMapping(ROUTE.REFRESH)
     public ResponseEntity<LoginResponseDTO> refreshToken(@RequestBody @Valid RefreshTokenRequestDTO dto) {
         return ResponseEntity.ok(authService.refreshToken(dto));
     }
 
     @Transactional
-    @PostMapping("/signup")
+    @PostMapping(ROUTE.SIGNUP)
     public ResponseEntity<LoginResponseDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
         var uri = uriComponentsBuilder.path("/user").buildAndExpand().toUri();
 

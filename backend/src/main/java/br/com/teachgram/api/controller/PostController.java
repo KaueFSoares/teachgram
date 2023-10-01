@@ -1,5 +1,6 @@
 package br.com.teachgram.api.controller;
 
+import br.com.teachgram.api.constant.ROUTE;
 import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping(ROUTE.POSTS)
 public class PostController {
 
     private final PostService postService;
@@ -30,7 +31,7 @@ public class PostController {
     public ResponseEntity<UserPostDetailsDTO> createPost(@RequestBody @Valid CreatePostRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
         var data = postService.createPost(dto);
 
-        var uri = uriComponentsBuilder.path("/post/{id}").buildAndExpand(data.id()).toUri();
+        var uri = uriComponentsBuilder.path(ROUTE.POSTS + "/{id}").buildAndExpand(data.id()).toUri();
 
         return ResponseEntity.created(uri).body(data);
     }
@@ -41,7 +42,7 @@ public class PostController {
         return ResponseEntity.ok().body(postService.updatePost(id, dto));
     }
 
-    @PutMapping("/{id}/private")
+    @PutMapping("/{id}" + ROUTE.PRIVATE)
     @Transactional
     public ResponseEntity<UserPostDetailsDTO> updatePostPrivate(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.updatePostPrivate(id));
@@ -52,12 +53,12 @@ public class PostController {
         return ResponseEntity.ok().body(postService.deletePost(id));
     }
 
-    @GetMapping("/me/{id}")
+    @GetMapping(ROUTE.ME + "/{id}")
     public ResponseEntity<UserPostDetailsDTO> getUserPost(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.getUserPost(id));
     }
 
-    @GetMapping("/me")
+    @GetMapping(ROUTE.ME)
     public ResponseEntity<Page<ShortUserPostDetailsDTO>> getUserPosts(Pageable pageable) {
         return ResponseEntity.ok().body(postService.getUserPosts(pageable));
     }
@@ -72,13 +73,13 @@ public class PostController {
         return ResponseEntity.ok().body(postService.getPostDetails(id));
     }
 
-    @PutMapping("/{id}/like")
+    @PutMapping("/{id}" + ROUTE.LIKE)
     @Transactional
     public ResponseEntity<UserPostDetailsDTO> likePost(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.likePost(id));
     }
 
-    @PutMapping("/{id}/dislike")
+    @PutMapping("/{id}" + ROUTE.DISLIKE)
     @Transactional
     public ResponseEntity<UserPostDetailsDTO> dislikePost(@PathVariable String id) {
         return ResponseEntity.ok().body(postService.dislikePost(id));

@@ -1,5 +1,6 @@
 package br.com.teachgram.api.controller;
 
+import br.com.teachgram.api.constant.ROUTE;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.service.UserService;
 import jakarta.transaction.Transactional;
@@ -38,23 +39,23 @@ public class UserController {
         return ResponseEntity.ok().body(userService.details());
     }
 
-    @PostMapping("/friends/{id}")
+    @PostMapping(ROUTE.FRIENDS + "/{id}")
     @Transactional
     public ResponseEntity<FriendDetailsDTO> addFriend(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.addFriend(id));
     }
 
-    @GetMapping("/friends")
+    @GetMapping(ROUTE.FRIENDS)
     public ResponseEntity<Page<FriendShortDetailsDTO>> getFriends(Pageable pageable) {
         return ResponseEntity.ok().body(userService.getManyFriends(pageable));
     }
 
-    @GetMapping("/friends/{id}")
+    @GetMapping(ROUTE.FRIENDS + "/{id}")
     public ResponseEntity<FriendDetailsDTO> getFriend(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.getSingleFriend(id));
     }
 
-    @DeleteMapping("/friends/{id}")
+    @DeleteMapping(ROUTE.FRIENDS + "/{id}")
     @Transactional
     public ResponseEntity<DeleteResponseDTO> deleteFriend(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.deleteFriend(id));

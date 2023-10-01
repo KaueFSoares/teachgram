@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
+import br.com.teachgram.api.constant.ROUTE;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.filter.ExceptionHandlerFilter;
 import br.com.teachgram.api.infra.filter.PerformanceFilter;
@@ -46,9 +47,9 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/signup").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
+                        .requestMatchers(HttpMethod.POST, ROUTE.AUTH + ROUTE.LOGIN).permitAll()
+                        .requestMatchers(HttpMethod.POST, ROUTE.AUTH + ROUTE.SIGNUP).permitAll()
+                        .requestMatchers(HttpMethod.POST, ROUTE.AUTH + ROUTE.REFRESH).permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )
