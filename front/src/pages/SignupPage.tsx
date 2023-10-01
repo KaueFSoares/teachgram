@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
-import Button from "../components/layout/form/Button.tsx"
-import Input from "../components/layout/form/Input.tsx"
-import LinkModal from "../components/layout/form/LinkModal.tsx"
+import Button from "../components/form/Button.tsx"
+import Input from "../components/form/Input.tsx"
+import LinkModal from "../components/form/LinkModal.tsx"
 import { emailValidation, emptyValidation, phoneValidation } from "../service/validation.service.ts"
-import Message from "../components/layout/form/Message.tsx"
+import Message from "../components/form/Message.tsx"
 
 interface SignupPageProps {
   name: string

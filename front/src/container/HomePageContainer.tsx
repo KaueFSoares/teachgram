@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { HomePage } from "../pages"
-import Loading from "../components/layout/util/Loading.tsx"
+import Loading from "../components/util/Loading.tsx"
 import usePosts from "../service/post.service.ts"
 import { Post } from "../interface/home/Post.ts"
 

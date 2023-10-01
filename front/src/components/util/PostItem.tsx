@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { Post } from "../../../interface/home/Post"
-import { getTimeAgo } from "../../../util/getTimeAgo"
+import { Post } from "../../interface/home/Post"
+import { getTimeAgo } from "../../util/getTimeAgo"
 
 interface PostItemProps {
   post: Post

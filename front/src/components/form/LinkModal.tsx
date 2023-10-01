@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { emptyValidation } from "../../../service/validation.service.ts"
+import { emptyValidation } from "../../service/validation.service.ts"
 import Input from "./Input.tsx"
 import Button from "./Button.tsx"
 import Message from "./Message.tsx"

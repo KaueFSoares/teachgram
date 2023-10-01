@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Button from "../components/layout/form/Button.tsx"
-import Input from "../components/layout/form/Input.tsx"
+import Button from "../components/form/Button.tsx"
+import Input from "../components/form/Input.tsx"
 import { emailValidation, emptyValidation } from "../service/validation.service.ts"
-import Message from "../components/layout/form/Message.tsx"
+import Message from "../components/form/Message.tsx"
 
 interface LoginPageProps {
   email: string

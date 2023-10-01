@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next"
 import { useEffect } from "react"
-import Navbar from "../components/layout/navbar/Navbar.tsx"
+import Navbar from "../components/navbar/Navbar.tsx"
 import { Post } from "../interface/home/Post.ts"
-import PostItem from "../components/layout/util/PostItem.tsx"
-import Button from "../components/layout/form/Button.tsx"
-import RightImage from "../components/layout/util/RightImage.tsx"
+import PostItem from "../components/util/PostItem.tsx"
+import Button from "../components/form/Button.tsx"
+import RightImage from "../components/util/RightImage.tsx"
 
 interface HomePageProps {
   posts: Post[]

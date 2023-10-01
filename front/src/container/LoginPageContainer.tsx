@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { LoginPage } from "../pages"
 import { onLogin } from "../service/auth.service"
 import AuthContext from "../context/AuthContext"
-import Loading from "../components/layout/util/Loading.tsx"
+import Loading from "../components/util/Loading.tsx"
 
 const LoginPageContainer = () => {
   const navigate = useNavigate()
