@@ -9,12 +9,13 @@ const PostItem = ({ post }: PostItemProps) => {
   return (
     <div className="w-full shadow-full p-4 rounded-lg flex flex-col gap-4">
       <header className="w-full flex gap-4">
-        <div className="w-1/6 aspect-square overflow-hidden flex items-center justify-center rounded-full ">
+        <div className="w-1/6 aspect-square overflow-hidden flex items-center justify-center rounded-full 
+                        xl:w-[10%]">
           <img src={post.userPhotoLink} alt="" className="w-full" />
         </div>
 
         <div className="flex justify-between flex-grow text-gray">
-          <div className="flex flex-col">
+          <div className="flex flex-col lg:gap-1">
             <h1 className="text-base">{post.username}</h1>
             <h2 className="text-sm">há {getTimeAgo(post.createdAt).value} {getTimeAgo(post.createdAt).unit}</h2>
           </div>
