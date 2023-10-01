@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class UserDataValidationService {
 
-    private List<UserDataValidationInterface> validations;
+    private final List<UserDataValidationInterface> validations;
 
     @Autowired
     public UserDataValidationService(List<UserDataValidationInterface> validations) {
