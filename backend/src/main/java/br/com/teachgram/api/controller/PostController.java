@@ -1,9 +1,8 @@
 package br.com.teachgram.api.controller;
 
-import br.com.teachgram.api.constant.ROUTE;
+import br.com.teachgram.api.infra.constant.ROUTE;
 import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.service.PostService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController

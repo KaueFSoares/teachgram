@@ -1,6 +1,6 @@
 package br.com.teachgram.api.infra.locale;
 
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.VAR;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package br.com.teachgram.api.service;
 
-import br.com.teachgram.api.constant.MESSAGE;
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.VAR;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
@@ -12,7 +12,6 @@ import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

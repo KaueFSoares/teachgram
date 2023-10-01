@@ -1,6 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
-import br.com.teachgram.api.constant.ROUTE;
+import br.com.teachgram.api.infra.constant.ROUTE;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

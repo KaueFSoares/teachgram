@@ -1,4 +1,4 @@
-package br.com.teachgram.api.constant;
+package br.com.teachgram.api.infra.constant;
 
 public class ROUTE {
     public static final String FRONT_END = "http://localhost:5173";

@@ -1,4 +1,4 @@
-package br.com.teachgram.api.constant;
+package br.com.teachgram.api.infra.constant;
 
 public class MESSAGE {
     public static final String USER_NOT_FOUND = "error.user.not-found";

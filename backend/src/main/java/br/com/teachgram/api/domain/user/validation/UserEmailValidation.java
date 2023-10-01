@@ -1,6 +1,6 @@
 package br.com.teachgram.api.domain.user.validation;
 
-import br.com.teachgram.api.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.MESSAGE;
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import br.com.teachgram.api.infra.exception.DuplicateException;

@@ -1,6 +1,6 @@
 package br.com.teachgram.api.controller;
 
-import br.com.teachgram.api.constant.ROUTE;
+import br.com.teachgram.api.infra.constant.ROUTE;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.service.UserService;
 import jakarta.transaction.Transactional;

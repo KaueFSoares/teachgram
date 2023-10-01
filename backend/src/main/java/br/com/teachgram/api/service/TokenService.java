@@ -1,14 +1,13 @@
 package br.com.teachgram.api.service;
 
-import br.com.teachgram.api.constant.MESSAGE;
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.VAR;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
 import br.com.teachgram.api.infra.exception.AuthException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

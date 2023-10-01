@@ -1,20 +1,17 @@
 package br.com.teachgram.api.service;
 
-import br.com.teachgram.api.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.MESSAGE;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class UserService {

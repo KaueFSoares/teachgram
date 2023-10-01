@@ -1,6 +1,6 @@
 package br.com.teachgram.api.infra.locale;
 
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.VAR;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;

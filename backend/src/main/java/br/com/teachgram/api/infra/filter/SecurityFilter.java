@@ -1,7 +1,7 @@
 package br.com.teachgram.api.infra.filter;
 
-import br.com.teachgram.api.constant.MESSAGE;
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.VAR;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
 import br.com.teachgram.api.repository.UserRepository;

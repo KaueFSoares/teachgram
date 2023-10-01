@@ -1,22 +1,12 @@
 package br.com.teachgram.api.controller;
 
-import br.com.teachgram.api.constant.ROUTE;
-import br.com.teachgram.api.domain.user.User;
+import br.com.teachgram.api.infra.constant.ROUTE;
 import br.com.teachgram.api.domain.user.dto.*;
-import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
-import br.com.teachgram.api.infra.exception.DeletedAccountException;
-import br.com.teachgram.api.infra.exception.NotFoundException;
-import br.com.teachgram.api.repository.UserRepository;
 import br.com.teachgram.api.service.AuthService;
-import br.com.teachgram.api.service.TokenService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

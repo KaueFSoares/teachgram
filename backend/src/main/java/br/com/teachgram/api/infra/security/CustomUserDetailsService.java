@@ -1,6 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
-import br.com.teachgram.api.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.MESSAGE;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.repository.UserRepository;
 import br.com.teachgram.api.service.MessageService;

@@ -1,7 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
-import br.com.teachgram.api.constant.ROUTE;
-import br.com.teachgram.api.infra.exception.AuthException;
+import br.com.teachgram.api.infra.constant.ROUTE;
 import br.com.teachgram.api.infra.filter.ExceptionHandlerFilter;
 import br.com.teachgram.api.infra.filter.PerformanceFilter;
 import br.com.teachgram.api.infra.filter.SecurityFilter;

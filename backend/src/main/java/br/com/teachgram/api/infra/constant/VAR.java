@@ -1,4 +1,4 @@
-package br.com.teachgram.api.constant;
+package br.com.teachgram.api.infra.constant;
 
 public class VAR {
     public static final String SECRET_PATH = "${api.security.token.secret}";

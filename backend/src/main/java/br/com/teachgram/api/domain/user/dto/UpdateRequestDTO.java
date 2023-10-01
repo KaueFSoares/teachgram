@@ -1,8 +1,7 @@
 package br.com.teachgram.api.domain.user.dto;
 
-import br.com.teachgram.api.constant.MESSAGE;
+import br.com.teachgram.api.infra.constant.MESSAGE;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 
 public record UpdateRequestDTO(
         String id,

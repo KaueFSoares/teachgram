@@ -1,10 +1,8 @@
 package br.com.teachgram.api.domain.post.dto;
 
-import br.com.teachgram.api.constant.VAR;
+import br.com.teachgram.api.infra.constant.VAR;
 import br.com.teachgram.api.domain.post.Post;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 public record PostDetailsDTO(
