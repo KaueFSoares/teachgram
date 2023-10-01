@@ -9,6 +9,7 @@ public record FriendDetailsDTO(
         String id,
         String name,
         String email,
+        String username,
         String bio,
         String photo,
         Long friendsCount
@@ -18,6 +19,7 @@ public record FriendDetailsDTO(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user.getActualUsername(),
                 user.getBio(),
                 user.getPhoto(),
                 friendsCount

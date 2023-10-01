@@ -6,6 +6,7 @@ public record FriendShortDetailsDTO(
         String id,
         String name,
         String email,
+        String username,
         String photo
 ) {
     public FriendShortDetailsDTO(User user) {
@@ -13,6 +14,7 @@ public record FriendShortDetailsDTO(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user.getActualUsername(),
                 user.getPhoto()
         );
     }

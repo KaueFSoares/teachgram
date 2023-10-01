@@ -40,6 +40,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select u from User u join Friendship f on u.id = f.secondUser.id where f.firstUser.id = :id")
     Page<User> getFriends(String id, Pageable pageable);
 
-    @Query("select u from User u join Friendship f on (u.id = f.secondUser.id) where f.firstUser.id = :id and f.secondUser.id = :id1")
-    Optional<User> findFriend(String id, String id1);
+    @Query("select u from User u join Friendship f on (u.id = f.secondUser.id) where f.firstUser.id = :id and f.secondUser.username = :friendUsername")
+    Optional<User> findFriendByUsername(String id, String friendUsername);
 }

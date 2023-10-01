@@ -50,9 +50,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getManyFriends(pageable));
     }
 
-    @GetMapping(ROUTE.FRIENDS + "/{id}")
-    public ResponseEntity<FriendDetailsDTO> getFriend(@PathVariable String id) {
-        return ResponseEntity.ok().body(userService.getSingleFriend(id));
+    @GetMapping(ROUTE.FRIENDS + "/{username}")
+    public ResponseEntity<FriendDetailsDTO> getFriend(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.getSingleFriend(username));
     }
 
     @DeleteMapping(ROUTE.FRIENDS + "/{id}")

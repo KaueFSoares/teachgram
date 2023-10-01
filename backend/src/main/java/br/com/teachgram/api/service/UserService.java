@@ -59,7 +59,6 @@ public class UserService {
     }
 
     public UserDetailsDTO details() {
-
         var user = getAuthenticatedUser();
 
         return new UserDetailsDTO(user);
@@ -85,11 +84,11 @@ public class UserService {
         return userRepository.getFriends(user.getId(), pageable).map(FriendShortDetailsDTO::new);
     }
 
-    public FriendDetailsDTO getSingleFriend(String id) {
+    public FriendDetailsDTO getSingleFriend(String username) {
 
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
+        var friend = userRepository.findFriendByUsername(user.getId(), username).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
         var friendsCount = userRepository.countFriendsForUser(friend.getId());
 
@@ -99,7 +98,7 @@ public class UserService {
     public DeleteResponseDTO deleteFriend(String id) {
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
+        var friend = userRepository.findFriendByUsername(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
         user.removeFriend(friend);
 
