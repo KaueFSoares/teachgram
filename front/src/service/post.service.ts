@@ -7,7 +7,12 @@ const usePosts = () => {
   const api = useApi()
 
   const getPostsFromApi = async (page: number) => {
-    const postsResponse = await api.get(`${URL.POSTS}?page=${page}&&size=2`)
+    const postsResponse = await api.get(URL.POSTS, {
+      params: {
+        page: page,
+        size: 2,
+      },
+    })
       .catch((error) => {
         throw error
       })
