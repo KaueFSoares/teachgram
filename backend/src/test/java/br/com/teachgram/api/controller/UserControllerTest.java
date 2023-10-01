@@ -176,7 +176,7 @@ class UserControllerTest extends TestsBase {
     @DisplayName("Must return 409 when updating a user with an email already in use")
     void update5() throws Exception {
         var jsonContent = getJsonContent(
-                "seed@seed",
+                "seed@seed.seed",
                 "password",
                 "@username",
                 "name",

@@ -103,7 +103,7 @@ class AuthControllerTest extends TestsBase {
     void login1() throws Exception {
         var jsonContent = super.jsonLoginRequestDTO.write(
                 new LoginRequestDTO(
-                        "seed@seed",
+                        "seed@seed.seed",
                         "seed"
                 )
         ).getJson();
@@ -118,7 +118,7 @@ class AuthControllerTest extends TestsBase {
     void login2() throws Exception {
         var jsonContent = super.jsonLoginRequestDTO.write(
                 new LoginRequestDTO(
-                        "seed@seed",
+                        "seed@seed.seed",
                         "wrong_password"
                 )
         ).getJson();
@@ -200,7 +200,7 @@ class AuthControllerTest extends TestsBase {
     void refreshToken1() throws Exception {
         var jsonContent = refreshTokenRequestDTO.write(
                 new RefreshTokenRequestDTO(
-                        "Bearer " + super.login("seed@seed", "seed").refresh_token()
+                        "Bearer " + super.login("seed@seed.seed", "seed").refresh_token()
                 )
         ).getJson();
 
@@ -218,7 +218,7 @@ class AuthControllerTest extends TestsBase {
     void refreshToken2() throws Exception {
         var jsonContent = refreshTokenRequestDTO.write(
                 new RefreshTokenRequestDTO(
-                        "Bearer " + super.login("seed@seed", "seed").refresh_token() + "invalid"
+                        "Bearer " + super.login("seed@seed.seed", "seed").refresh_token() + "invalid"
                 )
         ).getJson();
 
@@ -325,7 +325,7 @@ class AuthControllerTest extends TestsBase {
     @DisplayName("Must return 409 when signup with already registered email")
     public void signup6() throws Exception {
 
-        var jsonContent = getJsonContent("seed@seed", "test", "test", "test", "test", "test");
+        var jsonContent = getJsonContent("seed@seed.seed", "test", "test", "test", "test", "test");
 
         MockHttpServletResponse response = mockMvc.perform(
                 post("/auth/signup")
