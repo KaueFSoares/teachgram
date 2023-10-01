@@ -6,6 +6,6 @@ export const URL = {
   REFRESH: "/auth/refresh",
 
   USER: "/user",
-  FRIENDS: "/friends",
+  FRIENDS: "/user/friends",
   POSTS: "/posts",
 }
