@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
 import br.com.teachgram.api.infra.exception.AuthException;
 import com.auth0.jwt.JWT;
@@ -25,7 +26,7 @@ public class TokenService {
         this.messageService = messageService;
     }
 
-    @Value("${api.security.token.secret}")
+    @Value(VAR.SECRET_PATH)
     private String secret;
 
     public LoginResponseDTO generateToken(String id) {
@@ -33,20 +34,20 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             var accessToken =  JWT.create()
-                    .withIssuer("Teachgram")
+                    .withIssuer(VAR.ISSUER)
                     .withSubject(id)
                     .withExpiresAt(getAccessTokenExpirationDate())
                     .sign(algorithm);
 
             var refreshToken =  JWT.create()
-                    .withIssuer("Teachgram")
+                    .withIssuer(VAR.ISSUER)
                     .withSubject(id)
                     .withExpiresAt(getRefreshTokenExpirationDate())
                     .sign(algorithm);
 
 
             return new LoginResponseDTO(
-                    "Bearer",
+                    VAR.TOKEN_TYPE,
                     accessToken,
                     getAccessTokenExpirationDate().toEpochMilli(),
                     refreshToken,
@@ -63,7 +64,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("Teachgram")
+                    .withIssuer(VAR.ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
@@ -74,11 +75,11 @@ public class TokenService {
     }
 
     private Instant getAccessTokenExpirationDate() {
-        return LocalDateTime.now().plusSeconds(10).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusSeconds(10).toInstant(ZoneOffset.of(VAR.OFFSET));
     }
 
     private Instant getRefreshTokenExpirationDate() {
-        return LocalDateTime.now().plusDays(30).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusDays(30).toInstant(ZoneOffset.of(VAR.OFFSET));
     }
 }
 

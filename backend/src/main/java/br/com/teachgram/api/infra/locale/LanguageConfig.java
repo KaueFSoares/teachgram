@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.locale;
 
+import br.com.teachgram.api.constant.VAR;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
@@ -11,10 +12,10 @@ public class LanguageConfig {
 
     public static final List<Locale> LOCALES = Arrays.asList(
             new Locale.Builder()
-                    .setLanguage("en")
+                    .setLanguage(VAR.EN)
                     .build(),
             new Locale.Builder()
-                    .setLanguage("pt")
+                    .setLanguage(VAR.PT)
                     .build()
     );
 

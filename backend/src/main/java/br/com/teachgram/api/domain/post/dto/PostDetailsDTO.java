@@ -1,5 +1,6 @@
 package br.com.teachgram.api.domain.post.dto;
 
+import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.domain.post.Post;
 
 import java.time.Instant;
@@ -31,7 +32,7 @@ public record PostDetailsDTO(
                 post.getUser().getId(),
                 post.getUser().getActualUsername(),
                 post.getUser().getPhoto(),
-                post.getCreatedAt().toInstant(ZoneOffset.of("-03:00")).toEpochMilli()
+                post.getCreatedAt().toInstant(ZoneOffset.of(VAR.OFFSET)).toEpochMilli()
         );
     }
 }

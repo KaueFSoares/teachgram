@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.locale;
 
+import br.com.teachgram.api.constant.VAR;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,7 @@ public class CustomLocaleResolver implements LocaleResolver {
         String language = request.getHeader("Accept-Language");
 
         if (language == null || language.isEmpty()) {
-            return Locale.forLanguageTag("pt");
+            return Locale.forLanguageTag(VAR.PT);
         }
 
         var locale = Locale.forLanguageTag(language);
@@ -23,7 +24,7 @@ public class CustomLocaleResolver implements LocaleResolver {
             return locale;
         }
 
-        return Locale.forLanguageTag("pt");
+        return Locale.forLanguageTag(VAR.PT);
     }
 
     @Override

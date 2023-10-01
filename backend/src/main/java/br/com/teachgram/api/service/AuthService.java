@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
@@ -57,7 +58,7 @@ public class AuthService {
     }
 
     public LoginResponseDTO refreshToken(RefreshTokenRequestDTO dto) {
-        var token = dto.refresh_token().replace("Bearer ", "");
+        var token = dto.refresh_token().replace(VAR.TOKEN_TYPE + " ", "");
 
         var subject = tokenService.validateToken(token);
 

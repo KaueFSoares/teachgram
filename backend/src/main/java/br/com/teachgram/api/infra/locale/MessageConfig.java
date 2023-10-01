@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.locale;
 
+import br.com.teachgram.api.constant.VAR;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,8 @@ public class MessageConfig {
     public MessageSource messageSource() {
         var messageSource = new ResourceBundleMessageSource();
 
-        messageSource.setBasename("messages");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setBasename(VAR.BASENAME);
+        messageSource.setDefaultEncoding(VAR.ENCODE);
 
         return messageSource;
     }
