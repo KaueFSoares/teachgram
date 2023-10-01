@@ -29,7 +29,7 @@ public class PostSeeder {
             var maria = userRepository.findByEmail("maria@maria.maria").orElse(null);
             var joao = userRepository.findByEmail("joao@joao.joao").orElse(null);
 
-            var post1 = new Post(
+            var post1 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
                             "Post da julia",
                             "Look at this beautiful view",
@@ -37,9 +37,9 @@ public class PostSeeder {
                             ""
                     ),
                     julia
-            );
+            ));
 
-            var post2 = new Post(
+            var post2 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
                             "Post do matheus",
                             "Look at this beautiful view",
@@ -47,9 +47,9 @@ public class PostSeeder {
                             ""
                     ),
                     matheus
-            );
+            ));
 
-            var post3 = new Post(
+            var post3 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
                             "Post da maria",
                             "Look at this beautiful view",
@@ -57,9 +57,9 @@ public class PostSeeder {
                             ""
                     ),
                     maria
-            );
+            ));
 
-            var post4 = new Post(
+            var post4 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
                             "Post do joao",
                             "Look at this beautiful view",
@@ -67,19 +67,49 @@ public class PostSeeder {
                             ""
                     ),
                     joao
-            );
+            ));
 
-            var post5 = new Post(
+            var post5 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
-                            "Post da julia",
+                            "Post da julia2",
                             "Look at this beautiful view",
                             "https://images.pexels.com/photos/551851/pexels-photo-551851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
                     julia
-            );
+            ));
 
-            var post6 = new Post(
+            var post6 = postRepository.save(new Post(
+                    new CreatePostRequestDTO(
+                            "Post da julia3",
+                            "Look at this beautiful view",
+                            "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            ""
+                    ),
+                    julia
+            ));
+
+            var post7 = postRepository.save(new Post(
+                    new CreatePostRequestDTO(
+                            "Post do matheus2",
+                            "Look at this beautiful view",
+                            "https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            ""
+                    ),
+                    matheus
+            ));
+
+            var post8 = postRepository.save(new Post(
+                    new CreatePostRequestDTO(
+                            "Post da maria2",
+                            "Look at this beautiful view",
+                            "https://images.pexels.com/photos/325807/pexels-photo-325807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            ""
+                    ),
+                    maria
+            ));
+
+            var post9 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
                             "Post do joao2",
                             "Look at this beautiful view",
@@ -87,47 +117,17 @@ public class PostSeeder {
                             ""
                     ),
                     joao
-            );
+            ));
 
-            var post7 = new Post(
+            var post10 = postRepository.save(new Post(
                     new CreatePostRequestDTO(
-                            "Post do joao3",
+                            "Post da julia4",
                             "Look at this beautiful view",
-                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             ""
                     ),
-                    joao
-            );
-
-            var post8 = new Post(
-                    new CreatePostRequestDTO(
-                            "Post do joao3",
-                            "Look at this beautiful view",
-                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                            ""
-                    ),
-                    joao
-            );
-
-            var post9 = new Post(
-                    new CreatePostRequestDTO(
-                            "Post do joao4",
-                            "Look at this beautiful view",
-                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                            ""
-                    ),
-                    joao
-            );
-
-            var post10 = new Post(
-                    new CreatePostRequestDTO(
-                            "Post do joao5",
-                            "Look at this beautiful view",
-                            "https://images.pexels.com/photos/5968894/pexels-photo-5968894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                            ""
-                    ),
-                    joao
-            );
+                    julia
+            ));
 
             post1.setCreatedAt(post1.getCreatedAt().plusMinutes(1));
             post2.setCreatedAt(post2.getCreatedAt().plusMinutes(2));
@@ -139,7 +139,7 @@ public class PostSeeder {
             post8.setCreatedAt(post8.getCreatedAt().plusMinutes(8));
             post9.setCreatedAt(post9.getCreatedAt().plusMinutes(9));
             post10.setCreatedAt(post10.getCreatedAt().plusMinutes(10));
-            
+
 
             postRepository.save(post1);
             postRepository.save(post2);
