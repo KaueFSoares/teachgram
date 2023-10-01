@@ -7,7 +7,7 @@ const usePosts = () => {
   const api = useApi()
 
   const getPostsFromApi = async (page: number) => {
-    const postsResponse = await api.get(`${URL.POSTS}?page=${page}&&size=1`)
+    const postsResponse = await api.get(`${URL.POSTS}?page=${page}&&size=2`)
       .catch((error) => {
         throw error
       })

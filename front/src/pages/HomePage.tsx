@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { useEffect } from "react"
 import Navbar from "../components/layout/navbar/Navbar.tsx"
 import { Post } from "../interface/home/Post.ts"
 import PostItem from "../components/layout/util/PostItem.tsx"
@@ -8,12 +9,32 @@ interface HomePageProps {
   incrementPage: () => void
 }
 
+
 const HomePage = ({ posts, incrementPage }: HomePageProps) => {
   const { t } = useTranslation()
+
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          console.log("intersecting")
+          incrementPage()
+        }
+      },
+      { threshold: 1 },
+    )
+
+    observer.observe(document.querySelector("#load-more") as Element)
+    
+
+    return () => observer.disconnect()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [  ])
   
   return (
     <main className="relative w-full min-h-screen flex items-center justify-start flex-col">
-      <div className="w-full flex flex-col h-full p-12 gap-4 mb-10">
+      <div className="w-full flex flex-col h-full p-12 gap-4 mb-12">
         <img src="/images/full_logo.svg" alt="" className="w-2/3 mb-6" />
         {posts.length > 0 ? (
           <>
@@ -26,18 +47,12 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
         ) : (
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-4xl font-bold text-gray-800">
-              Nenhum post encontrado
+              {t("noposts")}
             </h1>
           </div>
         )}
 
-        {/* remove */}
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          onClick={incrementPage}
-        >
-          {t("Carregar mais")}
-        </button>
+        <div id="load-more" className="w-10 h-4"></div>
       </div>
       <Navbar />
     </main>
