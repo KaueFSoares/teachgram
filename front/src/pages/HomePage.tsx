@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import Navbar from "../components/layout/navbar/Navbar.tsx"
 import { Post } from "../interface/home/Post.ts"
 import PostItem from "../components/layout/util/PostItem.tsx"
+import Button from "../components/layout/form/Button.tsx"
 
 interface HomePageProps {
   posts: Post[]
@@ -53,6 +54,12 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
         )}
 
         <div id="load-more" className="w-10 h-4"></div>
+
+        <Button 
+          text="Voltar ao topo"
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        />
       </div>
       <Navbar />
     </main>
