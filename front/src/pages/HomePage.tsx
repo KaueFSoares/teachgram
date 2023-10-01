@@ -4,7 +4,7 @@ import Navbar from "../components/layout/navbar/Navbar.tsx"
 import { Post } from "../interface/home/Post.ts"
 import PostItem from "../components/layout/util/PostItem.tsx"
 import Button from "../components/layout/form/Button.tsx"
-import LeftImage from "../components/layout/util/LeftImage.tsx"
+import RightImage from "../components/layout/util/RightImage.tsx"
 
 interface HomePageProps {
   posts: Post[]
@@ -67,7 +67,7 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
         />
       </div>
 
-      <LeftImage />
+      <RightImage />
       <Navbar />
     </main>
   )
