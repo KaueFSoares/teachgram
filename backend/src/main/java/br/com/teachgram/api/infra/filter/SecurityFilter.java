@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.filter;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.DeletedAccountException;
@@ -42,9 +43,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (token != null) {
             var subject = tokenService.validateToken(token);
-            var user = userRepository.findUserDetailsById(subject).orElseThrow(() -> new AuthException(messageService.getMessage("error.token.invalid")));
+            var user = userRepository.findUserDetailsById(subject).orElseThrow(() -> new AuthException(messageService.getMessage(MESSAGE.INVALID_TOKEN)));
 
-            if (!user.isEnabled()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
+            if (!user.isEnabled()) throw new DeletedAccountException(messageService.getMessage(MESSAGE.USER_DELETED));
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

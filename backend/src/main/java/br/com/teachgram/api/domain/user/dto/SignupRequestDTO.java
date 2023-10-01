@@ -1,19 +1,20 @@
 package br.com.teachgram.api.domain.user.dto;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 public record SignupRequestDTO(
-        @NotEmpty(message = "{validation.user.name.not-empty}")
+        @NotEmpty(message = MESSAGE.NAME_NOT_EMPTY)
         String name,
-        @NotEmpty(message = "{validation.user.email.not-empty}")
-        @Email(message = "{validation.user.email.invalid}")
+        @NotEmpty(message = MESSAGE.EMAIL_NOT_EMPTY)
+        @Email(message = MESSAGE.EMAIL_INVALID)
         String email,
-        @NotEmpty(message = "{validation.user.username.not-empty}")
+        @NotEmpty(message = MESSAGE.USERNAME_NOT_EMPTY)
         String username,
-        @NotEmpty(message = "{validation.user.password.not-empty}")
+        @NotEmpty(message = MESSAGE.PASSWORD_NOT_EMPTY)
         String password,
-        @NotEmpty(message = "{validation.user.bio.not-empty}")
+        @NotEmpty(message = MESSAGE.BIO_NOT_EMPTY)
         String bio,
         String phone,
         String photo

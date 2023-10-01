@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
@@ -36,7 +37,7 @@ public class UserService {
     private User getAuthenticatedUser() {
         var auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.unauthorized")));
+        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException(messageService.getMessage(MESSAGE.USER_UNAUTHORIZED)));
     }
 
     public UserDetailsDTO update(UpdateRequestDTO dto) {
@@ -57,7 +58,7 @@ public class UserService {
 
         user.setDeleted(true);
 
-        return new DeleteResponseDTO(messageService.getMessage("message.deleted.user"));
+        return new DeleteResponseDTO(messageService.getMessage(MESSAGE.DELETED_USER));
     }
 
     public UserDetailsDTO details() {
@@ -71,7 +72,7 @@ public class UserService {
 
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriendById(id).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.user.friend-not-found")));
+        var friend = userRepository.findFriendById(id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
         user.addFriend(friend);
 
@@ -91,7 +92,7 @@ public class UserService {
 
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.user.friend-not-found")));
+        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
         var friendsCount = userRepository.countFriendsForUser(friend.getId());
 
@@ -101,10 +102,10 @@ public class UserService {
     public DeleteResponseDTO deleteFriend(String id) {
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.user.friend-not-found")));
+        var friend = userRepository.findFriend(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
         user.removeFriend(friend);
 
-        return new DeleteResponseDTO(messageService.getMessage("message.deleted.friend"));
+        return new DeleteResponseDTO(messageService.getMessage(MESSAGE.DELETED_FRIEND));
     }
 }

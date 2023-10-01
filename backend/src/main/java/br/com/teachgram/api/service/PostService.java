@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.domain.post.Post;
 import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.domain.user.User;
@@ -35,16 +36,16 @@ public class PostService {
     private User getAuthenticatedUser() {
         var auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.unauthorized")));
+        return userRepository.findByEmail(auth.getName()).orElseThrow(() -> new AuthException(messageService.getMessage(MESSAGE.USER_UNAUTHORIZED)));
     }
 
     private Post getPost(String id) {
         var user = getAuthenticatedUser();
 
-        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.post.not-found")));
+        var post = postRepository.findById(id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.POST_NOT_FOUND)));
 
         if (!post.getUser().equals(user)) {
-            throw new AuthException(messageService.getMessage("error.post.unauthorized"));
+            throw new AuthException(messageService.getMessage(MESSAGE.POST_UNAUTHORIZED));
         }
         return post;
     }
@@ -62,7 +63,7 @@ public class PostService {
 
         post.setDeleted(true);
 
-        return new DeletePostResponseDTO(messageService.getMessage("message.deleted.post"));
+        return new DeletePostResponseDTO(messageService.getMessage(MESSAGE.DELETED_POST));
     }
 
     public UserPostDetailsDTO getUserPost(String id) {

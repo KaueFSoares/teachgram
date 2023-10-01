@@ -1,5 +1,6 @@
 package br.com.teachgram.api.infra.security;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.repository.UserRepository;
 import br.com.teachgram.api.service.MessageService;
@@ -26,6 +27,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserDetailsByEmail(username).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.not-found")));
+        return userRepository.findUserDetailsByEmail(username).orElseThrow(() -> new AuthException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
     }
 }

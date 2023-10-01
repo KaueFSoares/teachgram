@@ -1,5 +1,6 @@
 package br.com.teachgram.api.domain.user.validation;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import br.com.teachgram.api.infra.exception.DuplicateException;
@@ -25,11 +26,11 @@ public class UserUsernameValidation implements UserDataValidationInterface{
 
     @Override
     public void validate(SignupRequestDTO data) {
-        if (data.username() != null && userRepository.existsByUsername(data.username())) throw new DuplicateException(messageService.getMessage("validation.user.username.duplicated"));
+        if (data.username() != null && userRepository.existsByUsername(data.username())) throw new DuplicateException(messageService.getMessage(MESSAGE.USERNAME_DUPLICATED));
     }
 
     @Override
     public void validate(UpdateRequestDTO data) {
-        if (data.username() != null && userRepository.existsByUsernameAndIdNot(data.username(), data.id())) throw new DuplicateException(messageService.getMessage("validation.user.username.duplicated"));
+        if (data.username() != null && userRepository.existsByUsernameAndIdNot(data.username(), data.id())) throw new DuplicateException(messageService.getMessage(MESSAGE.USERNAME_DUPLICATED));
     }
 }

@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
@@ -46,9 +47,9 @@ public class AuthService {
     }
 
     public LoginResponseDTO login(LoginRequestDTO dto) {
-        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageService.getMessage("error.user.not-found")));
+        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
 
-        if (user.getDeleted()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
+        if (user.getDeleted()) throw new DeletedAccountException(messageService.getMessage(MESSAGE.DELETED_USER));
 
         var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
 
@@ -62,7 +63,7 @@ public class AuthService {
 
         var subject = tokenService.validateToken(token);
 
-        if (userRepository.findById(subject).orElseThrow(() -> new AuthException(messageService.getMessage("error.user.not-found"))).getDeleted()) throw new DeletedAccountException(messageService.getMessage("error.user.deleted"));
+        if (userRepository.findById(subject).orElseThrow(() -> new AuthException(messageService.getMessage(MESSAGE.USER_NOT_FOUND))).getDeleted()) throw new DeletedAccountException(messageService.getMessage(MESSAGE.DELETED_USER));
 
         return tokenService.generateToken(subject);
     }

@@ -1,5 +1,6 @@
 package br.com.teachgram.api.service;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import br.com.teachgram.api.constant.VAR;
 import br.com.teachgram.api.domain.user.dto.LoginResponseDTO;
 import br.com.teachgram.api.infra.exception.AuthException;
@@ -55,7 +56,7 @@ public class TokenService {
             );
 
         } catch (JWTCreationException exception){
-            throw new AuthException(messageService.getMessage("error.token.creation"));
+            throw new AuthException(messageService.getMessage(MESSAGE.TOKEN_CREATION_ERROR));
         }
     }
 
@@ -70,7 +71,7 @@ public class TokenService {
                     .getSubject();
 
         } catch (JWTVerificationException exception){
-            throw new AuthException(messageService.getMessage("error.token.validation"));
+            throw new AuthException(messageService.getMessage(MESSAGE.TOKEN_VALIDATION_ERROR));
         }
     }
 

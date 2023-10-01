@@ -1,11 +1,12 @@
 package br.com.teachgram.api.domain.post.dto;
 
+import br.com.teachgram.api.constant.MESSAGE;
 import jakarta.validation.constraints.NotEmpty;
 
 public record CreatePostRequestDTO(
-        @NotEmpty(message = "{validation.post.title.not-empty}")
+        @NotEmpty(message = MESSAGE.TITLE_NOT_EMPTY)
         String title,
-        @NotEmpty(message = "{validation.post.description.not-empty}")
+        @NotEmpty(message = MESSAGE.DESCRIPTION_NOT_EMPTY)
         String description,
         String photoLink,
         String videoLink
