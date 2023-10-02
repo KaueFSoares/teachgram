@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { HomePageContainer, LoginPageContainer, ProfilePageContainer, SignupPageContainer } from "../container"
 import PrivateRoutes from "./PrivateRoutes"
+import RoutesBase from "./RoutesBase"
 
 interface Props {
   authenticated: boolean
@@ -20,12 +21,17 @@ const AppRoutes = ({ authenticated }: Props) => {
       element: <PrivateRoutes authenticated={authenticated} />,
       children: [
         {
-          path: "/",
-          element: <HomePageContainer />,
-        },
-        {
-          path: "/profile",
-          element: <ProfilePageContainer />,
+          element: <RoutesBase />,
+          children: [
+            {
+              path: "/",
+              element: <HomePageContainer />,
+            },
+            {
+              path: "/profile",
+              element: <ProfilePageContainer />,
+            },
+          ],
         },
       ],
     },
