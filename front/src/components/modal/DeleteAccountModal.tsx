@@ -17,21 +17,28 @@ const DeleteAccountModal = ({ onCancel }: Props) => {
 
   return (
     <div className="fixed w-full h-screen bg-black/40 flex items-center justify-center flex-col  top-0 left-0">
-      <div className="w-4/5 bg-white rounded-[2rem] flex flex-col">
-        <header className="flex items-center justify-center py-10 border-b-gray border-b border-solid">
+      <div className="w-4/5 bg-white rounded-[2rem] flex flex-col
+                      lg:w-2/5
+                      xl:w-1/3
+                      2xl:w-1/4">
+        <header className="flex items-center justify-center py-10 border-b-gray border-b border-solid
+                            lg:justify-start lg:py-6 lg:px-8">
           <h2
-            className="text-2xl font-semibold"
+            className="text-2xl font-semibold
+                       lg:text-xl"
           >
             Excluir conta
           </h2>
         </header>
 
-        <main className="flex flex-col items-center justify-between gap-8 py-10">
+        <main className="flex flex-col items-center justify-between gap-8 py-10
+                          lg:items-start lg:py-6">
           <p className="px-8 text-center text-base">
             Todos os seus dados serão excluídos.
           </p>
 
-          <div className="flex gap-6 text-base font-semibold">
+          <div className="flex gap-6 text-base font-semibold
+                          lg:justify-center lg:w-full">
             <ModalButton text="Cancelar" confirm={false} onClick={() => onCancel()} />
             <ModalButton text="Confirmar" confirm onClick={() => onConfirm()}/>
           </div>
