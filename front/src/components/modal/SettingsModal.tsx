@@ -1,8 +1,11 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import NavbarContext from "../../context/NavbarContext.ts"
 import RightImage from "../util/RightImage.tsx"
+import DeleteAccountModal from "./DeleteAccountModal.tsx"
 
 const SettingsModal = () => {
+  const [ showDeleteModal, setShowDeleteModal ] = useState(false)
+
   const { setShowSettingsModal } = useContext(NavbarContext)
 
   return (
@@ -49,12 +52,18 @@ const SettingsModal = () => {
               <img src="/icon/short_arrow.svg" alt="" />
             </div>
 
-            <p className="underline text-lg text-orange">
-            Excluir conta
+            <p 
+              className="underline text-lg text-orange"
+              role="button"
+              onClick={() => setShowDeleteModal(true)}
+            >
+              Excluir conta
             </p>
           </main>
         </div>
         <RightImage />
+
+        { showDeleteModal && <DeleteAccountModal onCancel={() => setShowDeleteModal(false)} />}
       </div>
     </div>
   )
