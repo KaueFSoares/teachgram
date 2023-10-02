@@ -3,6 +3,7 @@ import { FriendListResponse } from "../interface/friends/response/FriendListResp
 import { UserResponse } from "../interface/home/response/UserResponse"
 import useApi from "./api/api"
 import { URL } from "./api/url"
+import { onLogout } from "./auth.service"
 
 
 export const useUser = () => {
@@ -17,13 +18,6 @@ export const useUser = () => {
     return userReponse.data as UserResponse
   }
 
-
-  const getUserPhoto = async () => {
-    const userData = await getUserFromApi()
-
-    return userData.photo
-  }
-
   const getFriendListFromApi = async (pageNumber: number) => {
     const friendListResponse = await api.get(URL.FRIENDS, {
       params: {
@@ -36,6 +30,12 @@ export const useUser = () => {
       })
 
     return friendListResponse.data as FriendListResponse
+  }
+
+  const getUserPhoto = async () => {
+    const userData = await getUserFromApi()
+
+    return userData.photo
   }
   
   const getFriendList = async (pageNumber: number) => {
@@ -62,9 +62,19 @@ export const useUser = () => {
     return friendList
   }
 
+  const deleteUser = async () => {
+    await api.delete(URL.USER)
+      .catch((error) => {
+        throw error
+      })
+
+    onLogout()
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
+    deleteUser: deleteUser,
   }
 }
 

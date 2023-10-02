@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom"
+import { useUser } from "../../service/user.service.ts"
 import ModalButton from "./ModalButton.tsx"
 
 interface Props {
@@ -5,6 +7,14 @@ interface Props {
 }
 
 const DeleteAccountModal = ({ onCancel }: Props) => {
+  const user = useUser()
+  const navigate = useNavigate()
+
+  const onConfirm = () => {
+    user.deleteUser()
+    navigate("/login")
+  }
+
   return (
     <div className="fixed w-full h-screen bg-black/40 flex items-center justify-center flex-col  top-0 left-0">
       <div className="w-4/5 bg-white rounded-[2rem] flex flex-col">
@@ -23,7 +33,7 @@ const DeleteAccountModal = ({ onCancel }: Props) => {
 
           <div className="flex gap-6 text-base font-semibold">
             <ModalButton text="Cancelar" confirm={false} onClick={() => onCancel()} />
-            <ModalButton text="Confirmar" confirm />
+            <ModalButton text="Confirmar" confirm onClick={() => onConfirm()}/>
           </div>
         </main>
       </div>
