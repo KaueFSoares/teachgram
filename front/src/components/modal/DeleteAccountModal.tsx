@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { t } from "i18next"
 import { useUser } from "../../service/user.service.ts"
 import ModalButton from "./ModalButton.tsx"
 
@@ -27,20 +28,20 @@ const DeleteAccountModal = ({ onCancel }: Props) => {
             className="text-2xl font-semibold
                        lg:text-xl"
           >
-            Excluir conta
+            {t("settings.delete_modal.delete")}
           </h2>
         </header>
 
         <main className="flex flex-col items-center justify-between gap-8 py-10
                           lg:items-start lg:py-6">
           <p className="px-8 text-center text-base">
-            Todos os seus dados serão excluídos.
+            {t("settings.delete_modal.alert")}
           </p>
 
           <div className="flex gap-6 text-base font-semibold
                           lg:justify-center lg:w-full">
-            <ModalButton text="Cancelar" confirm={false} onClick={() => onCancel()} />
-            <ModalButton text="Confirmar" confirm onClick={() => onConfirm()}/>
+            <ModalButton text={t("settings.delete_modal.cancel")} confirm={false} onClick={() => onCancel()} />
+            <ModalButton text={t("settings.delete_modal.confirm")} confirm onClick={() => onConfirm()}/>
           </div>
         </main>
       </div>

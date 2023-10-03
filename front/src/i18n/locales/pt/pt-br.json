@@ -81,6 +81,17 @@
             "hour": "horas",
             "day": "dias",
             "week": "semanas"
+        },
+        "settings": {
+            "accountSettings": "Configurações da conta",
+            "edit": "Editar perfil",
+            "delete": "Excluir conta",
+            "delete_modal": {
+                "delete": "Excluir conta",
+                "alert": "Todos os seus dados serão excluídos.",
+                "cancel": "Cancelar",
+                "confirm": "Confirmar"
+            }
         }
         
     }

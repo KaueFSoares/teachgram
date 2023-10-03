@@ -1,10 +1,13 @@
 import { useContext, useState } from "react"
+import { useTranslation } from "react-i18next"
 import NavbarContext from "../../context/NavbarContext.ts"
 import RightImage from "../util/RightImage.tsx"
 import DeleteAccountModal from "./DeleteAccountModal.tsx"
 
 const SettingsModal = () => {
   const [ showDeleteModal, setShowDeleteModal ] = useState(false)
+
+  const { t } = useTranslation()
 
   const { setShowSettingsModal } = useContext(NavbarContext)
 
@@ -35,7 +38,7 @@ const SettingsModal = () => {
               role="button"
             >
               <p className="font-semibold text-xl">
-              Configurações da conta
+                {t("settings.accountSettings")}
               </p>
             
               <img src="/icon/short_arrow.svg" alt="" />
@@ -46,7 +49,7 @@ const SettingsModal = () => {
               role="button"
             >
               <p className="font-semibold text-xl">
-              Editar perfil
+                {t("settings.edit")}
               </p>
             
               <img src="/icon/short_arrow.svg" alt="" />
@@ -57,7 +60,7 @@ const SettingsModal = () => {
               role="button"
               onClick={() => setShowDeleteModal(true)}
             >
-              Excluir conta
+              {t("settings.delete")}
             </p>
           </main>
         </div>
