@@ -68,10 +68,11 @@ const refresh = async (refreshToken: string): Promise<AuthData> => {
   }
 }
 
-const signup = async (name: string, email: string, bio: string, phone: string, password: string, photo: string): Promise<AuthData> => {
+const signup = async (name: string, email: string, username: string , bio: string, phone: string, password: string, photo: string): Promise<AuthData> => {
   const response = await OPENED_API().post(URL.SIGNUP, { 
     name: name,
     email: email,
+    username: username,
     bio: bio,
     phone: phone, 
     password: password, 
@@ -99,8 +100,8 @@ export const onLogin = async (email: string, password: string) => {
   return data
 }
 
-export const onSignup = async (name: string, email: string, bio: string, phone: string, password: string, photo: string) => {
-  const data = await signup(name, email, bio, phone, password, photo)
+export const onSignup = async (name: string, email: string, username: string, bio: string, phone: string, password: string, photo: string) => {
+  const data = await signup(name, email, username, bio, phone, password, photo)
   saveToLocalStorage(data)
 
   return data

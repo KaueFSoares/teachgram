@@ -18,7 +18,7 @@ const SignupPageContainer = () => {
   const [ photo, setPhoto ] = useState("")
 
   const handleSubmit = () => {
-    onSignup(name, email, bio, phone, password, photo)
+    onSignup(name, email, username, bio, phone, password, photo)
       .then(() => {
         setAuthenticated(true)
         navigate("/")
