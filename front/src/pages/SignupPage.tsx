@@ -143,6 +143,7 @@ const SignupPage = ({
         <div className={`relative h-full w-full flex flex-col p-12 items-center justify-start gap-8 text-black
                         lg:w-2/3 lg:gap-6 lg:pt-0 lg:px-6 lg:pb-6   lg:max-h-[calc(100vh-6rem)]
                         xl:w-1/2
+                        2xl:w-1/3
                         ${showModal ? "overflow-hidden h-screen" : "lg:overflow-auto"}`}>
           
 
