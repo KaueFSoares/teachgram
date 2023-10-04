@@ -10,14 +10,16 @@ interface Props extends HTMLProps<HTMLInputElement>{
 const ModalInput = ({ name, type, state, setState }: Props) => {
   return (
     <div className="w-full flex flex-col">
-      <label htmlFor={name} className="w-full text-base">{name}</label>
+      <label htmlFor={name} className="w-full text-base
+                                        lg:text-sm">{name}</label>
       <input 
         type={type} 
         name={name} 
         id={name} 
         value={state}
         onChange={(e) => setState(e.target.value)}
-        className="w-full border-b border-solid border-gray/50 outline-none py-1 text-base text-gray"
+        className="w-full border-b border-solid border-gray/50 outline-none py-1 text-base text-gray text-ellipsis
+                  lg:text-sm"
       />
     </div>
   )

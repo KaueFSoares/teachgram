@@ -89,12 +89,27 @@ export const useUser = () => {
     return userResponse.data as UserResponse
   }
 
+  const updateProfileData = async (photo: string, name: string, username: string, bio: string) => {
+    const userResponse = await api.put(URL.USER, {
+      photo: photo,
+      name: name,
+      username: username,
+      bio: bio,
+    })
+      .catch((error) => {
+        throw error
+      })
+
+    return userResponse.data as UserResponse
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
     deleteUser: deleteUser,
     getFullUser: getFullUser,
     updateAccountData: updateAccountData,
+    updateProfileData: updateProfileData,
   }
 }
 

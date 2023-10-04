@@ -4,10 +4,12 @@ import NavbarContext from "../../context/NavbarContext.ts"
 import RightImage from "../util/RightImage.tsx"
 import DeleteAccountModal from "./DeleteAccountModal.tsx"
 import AccountSettingsModal from "./AccountSettingsModal.tsx"
+import ProfileSettingsModal from "./ProfileSettingsModal.tsx"
 
 const SettingsModal = () => {
   const [ showDeleteModal, setShowDeleteModal ] = useState(false)
   const [ showAccountSettingsModal, setShowAccountSettingsModal ] = useState(false)
+  const [ showProfileSettingsModal, setShowProfileSettingsModal ] = useState(false)
 
   const { t } = useTranslation()
 
@@ -50,6 +52,7 @@ const SettingsModal = () => {
             <div 
               className="w-full flex items-center justify-between"
               role="button"
+              onClick={() => setShowProfileSettingsModal(true)}
             >
               <p className="font-semibold text-xl">
                 {t("settings.edit")}
@@ -71,6 +74,7 @@ const SettingsModal = () => {
 
         { showDeleteModal && <DeleteAccountModal onCancel={() => setShowDeleteModal(false)} />}
         { showAccountSettingsModal && <AccountSettingsModal onCancel={() => setShowAccountSettingsModal(false)} />}
+        { showProfileSettingsModal && <ProfileSettingsModal onCancel={() => setShowProfileSettingsModal(false)} />}
       </div>
     </div>
   )
