@@ -13,9 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Table(name = "users")
 @Entity
@@ -57,7 +55,7 @@ public class User implements UserDetails {
     private Set<Post> posts = new HashSet<>();
 
     @OneToMany(mappedBy = "firstUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Friendship> friends = new HashSet<>();
+    private List<Friendship> friends = new ArrayList<>();
 
     public User(SignupRequestDTO dto) {
         this.name = dto.name();
