@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next"
 import NavbarContext from "../../context/NavbarContext.ts"
 import RightImage from "../util/RightImage.tsx"
 import DeleteAccountModal from "./DeleteAccountModal.tsx"
+import AccountSettingsModal from "./AccountSettingsModal.tsx"
 
 const SettingsModal = () => {
   const [ showDeleteModal, setShowDeleteModal ] = useState(false)
+  const [ showAccountSettingsModal, setShowAccountSettingsModal ] = useState(false)
 
   const { t } = useTranslation()
 
@@ -36,6 +38,7 @@ const SettingsModal = () => {
             <div 
               className="w-full flex items-center justify-between"
               role="button"
+              onClick={() => setShowAccountSettingsModal(true)}
             >
               <p className="font-semibold text-xl">
                 {t("settings.accountSettings")}
@@ -67,6 +70,7 @@ const SettingsModal = () => {
         <RightImage />
 
         { showDeleteModal && <DeleteAccountModal onCancel={() => setShowDeleteModal(false)} />}
+        { showAccountSettingsModal && <AccountSettingsModal onCancel={() => setShowAccountSettingsModal(false)} />}
       </div>
     </div>
   )
