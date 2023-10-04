@@ -48,7 +48,7 @@ public class AuthService {
     public LoginResponseDTO login(LoginRequestDTO dto) {
         var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
 
-        if (user.getDeleted()) throw new DeletedAccountException(messageService.getMessage(MESSAGE.DELETED_USER));
+        if (user.getDeleted()) throw new DeletedAccountException(messageService.getMessage(MESSAGE.USER_DELETED));
 
         var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
 
