@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import RightImage from "../util/RightImage"
+import { useUser } from "../../service/user.service"
 import ModalButton from "./ModalButton"
 import ModalInput from "./ModalInput"
 
@@ -11,7 +12,21 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
   const [ name, setName ] = useState("")
   const [ email, setEmail ] = useState("")
   const [ phone, setPhone ] = useState("")
-  const [ password, setPassword ] = useState("")
+
+  // server should not send the real password for the frontend
+  const [ password, setPassword ] = useState("nopasswd")
+
+  const user = useUser()
+
+  useEffect(() => {
+    user.getFullUser().then((res) => {
+      setName(res.name)
+      setEmail(res.email)
+      setPhone(res.phone)
+    })
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ ])
 
   const handleUpdate = () => {
     // Update user data

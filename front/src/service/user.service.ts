@@ -62,6 +62,10 @@ export const useUser = () => {
     return friendList
   }
 
+  const getFullUser = async () => {
+    return await getUserFromApi()
+  }
+
   const deleteUser = async () => {
     await api.delete(URL.USER)
       .catch((error) => {
@@ -75,6 +79,7 @@ export const useUser = () => {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
     deleteUser: deleteUser,
+    getFullUser: getFullUser,
   }
 }
 
