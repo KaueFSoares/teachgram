@@ -15,19 +15,20 @@ public class MESSAGE {
 
     public static final String TITLE_NOT_EMPTY = "{validation.post.title.not-empty}";
     public static final String DESCRIPTION_NOT_EMPTY = "{validation.post.description.not-empty}";
+    public static final String PHOTO_NOT_EMPTY = "{validation.user.photo.not-empty}";
 
     public static final String EMAIL_NOT_EMPTY = "{validation.user.email.not-empty}";
     public static final String PASSWORD_NOT_EMPTY = "{validation.user.password.not-empty}";
     public static final String REFRESH_TOKEN_NOT_EMPTY = "{validation.user.refresh-token.not-empty}";
-    public static final String NAME_NOT_EMPTY = "validation.user.name.not-empty";
-    public static final String BIO_NOT_EMPTY = "validation.user.bio.not-empty";
-    public static final String USERNAME_NOT_EMPTY = "validation.user.username.not-empty";
+    public static final String NAME_NOT_EMPTY = "{validation.user.name.not-empty}";
+    public static final String BIO_NOT_EMPTY = "{validation.user.bio.not-empty}";
+    public static final String USERNAME_NOT_EMPTY = "{validation.user.username.not-empty}";
 
     public static final String PHONE_DUPLICATED = "validation.user.phone.duplicated";
     public static final String EMAIL_DUPLICATED = "validation.user.email.duplicated";
     public static final String USERNAME_DUPLICATED = "validation.user.username.duplicated";
 
-    public static final String EMAIL_INVALID = "validation.user.email.invalid";
+    public static final String EMAIL_INVALID = "{validation.user.email.invalid}";
 
     public static final String DELETED_USER = "message.deleted.user";
     public static final String DELETED_FRIEND = "message.deleted.friend";

@@ -4,10 +4,10 @@ import br.com.teachgram.api.infra.constant.MESSAGE;
 import jakarta.validation.constraints.NotEmpty;
 
 public record CreatePostRequestDTO(
-        @NotEmpty(message = MESSAGE.TITLE_NOT_EMPTY)
         String title,
         @NotEmpty(message = MESSAGE.DESCRIPTION_NOT_EMPTY)
         String description,
+        @NotEmpty(message = MESSAGE.PHOTO_NOT_EMPTY)
         String photoLink,
         String videoLink
 ) {
