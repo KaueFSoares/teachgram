@@ -1,5 +1,6 @@
 package br.com.teachgram.api.repository;
 
+import br.com.teachgram.api.domain.friendship.Friendship;
 import br.com.teachgram.api.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,10 +37,4 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query("select count(f) from Friendship f where f.firstUser.id = :userId")
     Long countFriendsForUser(String userId);
-
-    @Query("select f.secondUser from Friendship f where f.firstUser.id = :id")
-    Page<User> getFriends(String id, Pageable pageable);
-
-    @Query("select u from User u join Friendship f on (u.id = f.secondUser.id) where f.firstUser.id = :id and f.secondUser.username = :friendUsername")
-    Optional<User> findFriendByUsername(String id, String friendUsername);
 }

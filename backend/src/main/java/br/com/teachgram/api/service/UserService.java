@@ -6,6 +6,7 @@ import br.com.teachgram.api.domain.user.dto.*;
 import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
+import br.com.teachgram.api.repository.FriendshipRepository;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final FriendshipRepository friendshipRepository;
     private final UserDataValidationService userDataValidationService;
     private final MessageService messageService;
 
@@ -24,11 +26,13 @@ public class UserService {
     public UserService(
             UserRepository userRepository,
             UserDataValidationService userDataValidationService,
-            MessageService messageService
+            MessageService messageService,
+            FriendshipRepository friendshipRepository
     ) {
         this.userRepository = userRepository;
         this.userDataValidationService = userDataValidationService;
         this.messageService = messageService;
+        this.friendshipRepository = friendshipRepository;
     }
 
     private User getAuthenticatedUser() {
@@ -78,29 +82,27 @@ public class UserService {
     }
 
     public Page<FriendShortDetailsDTO> getManyFriends(Pageable pageable) {
-
         var user = getAuthenticatedUser();
 
-        return userRepository.getFriends(user.getId(), pageable).map(FriendShortDetailsDTO::new);
+        return friendshipRepository.getAllByFirstUserId(user.getId(), pageable).map(f -> new FriendShortDetailsDTO(f.getSecondUser()));
     }
 
     public FriendDetailsDTO getSingleFriend(String username) {
-
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriendByUsername(user.getId(), username).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
+        var friendship = friendshipRepository.findByFirstUserIdAndSecondUserUsername(user.getId(), username).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
-        var friendsCount = userRepository.countFriendsForUser(friend.getId());
+        var friendsCount = userRepository.countFriendsForUser(friendship.getSecondUser().getId());
 
-        return new FriendDetailsDTO(friend, friendsCount);
+        return new FriendDetailsDTO(friendship.getSecondUser(), friendsCount);
     }
 
     public DeleteResponseDTO deleteFriend(String id) {
         var user = getAuthenticatedUser();
 
-        var friend = userRepository.findFriendByUsername(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
+        var friendship = friendshipRepository.findByFirstUserIdAndSecondUserId(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
-        user.removeFriend(friend);
+        user.removeFriend(friendship.getSecondUser());
 
         return new DeleteResponseDTO(messageService.getMessage(MESSAGE.DELETED_FRIEND));
     }
