@@ -112,31 +112,31 @@ public class User implements UserDetails {
 
     public void update(UpdateRequestDTO dto) {
 
-        if (dto.email() != null) {
+        if (dto.email() != null && !dto.email().isEmpty()) {
             this.email = dto.email();
         }
 
-        if (dto.name() != null) {
+        if (dto.name() != null && !dto.name().isEmpty()) {
             this.name = dto.name();
         }
 
-        if (dto.username() != null) {
+        if (dto.username() != null && !dto.username().isEmpty()) {
             this.username = dto.username();
         }
 
-        if (dto.bio() != null) {
+        if (dto.bio() != null && !dto.bio().isEmpty()) {
             this.bio = dto.bio();
         }
 
-        if (dto.phone() != null) {
+        if (dto.phone() != null && !dto.phone().isEmpty()) {
             this.phone = dto.phone();
         }
 
-        if (dto.photo() != null) {
+        if (dto.photo() != null && !dto.photo().isEmpty()) {
             this.photo = dto.photo();
         }
 
-        if (dto.password() != null) {
+        if (dto.password() != null && !dto.password().isEmpty()) {
             this.password = new BCryptPasswordEncoder().encode(dto.password());
         }
 
