@@ -5,6 +5,7 @@ export interface UserResponse {
   updatedAt: string;
   name: string;
   email: string;
+  username: string;
   phone: string;
   bio: string;
   photo: string;
