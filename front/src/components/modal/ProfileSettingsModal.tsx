@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import RightImage from "../util/RightImage"
 import { useUser } from "../../service/user.service"
 import ModalButton from "./ModalButton"
@@ -14,6 +15,7 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
   const [ username, setUsername ] = useState("")
   const [ bio, setBio ] = useState("")
   
+  const { t } = useTranslation()
 
   const user = useUser()
 
@@ -53,7 +55,7 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
 
           <h2 className="w-full text-xl font-bold
                         lg:text-lg">
-            Editar perfil
+            {t("settings.profile_settings.title")}
           </h2>
 
           <div className="w-full flex items-center justify-center">
@@ -65,25 +67,25 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
 
           <div className="w-full flex flex-col gap-4 lg:gap-2">
             <ModalInput
-              name="Foto de perfil"
+              name={t("settings.profile_settings.photo")}
               type="text"
               state={photo}
               setState={setPhoto}
             />
             <ModalInput
-              name="Nome"
+              name={t("settings.profile_settings.name")}
               type="text"
               state={name}
               setState={setName}
             />
             <ModalInput
-              name="Nome de usuário"
+              name={t("settings.profile_settings.username")}
               type="text"
               state={username}
               setState={setUsername}
             />
             <ModalInput
-              name="Bio"
+              name={t("settings.profile_settings.bio")}
               type="text"
               state={bio}
               setState={setBio}
@@ -93,13 +95,13 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
           <div className="w-full flex gap-6 lg:hidden">
             <ModalButton 
               onClick={onCancel}
-              text="Cancelar"
+              text={t("settings.profile_settings.cancel")}
               confirm={false}
             />
 
             <ModalButton 
               onClick={handleUpdate}
-              text="Atualizar"
+              text={t("settings.profile_settings.update")}
               confirm={true}
             />
           </div>
@@ -107,7 +109,7 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
           <div className="hidden lg:flex w-full items-start">
             <ModalButton
               onClick={handleUpdate}
-              text="Salvar"
+              text={t("settings.profile_settings.save")}
               confirm={true}
             />
           </div>

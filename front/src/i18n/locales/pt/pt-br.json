@@ -91,6 +91,26 @@
                 "alert": "Todos os seus dados serão excluídos.",
                 "cancel": "Cancelar",
                 "confirm": "Confirmar"
+            },
+            "account_settings": {
+                "title": "Configurações da conta",
+                "name": "Nome",
+                "email": "E-mail",
+                "phone": "Telefone",
+                "password": "Senha",
+                "save": "Salvar",
+                "cancel": "Cancelar",
+                "update": "Atualizar"
+            },
+            "profile_settings": {
+                "title": "Editar perfil",
+                "photo": "Foto de perfil",
+                "name": "Nome",
+                "username": "Username",
+                "bio": "Descrição",
+                "save": "Salvar",
+                "cancel": "Cancelar",
+                "update": "Atualizar"
             }
         }
         
