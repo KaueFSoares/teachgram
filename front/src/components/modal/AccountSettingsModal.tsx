@@ -29,7 +29,9 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
   }, [ ])
 
   const handleUpdate = () => {
-    // Update user data
+    user.updateAccountData(name, email, phone, password).then(() => {
+      onCancel()
+    })
   }
 
   return (

@@ -75,11 +75,26 @@ export const useUser = () => {
     onLogout()
   }
 
+  const updateAccountData = async (name: string, email: string, phone: string, password: string) => {
+    const userResponse = await api.put(URL.USER, {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password === "nopasswd" ? "" : password,
+    })
+      .catch((error) => {
+        throw error
+      })
+
+    return userResponse.data as UserResponse
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
     deleteUser: deleteUser,
     getFullUser: getFullUser,
+    updateAccountData: updateAccountData,
   }
 }
 
