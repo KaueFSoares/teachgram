@@ -11,6 +11,7 @@ public record UserDetailsDTO(
         LocalDateTime updatedAt,
         String name,
         String email,
+        String username,
         String phone,
         String bio,
         String photo
@@ -23,6 +24,7 @@ public record UserDetailsDTO(
                 user.getUpdatedAt(),
                 user.getName(),
                 user.getEmail(),
+                user.getUsername(),
                 user.getPhone(),
                 user.getBio(),
                 user.getPhoto()
