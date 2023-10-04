@@ -309,6 +309,107 @@ public class UserSeeder {
                     "isadora"
             ));
 
+            var user29 = userRepository.save(makeUser(
+                    "Cleber",
+                    "cleber@cleber.cleber",
+                    "@cleber",
+                    "(51) 987654321",
+                    "Hello, I'm Cleber",
+                    "https://images.pexels.com/photos/842980/pexels-photo-842980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "cleber"
+            ));
+
+            var user30 = userRepository.save(makeUser(
+                    "Marina",
+                    "marina@marina.marina",
+                    "@marina",
+                    "(51) 111222333",
+                    "Hello, I'm Marina",
+                    "https://images.pexels.com/photos/18449500/pexels-photo-18449500/free-photo-of-morena-nevoa-neblina-nevoeiro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "marina"
+            ));
+
+            var user31 = userRepository.save(makeUser(
+                    "Augusto",
+                    "augusto@augusto.augusto",
+                    "@augusto",
+                    "(51) 555444333",
+                    "Hello, I'm Augusto",
+                    "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "augusto"
+            ));
+
+            var user32 = userRepository.save(makeUser(
+                    "Raiane",
+                    "raiane@raiane.raiane",
+                    "@raiane",
+                    "(51) 777888999",
+                    "Hello, I'm Raiane",
+                    "https://images.pexels.com/photos/18428858/pexels-photo-18428858/free-photo-of-bebe-nenem-preto-e-branco-p-b.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "raiane"
+            ));
+
+            var user33 = userRepository.save(makeUser(
+                    "Nicolas",
+                    "nicolas@nicolas.nicolas",
+                    "@nicolas",
+                    "(51) 123987456",
+                    "Hello, I'm Nicolas",
+                    "https://images.pexels.com/photos/1553783/pexels-photo-1553783.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "nicolas"
+            ));
+
+            var user34 = userRepository.save(makeUser(
+                    "Dominique",
+                    "dominique@dominique.dominique",
+                    "@dominique",
+                    "(51) 456789123",
+                    "Hello, I'm Dominique",
+                    "https://images.pexels.com/photos/18439408/pexels-photo-18439408/free-photo-of-morena-retrato-restaurante-sentado.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "dominique"
+            ));
+
+            var user35 = userRepository.save(makeUser(
+                    "Flavio",
+                    "flavio@flavio.flavio",
+                    "@flavio",
+                    "(51) 222333444",
+                    "Hello, I'm Flavio",
+                    "https://images.pexels.com/photos/3863793/pexels-photo-3863793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "flavio"
+            ));
+
+            var user36 = userRepository.save(makeUser(
+                    "Alessandra",
+                    "alessandra@alessandra.alessandra",
+                    "@alessandra",
+                    "(51) 777666555",
+                    "Hello, I'm Alessandra",
+                    "https://images.pexels.com/photos/18448905/pexels-photo-18448905/free-photo-of-cabelo-castanho-cabelo-longo-cabelo-comprido-retrato.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "alessandra"
+            ));
+
+            var user37 = userRepository.save(makeUser(
+                    "Jorge",
+                    "jorge@jorge.jorge",
+                    "@jorge",
+                    "(51) 111222333",
+                    "Hello, I'm Jorge",
+                    "https://images.pexels.com/photos/1578531/pexels-photo-1578531.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "jorge"
+            ));
+
+            var user38 = userRepository.save(makeUser(
+                    "Bianca",
+                    "bianca@bianca.bianca",
+                    "@bianca",
+                    "(51) 999888777",
+                    "Hello, I'm Bianca",
+                    "https://images.pexels.com/photos/18446073/pexels-photo-18446073/free-photo-of-fundo-preto-glamour-elegancia-pompa.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "bianca"
+            ));
+
+
             var users = new ArrayList<User>();
 
             users.add(user3);
@@ -337,6 +438,16 @@ public class UserSeeder {
             users.add(user26);
             users.add(user27);
             users.add(user28);
+            users.add(user29);
+            users.add(user30);
+            users.add(user31);
+            users.add(user32);
+            users.add(user33);
+            users.add(user34);
+            users.add(user35);
+            users.add(user36);
+            users.add(user37);
+            users.add(user38);
 
             // user 2 follows no users
             // user 1 follows all users
@@ -345,10 +456,8 @@ public class UserSeeder {
                 userRepository.save(user1);
             }
 
-            for (User user : users) {
-                user1.addFriend(user);
-                userRepository.save(user1);
-            }
+            user1.addFriend(user2);
+            userRepository.save(user1);
 
             // changes the order of the list
             Collections.shuffle(users);
