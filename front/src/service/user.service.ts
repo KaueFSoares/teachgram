@@ -18,11 +18,11 @@ export const useUser = () => {
     return userReponse.data as UserResponse
   }
 
-  const getFriendListFromApi = async (pageNumber: number) => {
+  const getFriendListFromApi = async (pageNumber: number, pageSize: number) => {
     const friendListResponse = await api.get(URL.FRIENDS, {
       params: {
         page: pageNumber,
-        size: 9,
+        size: pageSize,
       },
     })
       .catch((error) => {
@@ -38,8 +38,8 @@ export const useUser = () => {
     return userData.photo
   }
   
-  const getFriendList = async (pageNumber: number) => {
-    const friendListResponse = await getFriendListFromApi(pageNumber)
+  const getFriendList = async (pageNumber: number, pageSize: number) => {
+    const friendListResponse = await getFriendListFromApi(pageNumber, pageSize)
 
     const friendList = {
       totalPages: friendListResponse.totalPages,

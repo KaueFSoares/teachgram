@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { useMediaQuery } from "react-responsive"
 import NavbarContext from "../../context/NavbarContext"
 import { useUser } from "../../service/user.service"
 import { FriendList } from "../../interface/friends/FriendList"
@@ -8,12 +9,15 @@ const FriendModal = () => {
   const [ friendList, setFriendList ] = useState<FriendList>()
   const [ page, setPage ] = useState(0)
 
+  const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
+  const pageSize = isDesktop ? 4 : 9
+
   const { setShowFriendsModal } = useContext(NavbarContext)
   
   const user = useUser()
 
   useEffect(() => {
-    user.getFriendList(page).then((res) => {
+    user.getFriendList(page, pageSize).then((res) => {
       setFriendList(res)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,10 +52,12 @@ const FriendModal = () => {
   return friendList ? (
     <div className="fixed w-full h-screen bg-black/50 flex items-center justify-center flex-col top-0 left-0">
       <div className="w-full h-full bg-white p-12 flex flex-col items-center justify-between
-                      lg:w-2/5">
-        <header className="w-full flex flex-col gap-6">
-          <div className="flex justify-between">
-
+                      lg:w-2/5 lg:h-auto lg:rounded-3xl lg:p-8
+                      xl:w-1/3
+                      2xl:w-1/4">
+        <header className="w-full flex flex-col gap-6
+                          lg:gap-2">
+          <div className="flex justify-between lg:hidden">
             <button 
               className="h-full flex items-start"
               onClick={() => setShowFriendsModal(false)}
@@ -60,11 +66,24 @@ const FriendModal = () => {
             </button>
 
             <img src="/images/short_logo.svg" alt="" className="w-11" />
+          </div>
 
+          <div className="hidden justify-end w-full
+                          lg:flex">
+            <button
+              onClick={() => setShowFriendsModal(false)}
+            >
+              <img src="/icon/orange_X.svg" alt="" className="w-5" />
+            </button>
           </div>
 
           <div className="w-full flex">
-            <h1 className="pb-2 text-xl font-bold text-gray-800 border-b-[3px] border-solid border-orange">Amigos</h1>
+            <h1 
+              className="pb-2 text-xl font-bold text-gray-800 border-b-[3px] border-solid border-orange
+                          lg:text-lg"
+            >
+              Amigos
+            </h1>
             <div className="border-b-2 border-solid border-gray/60 flex-grow" />
           </div>
 
@@ -82,8 +101,15 @@ const FriendModal = () => {
                 </div>
 
                 <div>
-                  <h1 className="text-base font-semibold">{friend.username}</h1>
-                  <h2 className="text-sm text-gray">{friend.name}</h2>
+                  <h1 className="text-base font-semibold
+                                lg:text-sm">
+                    {friend.username}
+                  </h1>
+                  <h2 
+                    className="text-sm text-gray
+                              lg:text-xs">
+                    {friend.name}
+                  </h2>
                 </div>
               </div>
 
