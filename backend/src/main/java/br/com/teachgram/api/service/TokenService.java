@@ -75,11 +75,11 @@ public class TokenService {
     }
 
     private Instant getAccessTokenExpirationDate() {
-        return LocalDateTime.now().plusSeconds(10).toInstant(ZoneOffset.of(VAR.OFFSET));
+        return LocalDateTime.now().plusMinutes(VAR.ACCESS_TOKEN_EXPIRATION).toInstant(ZoneOffset.of(VAR.OFFSET));
     }
 
     private Instant getRefreshTokenExpirationDate() {
-        return LocalDateTime.now().plusDays(30).toInstant(ZoneOffset.of(VAR.OFFSET));
+        return LocalDateTime.now().plusDays(VAR.REFRESH_TOKEN_EXPIRATION).toInstant(ZoneOffset.of(VAR.OFFSET));
     }
 }
 

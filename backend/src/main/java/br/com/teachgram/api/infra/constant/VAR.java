@@ -9,4 +9,6 @@ public class VAR {
     public static final String EN = "en";
     public static final String BASENAME = "messages";
     public static final String ENCODE = "UTF-8";
+    public static final long REFRESH_TOKEN_EXPIRATION = 30;
+    public static final long ACCESS_TOKEN_EXPIRATION = 5;
 }
