@@ -19,9 +19,36 @@ const FriendModal = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ page ])
 
+  const pages = () => {
+    const pages = []
+    
+    if (friendList) {
+      const pageNumbers = page === 0 ? [ 0, 1, 2 ] : page === friendList.totalPages - 1 ? [ page - 2, page - 1, page ] : [ page - 1, page, page + 1 ]
+      
+      for (let i = 0; i < friendList.totalPages; i++) {
+        if (pageNumbers.includes(i)) {
+          pages.push(
+            <button 
+              className={`border border-solid border-gray text-gray h-8 w-8 rounded-md flex justify-center items-center
+                          ${page === i && "bg-orange text-white border-orange"}`}
+              key={i}
+              onClick={() => setPage(i)}
+              disabled={page === i}
+            >
+              {i + 1}
+            </button>,
+          )
+        }
+      }
+    }
+
+    return pages
+  }
+
   return friendList ? (
     <div className="fixed w-full h-screen bg-black/50 flex items-center justify-center flex-col top-0 left-0">
-      <div className="w-full h-full bg-white p-12 flex flex-col items-center justify-between">
+      <div className="w-full h-full bg-white p-12 flex flex-col items-center justify-between
+                      lg:w-2/5">
         <header className="w-full flex flex-col gap-6">
           <div className="flex justify-between">
 
@@ -71,12 +98,23 @@ const FriendModal = () => {
         </main>
 
         <footer className="w-full px-4 py-2">
-          <div className="w-full flex justify-center">
+          <div className="w-full flex items-center justify-center gap-4">
             <button 
-              className="w-1/2 h-10 bg-orange rounded-xl text-white font-bold text-base"
-              onClick={() => setPage((prev) => prev + 1)}
+              onClick={() => setPage((prev) => (prev - 1 < 0 ? 0 : prev - 1))}
+              disabled={page === 0}
+              className="border border-solid border-gray h-8 w-8 rounded-md flex justify-center items-center"
             >
-              Ver mais
+              <img src="/icon/gray_arrow.svg" alt="" />
+            </button>
+
+            {pages()}
+
+            <button 
+              onClick={() => setPage((prev) => (prev + 1 > friendList.totalPages - 1 ? prev : prev + 1))}
+              disabled={page === friendList.totalPages - 1}
+              className="border border-solid border-gray h-8 w-8 rounded-md flex justify-center items-center"
+            >
+              <img src="/icon/gray_arrow.svg" alt="" className="transform rotate-180" />
             </button>
           </div>
         </footer>
