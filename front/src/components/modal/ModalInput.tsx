@@ -5,9 +5,10 @@ interface Props extends HTMLProps<HTMLInputElement>{
   type: string
   state: string
   setState: Dispatch<SetStateAction<string>>
+  border?: boolean
 }
 
-const ModalInput = ({ name, type, state, setState }: Props) => {
+const ModalInput = ({ name, type, state, setState, placeholder, border = true }: Props) => {
   return (
     <div className="w-full flex flex-col">
       <label htmlFor={name} className="w-full text-base
@@ -17,9 +18,11 @@ const ModalInput = ({ name, type, state, setState }: Props) => {
         name={name} 
         id={name} 
         value={state}
+        placeholder={placeholder}
         onChange={(e) => setState(e.target.value)}
-        className="w-full border-b border-solid border-gray/50 outline-none py-1 text-base text-gray text-ellipsis
-                  lg:text-sm"
+        className={`w-full outline-none py-1 text-base text-gray text-ellipsis
+                    lg:text-sm
+                    ${border && "border-b border-solid border-gray/50"}`}
       />
     </div>
   )
