@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { ReactNode, useContext, useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import NavbarContext from "../../context/NavbarContext"
 import { useUser } from "../../service/user.service"
@@ -24,26 +24,24 @@ const FriendModal = () => {
   }, [ page ])
 
   const pages = () => {
-    const pages = []
+    const pages: ReactNode[] = []
     
     if (friendList) {
       const pageNumbers = page === 0 ? [ 0, 1, 2 ] : page === friendList.totalPages - 1 ? [ page - 2, page - 1, page ] : [ page - 1, page, page + 1 ]
-      
-      for (let i = 0; i < friendList.totalPages; i++) {
-        if (pageNumbers.includes(i)) {
-          pages.push(
-            <button 
-              className={`border border-solid border-gray text-gray h-8 w-8 rounded-md flex justify-center items-center
-                          ${page === i && "bg-orange text-white border-orange"}`}
-              key={i}
-              onClick={() => setPage(i)}
-              disabled={page === i}
-            >
-              {i + 1}
-            </button>,
-          )
-        }
-      }
+
+      pageNumbers.forEach((i) => {
+        pages.push(
+          <button 
+            className={`border border-solid border-gray text-gray h-8 w-8 rounded-md flex justify-center items-center
+                        ${page === i && "bg-orange text-white border-orange"}`}
+            key={`page${i}`}
+            onClick={() => setPage(i)}
+            disabled={page === i}
+          >
+            {i + 1}
+          </button>,
+        )
+      })
     }
 
     return pages
