@@ -33,9 +33,13 @@ const NewPostModal = () => {
 
 
   return (
-    <div className="fixed w-full h-screen bg-black/50 flex items-center justify-start flex-col top-0 left-0">
+    <div className="fixed w-full h-screen bg-black/50 flex items-center justify-start flex-col top-0 left-0
+                    lg:justify-center">
       { firstScreen ? (
-        <header className="w-full p-7 bg-white flex gap-8">
+        <header className={`w-full p-7 bg-white flex gap-8
+                            lg:w-2/5 lg:rounded-t-3xl
+                            xl:w-1/3
+                            ${imageLoaded ? "" : "lg:flex-row-reverse"}`}>
           <button
             className="flex justify-center items-center"
             onClick={() => setShowNewPostModal(false)}
@@ -44,11 +48,11 @@ const NewPostModal = () => {
           </button>
 
           <h2 className="flex-grow font-semibold text-xl">
-          Nova publicação
+            Nova publicação
           </h2>
 
           <button
-            className="flex justify-center items-center disabled:grayscale disabled:opacity-50"
+            className="flex justify-center items-center disabled:grayscale disabled:opacity-50 lg:disabled:hidden"
             onClick={() => setFirstScreen(false)}
             disabled={!imageLoaded}
           >
@@ -58,7 +62,10 @@ const NewPostModal = () => {
           </button>
         </header>
       ) : (
-        <header className="w-full p-7 bg-white flex gap-8">
+        <header className={`w-full p-7 bg-white flex gap-8
+                            lg:w-2/5 lg:rounded-t-3xl
+                            xl:w-1/3
+                            ${imageLoaded ? "" : "lg:flex-row-reverse"}`}>
           <button
             className="flex justify-center items-center"
             onClick={() => setFirstScreen(true)}
@@ -82,19 +89,39 @@ const NewPostModal = () => {
       )}
 
       { firstScreen ? (
-        <main className="w-[calc(100%-6rem)] bg-white mt-12 shadow-full rounded-lg p-6 flex flex-col gap-2">
-          <h3 className="font-semibold text-xl">
-          Link da imagem
-          </h3>
+        <main className="w-[calc(100%-6rem)] bg-white mt-12 shadow-full rounded-lg p-6 flex flex-col
+                          lg:mt-0 lg:shadow-none lg:rounded-b-3xl lg:rounded-t-none lg:w-2/5 lg:gap-6
+                          xl:w-1/3">
+          <div className="flex flex-grow flex-col gap-2 lg:hidden">
+            <h3 className="font-semibold text-xl">
+              Link da imagem
+            </h3>
 
-          <ModalInput 
-            name=""
-            type="text"
-            state={link}
-            setState={setLink}
-            placeholder="Insira aqui a url da imagem"
-            border={false}
-          />
+          
+            <ModalInput 
+              name=""
+              type="text"
+              state={link}
+              setState={setLink}
+              placeholder="Insira aqui a url da imagem"
+              border={false}
+            />
+          </div>
+
+          <div className="hidden w-full border-orange border border-solid rounded-lg overflow-hidden gap-4
+                          lg:flex">
+            <h3 className="text-sm whitespace-nowrap px-4 py-1 bg-orange text-white rounded-lg">
+                Link da imagem
+            </h3>
+            <ModalInput 
+              name=""
+              type="text"
+              state={link}
+              setState={setLink}
+              placeholder="Insira aqui a url da imagem"
+              border={false}
+            />
+          </div>
 
           {imageLoaded ? (
             <img src={imageLoaded ? link : ""} alt="Post image" className="w-full rounded-lg" />
@@ -102,15 +129,17 @@ const NewPostModal = () => {
             <>
               {link.length > 0 && (
                 <p className="text-red text-sm">
-                Link inválido
+                  Link inválido
                 </p>
               )}
             </>
           )}
         </main>
       ) : (
-        <main className="w-full h-full bg-white flex flex-col gap-2">
-          <img src={link} alt="" className="w-full" />
+        <main className="w-full h-full bg-white flex flex-col gap-2
+                          lg:mt-0 lg:shadow-none lg:rounded-b-3xl lg:rounded-t-none lg:w-2/5 lg:h-auto
+                          xl:w-1/3">
+          <img src={link} alt="" className="w-full lg:w-4/5 lg:self-center" />
 
           <div
             className="p-6"
