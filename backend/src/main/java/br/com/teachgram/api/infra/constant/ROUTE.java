@@ -1,7 +1,8 @@
 package br.com.teachgram.api.infra.constant;
 
 public class ROUTE {
-    public static final String FRONT_END = "http://localhost:5173";
+    public static final String FRONT_END_DEV = "http://localhost:5173";
+    public static final String FRONT_END = "https://teachgram.kauesoares.website";
 
     public static final String USER = "/user";
     public static final String FRIENDS = "/friends";
