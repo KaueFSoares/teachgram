@@ -7,7 +7,7 @@ interface Props {
 
 const NavbarItem = ({ children, order }: Props) => {
   return (
-    <li className={`w-full flex items-center justify-center
+    <li className={`w-full flex items-center justify-center cursor-pointer
                     lg:justify-start lg:border lg:border-solid lg:border-gray lg:rounded-xl
                     ${order}`}>
       {children}
