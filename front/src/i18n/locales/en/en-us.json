@@ -7,6 +7,111 @@
             "create": "Create",
             "config": "Settings",
             "profile": "Profile"
+        },
+        "login": {
+            "makelogin": "Make your login",
+            "forgotpassword": "Forgot my password",
+            "enter": "Enter",
+            "remember": "Remember password",
+            "donthaveaccount": "Don't have an account?",
+            "signup": "Sign up",
+            "enterwith": "Enter with",
+            "google": "Google",
+            "apple": "Apple",
+            "input": {
+                "placeholder": {
+                    "email": "Enter your email",
+                    "password": "Enter your password"
+                },
+                "label": {
+                    "email": "Email",
+                    "password": "Password"
+                }
+            }
+        },
+        "signup": {
+            "createaccount": "Create your account",
+            "next": "Next",
+            "insertlink": "Insert the link to your profile picture",
+            "save": "Save",
+            "alreadyhaveaccount": "Already have an account?",
+            "login": "Login",
+            "input": {
+                "placeholder": {
+                    "name": "Enter your name",
+                    "email": "Enter your email",
+                    "username": "@your_username",
+                    "bio": "Write a description",
+                    "phone": "Enter your phone number",
+                    "password": "Enter your password",
+                    "link": "Insert your link"
+                },
+                "label": {
+                    "name": "Name",
+                    "email": "Email",
+                    "username": "Username",
+                    "bio": "Description",
+                    "phone": "Phone",
+                    "password": "Password",
+                    "link": "Link"
+                }
+            },
+            "link": {
+                "insertlink": "Insert the link to your profile picture",
+                "link": "Link",
+                "placeholder": "Insert your link",
+                "save": "Save"
+            }
+        },
+        "validation": {
+            "empty": "Field not filled",
+            "email": "Invalid email",
+            "phone": "Phone must be (00) 0 0000-0000"
+        },
+        "home": {
+            "noposts": "No posts",
+            "backtotop": "Back to top",
+            "post": {
+                "time": "{{time}} {{unit}} ago",
+                "likes": "likes"
+            }
+        },
+        "units": {
+            "minute": "minutes",
+            "hour": "hours",
+            "day": "days",
+            "week": "weeks"
+        },
+        "settings": {
+            "accountSettings": "Account settings",
+            "edit": "Edit profile",
+            "delete": "Delete account",
+            "delete_modal": {
+                "delete": "Delete account",
+                "alert": "All your data will be deleted.",
+                "cancel": "Cancel",
+                "confirm": "Confirm"
+            },
+            "account_settings": {
+                "title": "Account settings",
+                "name": "Name",
+                "email": "Email",
+                "phone": "Phone",
+                "password": "Password",
+                "save": "Save",
+                "cancel": "Cancel",
+                "update": "Update"
+            },
+            "profile_settings": {
+                "title": "Edit profile",
+                "photo": "Profile picture",
+                "name": "Name",
+                "username": "Username",
+                "bio": "Description",
+                "save": "Save",
+                "cancel": "Cancel",
+                "update": "Update"
+            }
         }
     }
 }
