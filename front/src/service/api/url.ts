@@ -1,5 +1,5 @@
 export const URL = {
-  BASE: "http://localhost:8080",
+  BASE: `${import.meta.env.VITE_API_URL}`,
 
   LOGIN: "/auth/login",
   SIGNUP: "/auth/signup",
