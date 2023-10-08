@@ -74,9 +74,7 @@ public abstract class TestsBase {
             return new LoginResponseDTO(
                     mapper.readTree(response.getContentAsString()).get("token_type").asText(),
                     mapper.readTree(response.getContentAsString()).get("access_token").asText(),
-                    Long.parseLong(mapper.readTree(response.getContentAsString()).get("access_token_expires_at").asText()),
-                    mapper.readTree(response.getContentAsString()).get("refresh_token").asText(),
-                    Long.parseLong(mapper.readTree(response.getContentAsString()).get("refresh_token_expires_at").asText())
+                    mapper.readTree(response.getContentAsString()).get("refresh_token").asText()
             );
         } catch (IOException e) {
             e.printStackTrace();
