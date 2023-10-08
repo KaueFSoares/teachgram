@@ -49,9 +49,7 @@ public class TokenService {
             return new LoginResponseDTO(
                     VAR.TOKEN_TYPE,
                     accessToken,
-                    getAccessTokenExpirationDate().toEpochMilli(),
-                    refreshToken,
-                    getRefreshTokenExpirationDate().toEpochMilli()
+                    refreshToken
             );
 
         } catch (JWTCreationException exception){
