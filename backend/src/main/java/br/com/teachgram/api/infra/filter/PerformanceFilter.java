@@ -17,6 +17,7 @@ public class PerformanceFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
         Long end = System.currentTimeMillis();
         System.out.println("Request: " + request.getRequestURI());
+        System.out.println("Method: " + request.getMethod());
         System.out.println("Time: " + (end - start) + "ms");
     }
 }
