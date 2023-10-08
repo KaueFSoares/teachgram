@@ -15,6 +15,6 @@ public interface PostRepository extends JpaRepository<Post, String> {
     @Query("select p from Post p where p.id = :id and p.deleted = false")
     Post findByIdAndDeletedFalse(String id);
 
-    @Query("select p from Post p where p.user.id != :userId and p.deleted = false order by p.createdAt desc")
-    Page<Post> getAllPostsByTimeDescWithoutOwnPosts(String userId, Pageable pageable);
+    @Query("select p from Post p where p.deleted = false order by p.createdAt desc")
+    Page<Post> getAllPostsByTimeDescWithoutOwnPosts(Pageable pageable);
 }
