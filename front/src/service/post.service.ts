@@ -10,7 +10,7 @@ const usePosts = () => {
     const postsResponse = await api.get(URL.POSTS, {
       params: {
         page: page,
-        size: 2,
+        size: 4,
       },
     })
       .catch((error) => {
