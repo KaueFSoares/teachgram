@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,19 +24,16 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping(ROUTE.LOGIN)
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
         return ResponseEntity.ok(authService.login(dto));
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping(ROUTE.REFRESH)
     public ResponseEntity<LoginResponseDTO> refreshToken(@RequestBody @Valid RefreshTokenRequestDTO dto) {
         return ResponseEntity.ok(authService.refreshToken(dto));
     }
 
-    @PreAuthorize("permitAll()")
     @Transactional
     @PostMapping(ROUTE.SIGNUP)
     public ResponseEntity<LoginResponseDTO> signup(@RequestBody @Valid SignupRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
