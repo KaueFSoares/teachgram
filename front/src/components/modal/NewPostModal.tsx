@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import NavbarContext from "../../context/NavbarContext"
+import usePosts from "../../service/post.service"
 import ModalInput from "./ModalInput"
 
 const NewPostModal = () => {
@@ -11,6 +12,8 @@ const NewPostModal = () => {
   const [ description, setDescription ] = useState("")
 
   const { setShowNewPostModal } = useContext(NavbarContext)
+
+  const post = usePosts()
 
   useEffect(() => {
     try {
@@ -28,8 +31,19 @@ const NewPostModal = () => {
       } else {
         setImageLoaded(false)
       }
-    } catch (err: unknown) { /* empty */ }
+    } catch (err: unknown) { 
+      setImageLoaded(false)
+    }
   }, [ link ])
+
+  const createPost = async () => {
+    if(description.length > 0){
+      await post.savePost(link, description)
+    } else {
+      await post.savePost(link)
+    }
+    setShowNewPostModal(false)
+  }
 
 
   return (
@@ -79,7 +93,7 @@ const NewPostModal = () => {
 
           <button
             className="flex justify-center items-center"
-            onClick={() => setShowNewPostModal(false)}
+            onClick={() => createPost()}
           >
             <p className="text-base text-orange font-semibold underline">
               Compartilhar

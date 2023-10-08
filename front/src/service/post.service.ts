@@ -41,8 +41,19 @@ const usePosts = () => {
     }) as Post[]
   }
 
+  const savePost = async (image: string, description?: string) => {
+    return await api.post(URL.POSTS, {
+      description: description,
+      photoLink: image,
+    })
+      .catch((error) => {
+        throw error
+      })
+  }
+
   return {
-    getPosts: getPosts,    
+    getPosts: getPosts,   
+    savePost: savePost, 
   }
 }
 
