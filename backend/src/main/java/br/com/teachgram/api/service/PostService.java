@@ -66,6 +66,8 @@ public class PostService {
 
         post.setDeleted(true);
 
+        postRepository.save(post);
+
         return new DeletePostResponseDTO(messageService.getMessage(MESSAGE.DELETED_POST));
     }
 
