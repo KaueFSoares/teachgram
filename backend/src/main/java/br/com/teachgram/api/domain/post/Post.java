@@ -3,11 +3,13 @@ package br.com.teachgram.api.domain.post;
 import br.com.teachgram.api.domain.post.dto.CreatePostRequestDTO;
 import br.com.teachgram.api.domain.post.dto.UpdatePostRequestDTO;
 import br.com.teachgram.api.domain.user.User;
+import br.com.teachgram.api.infra.constant.VAR;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 @Table(name = "posts")
@@ -26,9 +28,9 @@ public class Post {
 
     private Boolean deleted = false;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
 
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
 
     @Column(name = "private")
     private Boolean privatePost = false;
@@ -73,7 +75,7 @@ public class Post {
             this.videoLink = dto.videoLink();
         }
 
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
     }
 
     public void setLikes(Integer likes) {

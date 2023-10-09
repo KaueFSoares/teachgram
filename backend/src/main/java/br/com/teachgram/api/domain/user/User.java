@@ -4,6 +4,7 @@ import br.com.teachgram.api.domain.friendship.Friendship;
 import br.com.teachgram.api.domain.post.Post;
 import br.com.teachgram.api.domain.user.dto.SignupRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
+import br.com.teachgram.api.infra.constant.VAR;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @Table(name = "users")
@@ -32,9 +34,9 @@ public class User implements UserDetails {
 
     private Boolean deleted = false;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
 
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
 
     private String name;
 
@@ -138,7 +140,7 @@ public class User implements UserDetails {
             this.password = new BCryptPasswordEncoder().encode(dto.password());
         }
 
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now(ZoneId.of(VAR.OFFSET));
 
     }
 
