@@ -82,4 +82,9 @@ public class PostController {
         return ResponseEntity.ok().body(postService.dislikePost(id));
     }
 
+    @GetMapping(ROUTE.FRIENDS + "/{username}")
+    public ResponseEntity<Page<ShortUserPostDetailsDTO>> getFriendsPosts(@PathVariable String username, Pageable pageable) {
+        return ResponseEntity.ok().body(postService.getFriendPosts(username, pageable));
+    }
+
 }

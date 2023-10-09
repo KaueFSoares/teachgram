@@ -6,6 +6,7 @@ import br.com.teachgram.api.domain.post.dto.*;
 import br.com.teachgram.api.domain.user.User;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
+import br.com.teachgram.api.repository.FriendshipRepository;
 import br.com.teachgram.api.repository.PostRepository;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,20 @@ public class PostService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final FriendshipRepository friendshipRepository;
     private final MessageService messageService;
 
     @Autowired
     public PostService(
             UserRepository userRepository,
             PostRepository postRepository,
-            MessageService messageService
+            MessageService messageService,
+            FriendshipRepository friendshipRepository
     ) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.messageService = messageService;
+        this.friendshipRepository = friendshipRepository;
     }
 
     private User getAuthenticatedUser() {
@@ -78,7 +82,7 @@ public class PostService {
     }
 
     public PostDetailsDTO getPostDetails(String id) {
-        return new PostDetailsDTO(postRepository.findByIdAndDeletedFalse(id ));
+        return new PostDetailsDTO(postRepository.findByIdAndDeletedFalse(id));
     }
 
     public Page<PostDetailsDTO> getAllPosts(Pageable pageable) {
@@ -115,5 +119,14 @@ public class PostService {
         post.setLikes(post.getLikes() - 1);
 
         return new UserPostDetailsDTO(postRepository.save(post));
+    }
+
+    public Page<ShortUserPostDetailsDTO> getFriendPosts(String username, Pageable pageable) {
+        var user = getAuthenticatedUser();
+
+        var friendship = friendshipRepository.findByFirstUserIdAndSecondUserUsername(user.getId(), username)
+                .orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
+
+        return postRepository.findAllByUserAndDeletedFalse(friendship.getSecondUser(), pageable).map(ShortUserPostDetailsDTO::new);
     }
 }
