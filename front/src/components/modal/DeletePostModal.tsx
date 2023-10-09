@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import NavbarContext from "../../context/NavbarContext"
 import usePosts from "../../service/post.service"
-import ModalButton from "./ModalButton"
+import { ModalButton } from "."
 
 interface DeletePostModalProps {
   id: string

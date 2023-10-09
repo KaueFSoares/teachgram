@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import NavbarContext from "../../context/NavbarContext"
 import usePosts from "../../service/post.service"
-import ModalInput from "./ModalInput"
+import { ModalInput } from "."
 
 interface UpdatePostModalProps {
   id: string

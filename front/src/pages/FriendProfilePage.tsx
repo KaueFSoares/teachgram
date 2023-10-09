@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive"
 import { SingleFriendProfileResponse } from "../interface/friend_profile/response/SingleFriendProfileResponse"
 import { PostProfileData } from "../interface/profile/PostProfileData"
 import Navbar from "../components/navbar/Navbar"
-import ModalButton from "../components/modal/ModalButton"
+import { ModalButton } from "../components/modal"
 
 interface FriendProfilePageProps {
   incrementPage: () => void

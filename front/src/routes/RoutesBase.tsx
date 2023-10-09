@@ -1,11 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { useState } from "react"
 import NavbarContext from "../context/NavbarContext"
-import FriendModal from "../components/modal/FriendModal"
-import NewPostModal from "../components/modal/NewPostModal"
-import SettingsModal from "../components/modal/SettingsModal"
-import UpdatePostModal from "../components/modal/UpdatePostModal"
-import DeletePostModal from "../components/modal/DeletePostModal"
+import { DeletePostModal, FriendModal, NewPostModal, SettingsModal, UpdatePostModal } from "../components/modal"
 
 const RoutesBase = () => {
   const [ showFriendsModal, setShowFriendsModal ] = useState(false)

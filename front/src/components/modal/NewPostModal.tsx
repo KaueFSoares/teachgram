@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import NavbarContext from "../../context/NavbarContext"
 import usePosts from "../../service/post.service"
-import ModalInput from "./ModalInput"
+import { ModalInput } from "."
 
 const NewPostModal = () => {
   const [ link, setLink ] = useState("")

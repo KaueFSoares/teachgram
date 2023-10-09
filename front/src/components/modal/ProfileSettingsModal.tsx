@@ -2,8 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import RightImage from "../util/RightImage"
 import { useUser } from "../../service/user.service"
-import ModalButton from "./ModalButton"
-import ModalInput from "./ModalInput"
+import { ModalButton, ModalInput } from "."
 
 interface Props {
   onCancel: () => void
