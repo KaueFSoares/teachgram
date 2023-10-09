@@ -50,6 +50,15 @@ const usePosts = () => {
     return postsResponse.data as ShortPostsResponse
   }
 
+  const getPostFromApi = async (id: string) => {
+    const postResponse = await api.get(`${URL.POSTS}${URL.ME}/${id}`)
+      .catch((error) => {
+        throw error
+      })
+    
+    return postResponse.data as Post
+  }
+
   const getPosts = async (page: number) => {
     const postsData = await getPostsFromApi(page)
 
@@ -80,6 +89,18 @@ const usePosts = () => {
       })
   }
 
+  const updatePost = async (id: string, image: string, description?: string) => {
+    const response = await api.put(`${URL.POSTS}/${id}`, {
+      description: description,
+      photoLink: image,
+    })
+      .catch((error) => {
+        throw error
+      })
+
+    return response.data as Post
+  }
+
   const getOwnPosts = async (page: number) => {
     const postsData = await getOwnPostsFromApi(page)
 
@@ -102,11 +123,31 @@ const usePosts = () => {
     }) as PostProfileData[]
   }
 
+  const getSinglePost = async (id: string) => {
+    const postData = await getPostFromApi(id)
+
+    return {
+      id: postData.id,
+      title: postData.title,
+      description: postData.description,
+      photoLink: postData.photoLink,
+      videoLink: postData.videoLink,
+      likes: postData.likes,
+      privatePost: postData.privatePost,
+      userId: postData.userId,
+      username: postData.username,
+      userPhotoLink: postData.userPhotoLink,
+      createdAt: postData.createdAt,
+    } as Post
+  }
+
   return {
     getPosts: getPosts,   
     savePost: savePost, 
     getOwnPosts: getOwnPosts,
     getFriendPosts: getFriendPosts,
+    getSinglePost: getSinglePost,
+    updatePost: updatePost,
   }
 }
 
