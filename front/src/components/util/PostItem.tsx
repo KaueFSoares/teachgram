@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Post } from "../../interface/home/Post"
 import { getTimeAgo } from "../../util/getTimeAgo"
 import usePosts from "../../service/post.service"
@@ -16,6 +17,8 @@ const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
 
   const posts = usePosts()
 
+  const navigate = useNavigate()
+
   const { t } = useTranslation()
 
   const handleOnLike = () => {
@@ -30,8 +33,12 @@ const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
   return (
     <div className="w-full shadow-full p-4 rounded-lg flex flex-col gap-4">
       <header className="w-full flex gap-4">
-        <div className="w-1/6 aspect-square overflow-hidden flex items-center justify-center rounded-full 
-                        xl:w-[10%]">
+        <div 
+          className="w-1/6 aspect-square overflow-hidden flex items-center justify-center rounded-full 
+                        xl:w-[10%]"
+          role="button"
+          onClick={() => navigate(`/profile${authenticatedUserId === post.userId ? "" : `/${post.username}`}`)}
+        >
           <img src={post.userPhotoLink} alt="" className="w-full" />
         </div>
 
