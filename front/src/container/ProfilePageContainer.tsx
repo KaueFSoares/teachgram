@@ -22,7 +22,7 @@ const ProfilePageContainer = () => {
   useEffect(() => {
     setLoading(true)
     post.getOwnPosts(page).then((res) => {
-      setUserPostsData(res)
+      setUserPostsData((prev) => prev.concat(res))
       setLoading(false)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
