@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next"
 import { useState } from "react"
 import { Post } from "../../interface/home/Post"
 import { getTimeAgo } from "../../util/getTimeAgo"
+import usePosts from "../../service/post.service"
 import PostPopup from "./PostPopup"
 
 interface PostItemProps {
@@ -11,8 +12,20 @@ interface PostItemProps {
 
 const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
   const [ popup, setPopup ] = useState(false)
+  const [ liked, setLiked ] = useState(false)
+
+  const posts = usePosts()
 
   const { t } = useTranslation()
+
+  const handleOnLike = () => {
+    if (liked) {
+      posts.dislikePost(post.id)
+    } else {
+      posts.likePost(post.id)
+    }
+    setLiked((prev) => !prev)
+  }
 
   return (
     <div className="w-full shadow-full p-4 rounded-lg flex flex-col gap-4">
@@ -61,9 +74,12 @@ const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
       </main>
 
       <footer className="w-full flex items-center text-gray text-sm">
-        <button className="flex gap-4">
-          <img src="/icon/outline_heart.svg" alt="" className="" />
-          <p>{post.likes} {t("home.post.likes")}</p>
+        <button 
+          className="flex gap-4"
+          onClick={handleOnLike}
+        >
+          <img src={ liked ? "/icon/filled_heart.svg" : "/icon/outline_heart.svg" } alt="" className="" />
+          <p>{ liked ? post.likes + 1 : post.likes} {t("home.post.likes")}</p>
         </button>
       </footer>
     </div>

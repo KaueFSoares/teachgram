@@ -148,6 +148,20 @@ const usePosts = () => {
       })
   }
 
+  const likePost = async (id: string) => {
+    return await api.put(`${URL.POSTS}/${id}/like`)
+      .catch((error) => {
+        throw error
+      })
+  }
+
+  const dislikePost = async (id: string) => {
+    return await api.put(`${URL.POSTS}/${id}/dislike`)
+      .catch((error) => {
+        throw error
+      })
+  }
+
   return {
     getPosts: getPosts,   
     savePost: savePost, 
@@ -156,6 +170,8 @@ const usePosts = () => {
     getSinglePost: getSinglePost,
     updatePost: updatePost,
     deletePost: deletePost,
+    likePost: likePost,
+    dislikePost: dislikePost,
   }
 }
 
