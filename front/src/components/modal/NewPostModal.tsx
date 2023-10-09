@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import NavbarContext from "../../context/NavbarContext"
 import usePosts from "../../service/post.service"
 import ModalInput from "./ModalInput"
@@ -10,6 +11,8 @@ const NewPostModal = () => {
   const [ firstScreen, setFirstScreen ] = useState(true)
 
   const [ description, setDescription ] = useState("")
+
+  const navigate = useNavigate()
 
   const { setShowNewPostModal } = useContext(NavbarContext)
 
@@ -43,6 +46,7 @@ const NewPostModal = () => {
       await post.savePost(link)
     }
     setShowNewPostModal(false)
+    navigate("/")
   }
 
 
