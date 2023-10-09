@@ -10,8 +10,10 @@ function App() {
   useEffect(() => {
     const data = onLoad()
 
+    
     if (data) {
-      setAuthenticated(true)
+      const isRefreshTokenExpired = new Date(data.refreshTokenExpiresAt) < new Date()
+      setAuthenticated(!isRefreshTokenExpired)
     } else {
       setAuthenticated(false)
     }
