@@ -8,6 +8,7 @@ export const URL = {
   USER: "/user",
   FRIENDS: "/user/friends",
   POSTS: "/posts",
+  FRIENDS_POSTS: "/posts/friends",
 
   ME: "/me",
 }
