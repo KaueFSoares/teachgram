@@ -1,3 +1,4 @@
+import { SingleFriendProfileResponse } from "../interface/friend_profile/response/SingleFriendProfileResponse"
 import { FriendList } from "../interface/friends/FriendList"
 import { FriendListResponse } from "../interface/friends/response/FriendListResponse"
 import { UserResponse } from "../interface/home/response/UserResponse"
@@ -31,6 +32,15 @@ export const useUser = () => {
       })
 
     return friendListResponse.data as FriendListResponse
+  }
+
+  const getFriendFromApi = async (username: string) => {
+    const friendResponse = await api.get(`${URL.FRIENDS  }/${username}`)
+      .catch((error) => {
+        throw error
+      })
+
+    return friendResponse.data as SingleFriendProfileResponse
   }
 
   const getUserPhoto = async () => {
@@ -116,6 +126,12 @@ export const useUser = () => {
     } as UserProfileData
   }
 
+  const getFriendProfile = async (username: string) => {
+    const friendResponse = await getFriendFromApi(username)
+
+    return friendResponse
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
@@ -124,6 +140,7 @@ export const useUser = () => {
     updateAccountData: updateAccountData,
     updateProfileData: updateProfileData,
     getProfileData: getProfileData,
+    getFriendProfile: getFriendProfile,
   }
 }
 
