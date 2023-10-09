@@ -13,7 +13,7 @@ const SettingsModal = () => {
   const [ showAccountSettingsModal, setShowAccountSettingsModal ] = useState(false)
   const [ showProfileSettingsModal, setShowProfileSettingsModal ] = useState(false)
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const { setShowSettingsModal } = useContext(ModalContext)
   const { setAuthenticated } = useContext(AuthContext)
@@ -21,6 +21,14 @@ const SettingsModal = () => {
   const handleOnLogout = () => {
     onLogout()
     setAuthenticated(false)
+  }
+
+  const hangleOnChangeLanguage = () => {
+    if (i18n.language === "en-US") {
+      i18n.changeLanguage("pt-BR")
+    } else {
+      i18n.changeLanguage("en-US")
+    }
   }
 
   return (
@@ -88,9 +96,9 @@ const SettingsModal = () => {
             <p 
               className="underline text-lg text-orange"
               role="button"
-              onClick={() => setShowDeleteModal(true)}
+              onClick={() => hangleOnChangeLanguage()}
             >
-              {t("settings.change_to_english")}
+              {t("settings.change_language")}
             </p>
           </main>
         </div>

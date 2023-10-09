@@ -94,6 +94,8 @@
             "accountSettings": "Account settings",
             "edit": "Edit profile",
             "delete": "Delete account",
+            "logout": "Logout",
+            "change_language": "Change to portuguese",
             "delete_modal": {
                 "delete": "Delete account",
                 "alert": "All your data will be deleted.",

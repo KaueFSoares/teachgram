@@ -95,7 +95,7 @@
             "edit": "Editar perfil",
             "delete": "Excluir conta",
             "logout": "Sair",
-            "change_to_english": "Mudar para inglês",
+            "change_language": "Mudar para inglês",
             "delete_modal": {
                 "delete": "Excluir conta",
                 "alert": "Todos os seus dados serão excluídos.",
