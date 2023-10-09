@@ -65,7 +65,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
           </div>
 
           <div className="flex gap-4 flex-col lg:ml-8 lg:items-start">
-            <h1 className="text-xl font-semibold">
+            <h1 className="text-xl font-semibold text-center">
               {userProfileData.name}
             </h1>
 
