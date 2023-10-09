@@ -14,9 +14,11 @@ public record UserDetailsDTO(
         String username,
         String phone,
         String bio,
-        String photo
+        String photo,
+        Long friendsCount,
+        Long postsCount
 ) {
-    public UserDetailsDTO(User user) {
+    public UserDetailsDTO(User user, Long friendsCount, Long postsCount) {
         this(
                 user.getId(),
                 user.getDeleted(),
@@ -27,7 +29,9 @@ public record UserDetailsDTO(
                 user.getUsername(),
                 user.getPhone(),
                 user.getBio(),
-                user.getPhoto()
+                user.getPhoto(),
+                friendsCount,
+                postsCount
         );
     }
 }

@@ -7,6 +7,7 @@ import br.com.teachgram.api.domain.user.validation.UserDataValidationService;
 import br.com.teachgram.api.infra.exception.AuthException;
 import br.com.teachgram.api.infra.exception.NotFoundException;
 import br.com.teachgram.api.repository.FriendshipRepository;
+import br.com.teachgram.api.repository.PostRepository;
 import br.com.teachgram.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
+    private final PostRepository postRepository;
     private final UserDataValidationService userDataValidationService;
     private final MessageService messageService;
 
@@ -27,12 +29,14 @@ public class UserService {
             UserRepository userRepository,
             UserDataValidationService userDataValidationService,
             MessageService messageService,
-            FriendshipRepository friendshipRepository
+            FriendshipRepository friendshipRepository,
+            PostRepository postRepository
     ) {
         this.userRepository = userRepository;
         this.userDataValidationService = userDataValidationService;
         this.messageService = messageService;
         this.friendshipRepository = friendshipRepository;
+        this.postRepository = postRepository;
     }
 
     private User getAuthenticatedUser() {
@@ -50,7 +54,11 @@ public class UserService {
 
         user.update(newDTO);
 
-        return new UserDetailsDTO(user);
+        var friendsCount = userRepository.countFriendsForUser(user.getId());
+
+        var postsCount = postRepository.countPostsForUser(user.getId());
+
+        return new UserDetailsDTO(user, friendsCount, postsCount);
     }
 
     public DeleteResponseDTO delete() {
@@ -65,7 +73,11 @@ public class UserService {
     public UserDetailsDTO details() {
         var user = getAuthenticatedUser();
 
-        return new UserDetailsDTO(user);
+        var friendsCount = userRepository.countFriendsForUser(user.getId());
+
+        var postsCount = postRepository.countPostsForUser(user.getId());
+
+        return new UserDetailsDTO(user, friendsCount, postsCount);
     }
 
     public FriendDetailsDTO addFriend(String id) {
