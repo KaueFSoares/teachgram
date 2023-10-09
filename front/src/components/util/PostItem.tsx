@@ -41,7 +41,7 @@ const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
               <img src="/icon/options.svg" alt="" className="h-1/3" />
             </button>
 
-            { popup && (<PostPopup />)}
+            { popup && (<PostPopup id={post.id} />)}
           </div>
         </div>
       </header>

@@ -5,18 +5,25 @@ import FriendModal from "../components/modal/FriendModal"
 import NewPostModal from "../components/modal/NewPostModal"
 import SettingsModal from "../components/modal/SettingsModal"
 import UpdatePostModal from "../components/modal/UpdatePostModal"
+import DeletePostModal from "../components/modal/DeletePostModal"
 
 const RoutesBase = () => {
   const [ showFriendsModal, setShowFriendsModal ] = useState(false)
   const [ showNewPostModal, setShowNewPostModal ] = useState(false)
   const [ showSettingsModal, setShowSettingsModal ] = useState(false)
   const [ showUpdatePostModal, setShowUpdatePostModal ] = useState(false)
+  const [ showDeletePostModal, setShowDeletePostModal ] = useState(false)
 
-  const [ updatingPostId, setUpdatingPostId ] = useState("")
+  const [ postId, setPostId ] = useState("")
 
   const changeShowUpdatePostModal = ( id: string ) => {
-    setUpdatingPostId(id)
+    setPostId(id)
     setShowUpdatePostModal((prev) => !prev)
+  }
+
+  const changeShowDeletePostModal = ( id: string ) => {
+    setPostId(id)
+    setShowDeletePostModal((prev) => !prev)
   }
   
   return (
@@ -30,12 +37,15 @@ const RoutesBase = () => {
         setShowSettingsModal,
         showUpdatePostModal,
         changeShowUpdatePostModal,
+        showDeletePostModal,
+        changeShowDeletePostModal,
       }}>
         <Outlet />
         { showFriendsModal && <FriendModal /> }
         { showNewPostModal && <NewPostModal /> }
         { showSettingsModal && <SettingsModal /> }
-        { showUpdatePostModal && <UpdatePostModal id={updatingPostId} />}
+        { showUpdatePostModal && <UpdatePostModal id={postId} />}
+        { showDeletePostModal && <DeletePostModal id={postId} /> }
       </NavbarContext.Provider>
     </>
   )

@@ -1,5 +1,13 @@
+import { useContext } from "react"
+import NavbarContext from "../../context/NavbarContext"
 
-const PostPopup = () => {
+interface PostPopupProps {
+  id: string
+}
+
+const PostPopup = ({ id }: PostPopupProps) => {
+  const { changeShowDeletePostModal } = useContext(NavbarContext)
+  
   return (
     <div className="bg-white shadow-full absolute -top-2 right-full py-4 px-6 rounded-xl flex flex-col gap-4">
       <button
@@ -10,6 +18,7 @@ const PostPopup = () => {
 
       <button
         className="w-full text-center font-medium text-orange text-base"
+        onClick={() => changeShowDeletePostModal(id)}
       >
         Excluir
       </button>

@@ -9,6 +9,8 @@ const NavbarContext = createContext<{
   setShowSettingsModal: Dispatch<SetStateAction<boolean>>
   showUpdatePostModal: boolean
   changeShowUpdatePostModal: (id: string) => void
+  showDeletePostModal: boolean
+  changeShowDeletePostModal: (id: string) => void
     }>({
       showFriendsModal: false,
       setShowFriendsModal: () => {},
@@ -18,6 +20,8 @@ const NavbarContext = createContext<{
       setShowSettingsModal: () => {},
       showUpdatePostModal: false,
       changeShowUpdatePostModal: () => {},
+      showDeletePostModal: false,
+      changeShowDeletePostModal: () => {},
     })
 
 export default NavbarContext

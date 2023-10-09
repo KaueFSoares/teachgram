@@ -141,6 +141,13 @@ const usePosts = () => {
     } as Post
   }
 
+  const deletePost = async (id: string) => {
+    return await api.delete(`${URL.POSTS}/${id}`)
+      .catch((error) => {
+        throw error
+      })
+  }
+
   return {
     getPosts: getPosts,   
     savePost: savePost, 
@@ -148,6 +155,7 @@ const usePosts = () => {
     getFriendPosts: getFriendPosts,
     getSinglePost: getSinglePost,
     updatePost: updatePost,
+    deletePost: deletePost,
   }
 }
 
