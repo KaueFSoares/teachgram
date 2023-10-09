@@ -1,12 +1,16 @@
 import { useTranslation } from "react-i18next"
+import { useState } from "react"
 import { Post } from "../../interface/home/Post"
 import { getTimeAgo } from "../../util/getTimeAgo"
+import PostPopup from "./PostPopup"
 
 interface PostItemProps {
   post: Post
 }
 
 const PostItem = ({ post }: PostItemProps) => {
+  const [ popup, setPopup ] = useState(false)
+
   const { t } = useTranslation()
 
   return (
@@ -28,9 +32,16 @@ const PostItem = ({ post }: PostItemProps) => {
             </h2>
           </div>
 
-          <button className="h-full flex w-4 justify-end">
-            <img src="/icon/options.svg" alt="" className="h-1/3" />
-          </button>
+          <div className="relative">
+            <button 
+              className="h-full flex w-4 justify-end"
+              onClick={() => setPopup((prev) => !prev)}
+            >
+              <img src="/icon/options.svg" alt="" className="h-1/3" />
+            </button>
+
+            { popup && (<PostPopup />)}
+          </div>
         </div>
       </header>
 
