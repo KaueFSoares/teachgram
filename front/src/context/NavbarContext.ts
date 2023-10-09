@@ -7,13 +7,17 @@ const NavbarContext = createContext<{
   setShowNewPostModal: Dispatch<SetStateAction<boolean>>
   showSettingsModal: boolean
   setShowSettingsModal: Dispatch<SetStateAction<boolean>>
-}>({
-  showFriendsModal: false,
-  setShowFriendsModal: () => {},
-  showNewPostModal: false,
-  setShowNewPostModal: () => {},
-  showSettingsModal: false,
-  setShowSettingsModal: () => {},
-})
+  showUpdatePostModal: boolean
+  changeShowUpdatePostModal: (id: string) => void
+    }>({
+      showFriendsModal: false,
+      setShowFriendsModal: () => {},
+      showNewPostModal: false,
+      setShowNewPostModal: () => {},
+      showSettingsModal: false,
+      setShowSettingsModal: () => {},
+      showUpdatePostModal: false,
+      changeShowUpdatePostModal: () => {},
+    })
 
 export default NavbarContext

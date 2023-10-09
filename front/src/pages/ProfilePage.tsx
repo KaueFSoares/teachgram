@@ -17,7 +17,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
 
-  const { setShowSettingsModal } = useContext(NavbarContext)
+  const { setShowSettingsModal, changeShowUpdatePostModal } = useContext(NavbarContext)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -103,6 +103,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
               <div 
                 key={post.id}
                 className="flex items-center justify-center w-full aspect-square overflow-hidden"
+                onClick={() => changeShowUpdatePostModal(post.id)}
               >
                 <img src={post.photo} alt="" className="min-w-full min-h-full object-cover" />
               </div>
