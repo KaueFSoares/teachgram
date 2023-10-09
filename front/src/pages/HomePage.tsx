@@ -5,6 +5,7 @@ import { Post } from "../interface/home/Post.ts"
 import PostItem from "../components/util/PostItem.tsx"
 import Button from "../components/form/Button.tsx"
 import RightImage from "../components/util/RightImage.tsx"
+import { getAuthenticatedUserId } from "../service/auth.service.ts"
 
 interface HomePageProps {
   posts: Post[]
@@ -15,6 +16,7 @@ interface HomePageProps {
 const HomePage = ({ posts, incrementPage }: HomePageProps) => {
   const { t } = useTranslation()
 
+  const authenticatedUserId = getAuthenticatedUserId()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +48,7 @@ const HomePage = ({ posts, incrementPage }: HomePageProps) => {
           <>
             {posts.map((post) => (
               
-              <PostItem  key={post.id} post={post} />
+              <PostItem  key={post.id} post={post} authenticatedUserId={authenticatedUserId} />
 
             ))}
           </>

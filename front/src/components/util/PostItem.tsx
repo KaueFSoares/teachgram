@@ -6,9 +6,10 @@ import PostPopup from "./PostPopup"
 
 interface PostItemProps {
   post: Post
+  authenticatedUserId: string
 }
 
-const PostItem = ({ post }: PostItemProps) => {
+const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
   const [ popup, setPopup ] = useState(false)
 
   const { t } = useTranslation()
@@ -32,7 +33,7 @@ const PostItem = ({ post }: PostItemProps) => {
             </h2>
           </div>
 
-          <div className="relative">
+          <div className={`relative ${authenticatedUserId === post.userId ? "flex" : "hidden"}`}>
             <button 
               className="h-full flex w-4 justify-end"
               onClick={() => setPopup((prev) => !prev)}

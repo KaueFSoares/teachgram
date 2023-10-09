@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode"
 import { AuthData } from "../interface/AuthData"
 import { OPENED_API } from "./api/opened_api"
 import { URL } from "./api/url"
@@ -124,4 +125,10 @@ export const onLoad = () => {
   return data
 }
 
+export const getAuthenticatedUserId = () => {
+  const data = jwtDecode((JSON.parse(localStorage.getItem("authData") as string) as AuthData).accessToken) as {
+    sub: string
+  }
 
+  return data.sub
+}
