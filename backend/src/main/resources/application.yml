@@ -22,3 +22,5 @@ api:
   security:
     token:
       secret: ${JWT_SECRET:t34ChGr4N53cr3T}
+    cors:
+      front-end: ${CORS_FRONTEND:http://localhost:5173}

@@ -2,6 +2,8 @@ package br.com.teachgram.api.infra.constant;
 
 public class VAR {
     public static final String SECRET_PATH = "${api.security.token.secret}";
+    public static final String FRONT_END_PATH = "${api.security.cors.front-end}";
+
     public static final String ISSUER = "Teachgram";
     public static final String TOKEN_TYPE = "Bearer";
     public static final String OFFSET = "-03:00";
