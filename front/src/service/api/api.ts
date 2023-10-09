@@ -28,9 +28,6 @@ const useApi = (): AxiosInstance => {
       return req
     } 
 
-    // eslint-disable-next-line no-console
-    console.log("Token expired, refreshing...")
-
     await onRefresh(authData.refreshToken)
       .then((res) => {
         req.headers.Authorization = `${authData.tokenType} ${res.accessToken}`
