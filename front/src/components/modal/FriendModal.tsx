@@ -95,7 +95,7 @@ const FriendModal = () => {
             >
               <div className="flex-grow flex gap-4 items-center">
                 <div className="w-1/5 aspect-square overflow-hidden flex items-center justify-center rounded-full">
-                  <img src={friend.photo} alt="" className="w-full" />
+                  <img src={friend.photo} alt="" className="w-full min-h-full object-cover" />
                 </div>
 
                 <div>

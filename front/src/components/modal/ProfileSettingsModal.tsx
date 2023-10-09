@@ -61,7 +61,7 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
           <div className="w-full flex items-center justify-center">
             <div className="w-[55%] overflow-hidden flex items-center justify-center aspect-square rounded-full
                             lg:w-2/5">
-              <img src={photo} alt="" className="min-w-full min-h-full" />
+              <img src={photo} alt="" className="min-w-full min-h-full object-cover" />
             </div>
           </div>
 

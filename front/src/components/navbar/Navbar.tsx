@@ -72,7 +72,7 @@ const Navbar = () => {
 
         <NavbarItem order={"order-5 lg:order-3"}>
           <Link className="flex items-center justify-center gap-4  lg:py-3 lg:px-4 lg:justify-start w-full overflow-hidden" to={"/profile"}>
-            <img src={imgSrc} className="w-7 h-7  rounded-full border border-gray border-solid" alt="" />
+            <img src={imgSrc} className="w-7 h-7  rounded-full border border-gray border-solid object-cover" alt="" />
             <span className="hidden lg:flex text-gray text-base">{t("navbar.profile")}</span>
           </Link>
         </NavbarItem>
