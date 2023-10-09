@@ -28,7 +28,7 @@ const PostItem = ({ post, authenticatedUserId }: PostItemProps) => {
             <h2 className="text-sm">
               {t("home.post.time", {
                 time: getTimeAgo(post.createdAt).value,
-                unit: t(`units.${getTimeAgo(post.createdAt).unit}`),
+                unit: t(`units.${getTimeAgo(post.createdAt).value === 1 ? "singular" : "plural"}.${getTimeAgo(post.createdAt).unit}`),
               })}
             </h2>
           </div>

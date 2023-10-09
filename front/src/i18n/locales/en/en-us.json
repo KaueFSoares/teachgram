@@ -77,10 +77,18 @@
             }
         },
         "units": {
-            "minute": "minutes",
-            "hour": "hours",
-            "day": "days",
-            "week": "weeks"
+            "singular": {
+                "minute": "minute",
+                "hour": "hour",
+                "day": "day",
+                "week": "week"
+            },
+            "plural": {
+                "minute": "minutes",
+                "hour": "hours",
+                "day": "days",
+                "week": "weeks"
+            }
         },
         "settings": {
             "accountSettings": "Account settings",
