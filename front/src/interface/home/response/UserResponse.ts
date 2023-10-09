@@ -9,4 +9,6 @@ export interface UserResponse {
   phone: string;
   bio: string;
   photo: string;
+  friendsCount: number;
+  postsCount: number;
 }
