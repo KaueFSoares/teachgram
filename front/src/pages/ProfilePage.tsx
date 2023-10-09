@@ -45,7 +45,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
           <header className="w-full flex p-6 justify-between items-center lg:hidden">
             <button 
               className="flex items-center justify-center"
-              onClick={() => navigate("/")}
+              onClick={() => navigate(-1)}
             >
               <img src="/icon/left_arrow.svg" alt="" className="w-5" />
             </button>
