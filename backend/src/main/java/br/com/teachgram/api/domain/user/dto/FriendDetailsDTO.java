@@ -12,9 +12,10 @@ public record FriendDetailsDTO(
         String username,
         String bio,
         String photo,
-        Long friendsCount
+        Long friendsCount,
+        Long postsCount
 ) {
-    public FriendDetailsDTO(User user, Long friendsCount) {
+    public FriendDetailsDTO(User user, Long friendsCount, Long postsCount) {
         this(
                 user.getId(),
                 user.getName(),
@@ -22,7 +23,8 @@ public record FriendDetailsDTO(
                 user.getActualUsername(),
                 user.getBio(),
                 user.getPhoto(),
-                friendsCount
+                friendsCount,
+                postsCount
         );
     }
 }

@@ -90,7 +90,9 @@ public class UserService {
 
         var friendsCount = userRepository.countFriendsForUser(friend.getId());
 
-        return new FriendDetailsDTO(friend, friendsCount);
+        var postsCount = postRepository.countPostsForUser(friend.getId());
+
+        return new FriendDetailsDTO(friend, friendsCount, postsCount);
     }
 
     public Page<FriendShortDetailsDTO> getManyFriends(Pageable pageable) {
@@ -106,7 +108,9 @@ public class UserService {
 
         var friendsCount = userRepository.countFriendsForUser(friendship.getSecondUser().getId());
 
-        return new FriendDetailsDTO(friendship.getSecondUser(), friendsCount);
+        var postsCount = postRepository.countPostsForUser(friendship.getSecondUser().getId());
+
+        return new FriendDetailsDTO(friendship.getSecondUser(), friendsCount, postsCount);
     }
 
     public DeleteResponseDTO deleteFriend(String id) {
