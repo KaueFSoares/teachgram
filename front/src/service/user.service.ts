@@ -1,6 +1,7 @@
 import { FriendList } from "../interface/friends/FriendList"
 import { FriendListResponse } from "../interface/friends/response/FriendListResponse"
 import { UserResponse } from "../interface/home/response/UserResponse"
+import { UserProfileData } from "../interface/profile/UserProfileData"
 import useApi from "./api/api"
 import { URL } from "./api/url"
 import { onLogout } from "./auth.service"
@@ -103,6 +104,18 @@ export const useUser = () => {
     return userResponse.data as UserResponse
   }
 
+  const getProfileData = async () => {
+    const userResponse = await getUserFromApi()
+
+    return {
+      photo: userResponse.photo,
+      name: userResponse.name,
+      bio: userResponse.bio,
+      postsNumber: userResponse.postsCount,
+      friendsNumber: userResponse.friendsCount,
+    } as UserProfileData
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
@@ -110,6 +123,7 @@ export const useUser = () => {
     getFullUser: getFullUser,
     updateAccountData: updateAccountData,
     updateProfileData: updateProfileData,
+    getProfileData: getProfileData,
   }
 }
 

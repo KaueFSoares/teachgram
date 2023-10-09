@@ -1,5 +1,7 @@
 import { Post } from "../interface/home/Post"
 import { PostResponse } from "../interface/home/response/PostResponse"
+import { PostProfileData } from "../interface/profile/PostProfileData"
+import { OwnPostsResponse } from "../interface/profile/response/OwnPostsResponse"
 import useApi from "./api/api"
 import { URL } from "./api/url"
 
@@ -19,7 +21,6 @@ const usePosts = () => {
     
     return postsResponse.data as PostResponse
   }
-
   
   const getPosts = async (page: number) => {
     const postsData = await getPostsFromApi(page)
@@ -51,9 +52,35 @@ const usePosts = () => {
       })
   }
 
+  const getOwnPostsFromApi = async (page: number) => {
+    const postsResponse = await api.get(URL.POSTS + URL.ME, {
+      params: {
+        page: page,
+        size: 12,
+      },
+    })
+      .catch((error) => {
+        throw error
+      })
+    
+    return postsResponse.data as OwnPostsResponse
+  }
+
+  const getOwnPosts = async (page: number) => {
+    const postsData = await getOwnPostsFromApi(page)
+
+    return postsData.content.map((post) => {
+      return {
+        id: post.id,
+        photo: post.photoLink,
+      }
+    }) as PostProfileData[]
+  }
+
   return {
     getPosts: getPosts,   
     savePost: savePost, 
+    getOwnPosts: getOwnPosts,
   }
 }
 
