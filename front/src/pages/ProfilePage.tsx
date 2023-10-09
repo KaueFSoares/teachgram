@@ -87,7 +87,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
           </div>
         </section>
 
-        <section className="w-full grid grid-cols-3 gap-1 flex-grow border border-solid">
+        <section className="w-full grid grid-cols-3 gap-1 flex-grow">
           {userPostsData.map((post) => {
             return (
               <div 
