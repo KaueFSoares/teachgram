@@ -22,10 +22,8 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log("Intersecting")
         if ((entries.some((entry) => entry.isIntersecting)) && (userPostsData.length > 11)) {
           incrementPage()
-          console.log("Incrementing")
         }
       },
       { threshold: 1 },
