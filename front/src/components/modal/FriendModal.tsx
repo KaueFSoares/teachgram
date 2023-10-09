@@ -1,5 +1,6 @@
 import { ReactNode, useContext, useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
+import { Link } from "react-router-dom"
 import NavbarContext from "../../context/NavbarContext"
 import { useUser } from "../../service/user.service"
 import { FriendList } from "../../interface/friends/FriendList"
@@ -111,11 +112,15 @@ const FriendModal = () => {
                 </div>
               </div>
 
-              <button className="bg-orange rounded-lg text-white text-sm px-2 py-1 shadow-md">
+              <Link 
+                to={`/profile/${friend.username}`} 
+                className="bg-orange rounded-lg text-white text-sm px-2 py-1 shadow-md"
+                onClick={() => setShowFriendsModal(false)}
+              >
                 <p className="whitespace-nowrap">
                   Ver perfil
                 </p>
-              </button>              
+              </Link>              
                 
             </div>
           ))}
