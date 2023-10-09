@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { useTranslation } from "react-i18next"
-import NavbarContext from "../../context/NavbarContext.ts"
+import ModalContext from "../../context/ModalContext.ts"
 import RightImage from "../util/RightImage.tsx"
 import DeleteAccountModal from "./DeleteAccountModal.tsx"
 import AccountSettingsModal from "./AccountSettingsModal.tsx"
@@ -13,7 +13,7 @@ const SettingsModal = () => {
 
   const { t } = useTranslation()
 
-  const { setShowSettingsModal } = useContext(NavbarContext)
+  const { setShowSettingsModal } = useContext(ModalContext)
 
   return (
     <div className="fixed w-full h-screen bg-black/50 flex items-center justify-center flex-col  top-0 left-0">

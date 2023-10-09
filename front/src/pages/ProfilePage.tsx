@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react"
 import { useMediaQuery } from "react-responsive"
 import { PostProfileData } from "../interface/profile/PostProfileData"
 import { UserProfileData } from "../interface/profile/UserProfileData"
-import NavbarContext from "../context/NavbarContext"
+import ModalContext from "../context/ModalContext"
 import Navbar from "../components/navbar/Navbar"
 
 interface ProfilePageProps {
@@ -17,7 +17,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
 
-  const { setShowSettingsModal, changeShowUpdatePostModal } = useContext(NavbarContext)
+  const { setShowSettingsModal, changeShowUpdatePostModal } = useContext(ModalContext)
 
   useEffect(() => {
     const observer = new IntersectionObserver(

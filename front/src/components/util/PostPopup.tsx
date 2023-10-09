@@ -1,12 +1,12 @@
 import { useContext } from "react"
-import NavbarContext from "../../context/NavbarContext"
+import ModalContext from "../../context/ModalContext"
 
 interface PostPopupProps {
   id: string
 }
 
 const PostPopup = ({ id }: PostPopupProps) => {
-  const { changeShowDeletePostModal, changeShowUpdatePostModal } = useContext(NavbarContext)
+  const { changeShowDeletePostModal, changeShowUpdatePostModal } = useContext(ModalContext)
   
   return (
     <div className="bg-white shadow-full absolute -top-2 right-full py-4 px-6 rounded-xl flex flex-col gap-4">

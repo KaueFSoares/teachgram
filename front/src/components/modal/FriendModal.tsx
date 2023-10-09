@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "react-router-dom"
-import NavbarContext from "../../context/NavbarContext"
+import ModalContext from "../../context/ModalContext"
 import { useUser } from "../../service/user.service"
 import { FriendList } from "../../interface/friends/FriendList"
 import Loading from "../util/Loading"
@@ -13,7 +13,7 @@ const FriendModal = () => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
   const pageSize = isDesktop ? 4 : 9
 
-  const { setShowFriendsModal } = useContext(NavbarContext)
+  const { setShowFriendsModal } = useContext(ModalContext)
   
   const user = useUser()
 

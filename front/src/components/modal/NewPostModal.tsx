@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import NavbarContext from "../../context/NavbarContext"
+import ModalContext from "../../context/ModalContext"
 import usePosts from "../../service/post.service"
 import { ModalInput } from "."
 
@@ -14,7 +14,7 @@ const NewPostModal = () => {
 
   const navigate = useNavigate()
 
-  const { setShowNewPostModal } = useContext(NavbarContext)
+  const { setShowNewPostModal } = useContext(ModalContext)
 
   const post = usePosts()
 

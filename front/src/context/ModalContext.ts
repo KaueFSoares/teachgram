@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, createContext } from "react"
 
-const NavbarContext = createContext<{
+const ModalContext = createContext<{
   showFriendsModal: boolean
   setShowFriendsModal: Dispatch<SetStateAction<boolean>>
   showNewPostModal: boolean
@@ -24,4 +24,4 @@ const NavbarContext = createContext<{
       changeShowDeletePostModal: () => {},
     })
 
-export default NavbarContext
+export default ModalContext

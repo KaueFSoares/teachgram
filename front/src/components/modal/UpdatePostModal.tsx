@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import NavbarContext from "../../context/NavbarContext"
+import ModalContext from "../../context/ModalContext"
 import usePosts from "../../service/post.service"
 import { ModalInput } from "."
 
@@ -13,7 +13,7 @@ const UpdatePostModal = ({ id }: UpdatePostModalProps) => {
 
   const post = usePosts()
 
-  const { changeShowUpdatePostModal } = useContext(NavbarContext)
+  const { changeShowUpdatePostModal } = useContext(ModalContext)
   
   useEffect(() => {
     post.getSinglePost(id).then((res) => {

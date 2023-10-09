@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useUser } from "../../service/user.service.ts"
-import NavbarContext from "../../context/NavbarContext.ts"
+import ModalContext from "../../context/ModalContext.ts"
 import NavbarItem from "./NavbarItem.tsx"
 
 
 const Navbar = () => {
   const [ imgSrc, setImgSrc ] = useState<string>("")
 
-  const { setShowFriendsModal, setShowNewPostModal, setShowSettingsModal } = useContext(NavbarContext)
+  const { setShowFriendsModal, setShowNewPostModal, setShowSettingsModal } = useContext(ModalContext)
 
   const { t } = useTranslation()
 

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { useState } from "react"
-import NavbarContext from "../context/NavbarContext"
+import ModalContext from "../context/ModalContext"
 import { DeletePostModal, FriendModal, NewPostModal, SettingsModal, UpdatePostModal } from "../components/modal"
 
 const RoutesBase = () => {
@@ -24,7 +24,7 @@ const RoutesBase = () => {
   
   return (
     <>
-      <NavbarContext.Provider value={{
+      <ModalContext.Provider value={{
         showFriendsModal,
         setShowFriendsModal,
         showNewPostModal,
@@ -42,7 +42,7 @@ const RoutesBase = () => {
         { showSettingsModal && <SettingsModal /> }
         { showUpdatePostModal && <UpdatePostModal id={postId} />}
         { showDeletePostModal && <DeletePostModal id={postId} /> }
-      </NavbarContext.Provider>
+      </ModalContext.Provider>
     </>
   )
 }
