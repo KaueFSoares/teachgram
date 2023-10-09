@@ -1,7 +1,7 @@
 import { Post } from "../interface/home/Post"
 import { PostResponse } from "../interface/home/response/PostResponse"
 import { PostProfileData } from "../interface/profile/PostProfileData"
-import { OwnPostsResponse } from "../interface/profile/response/OwnPostsResponse"
+import { OwnPostsResponse as ShortPostsResponse } from "../interface/profile/response/OwnPostsResponse"
 import useApi from "./api/api"
 import { URL } from "./api/url"
 
@@ -22,6 +22,34 @@ const usePosts = () => {
     return postsResponse.data as PostResponse
   }
   
+  const getOwnPostsFromApi = async (page: number) => {
+    const postsResponse = await api.get(URL.POSTS + URL.ME, {
+      params: {
+        page: page,
+        size: 12,
+      },
+    })
+      .catch((error) => {
+        throw error
+      })
+    
+    return postsResponse.data as ShortPostsResponse
+  }
+
+  const getFriendPostsFromApi = async (page: number, username: string) => {
+    const postsResponse = await api.get(`${URL.FRIENDS_POSTS}/${username}`, {
+      params: {
+        page: page,
+        size: 4,
+      },
+    })
+      .catch((error) => {
+        throw error
+      })
+    
+    return postsResponse.data as ShortPostsResponse
+  }
+
   const getPosts = async (page: number) => {
     const postsData = await getPostsFromApi(page)
 
@@ -52,22 +80,19 @@ const usePosts = () => {
       })
   }
 
-  const getOwnPostsFromApi = async (page: number) => {
-    const postsResponse = await api.get(URL.POSTS + URL.ME, {
-      params: {
-        page: page,
-        size: 12,
-      },
-    })
-      .catch((error) => {
-        throw error
-      })
-    
-    return postsResponse.data as OwnPostsResponse
-  }
-
   const getOwnPosts = async (page: number) => {
     const postsData = await getOwnPostsFromApi(page)
+
+    return postsData.content.map((post) => {
+      return {
+        id: post.id,
+        photo: post.photoLink,
+      }
+    }) as PostProfileData[]
+  }
+
+  const getFriendPosts = async (page: number, username: string) => {
+    const postsData = await getFriendPostsFromApi(page, username)
 
     return postsData.content.map((post) => {
       return {
@@ -81,6 +106,7 @@ const usePosts = () => {
     getPosts: getPosts,   
     savePost: savePost, 
     getOwnPosts: getOwnPosts,
+    getFriendPosts: getFriendPosts,
   }
 }
 
