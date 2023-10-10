@@ -41,8 +41,10 @@ public class Post {
     @Size(max = 200)
     private String description;
 
+    @Size(max = 2000)
     private String photoLink;
 
+    @Size(max = 2000)
     private String videoLink;
 
     private Integer likes = 0;
