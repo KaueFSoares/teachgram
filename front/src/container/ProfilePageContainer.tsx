@@ -20,7 +20,6 @@ const ProfilePageContainer = () => {
   }
 
   useEffect(() => {
-    setLoading(true)
     post.getOwnPosts(page).then((res) => {
       setUserPostsData((prev) => prev.concat(res))
       setLoading(false)

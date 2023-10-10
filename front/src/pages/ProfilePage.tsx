@@ -26,10 +26,9 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
           incrementPage()
         }
       },
-      { threshold: 1 },
     )
 
-    observer.observe(document.querySelector("#load-more") as Element)
+    observer.observe(document.querySelector("#load-more-1") as Element)
     
 
     return () => observer.disconnect()
@@ -110,7 +109,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
             )
           })}
         </section>
-        <div id="load-more" className="opacity-0 h-px w-2"></div>
+        <div id="load-more-1" className="opacity-0 h-px w-full"></div>
       </div>
 
       { isDesktop && <Navbar /> }
