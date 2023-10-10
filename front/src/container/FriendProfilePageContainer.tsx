@@ -12,6 +12,7 @@ const FriendProfilePageContainer = () => {
   const [ page, setPage ] = useState(0)
   const [ friendData, setFriendData ] = useState({} as SingleFriendProfileResponse)
   const [ postsData, setPostsData ] = useState<PostProfileData[]>([])
+  const [ isFriend, setIsFriend ] = useState(false)
 
   const user = useUser()
   const post = usePosts()
@@ -22,10 +23,23 @@ const FriendProfilePageContainer = () => {
     setPage((prev) => prev + 1)
   }
 
+  const add = () => {
+    user.addFriend(friendData.id).then(() => {
+      setIsFriend(true)
+    })
+  }
+
+  const remove = () => {
+    user.removeFriend(friendData.id).then(() => {
+      setIsFriend(false)
+    })
+  }
+
   useEffect(() => {
     setLoading(true)
     user.getProfileByUsername(username || "_").then((res) => {
       setFriendData(res)
+      setIsFriend(res.isFriend)
       setLoading(false)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,6 +60,9 @@ const FriendProfilePageContainer = () => {
     ) : (
       <FriendProfilePage 
         incrementPage={incrementPage}
+        add={add}
+        remove={remove}
+        isFriend={isFriend}
         friendData={friendData}
         postsData={postsData}
       />

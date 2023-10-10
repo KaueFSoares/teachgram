@@ -132,6 +132,20 @@ export const useUser = () => {
     return userResponse
   }
 
+  const addFriend = async (id: string) => {
+    await api.post(`${URL.FRIENDS}/${id}`)
+      .catch((error) => {
+        throw error
+      })
+  }
+
+  const removeFriend = async (id: string) => {
+    await api.delete(`${URL.FRIENDS}/${id}`)
+      .catch((error) => {
+        throw error
+      })
+  }
+
   return {
     getUserPhoto: getUserPhoto,
     getFriendList: getFriendList,
@@ -141,6 +155,8 @@ export const useUser = () => {
     updateProfileData: updateProfileData,
     getProfileData: getProfileData,
     getProfileByUsername: getProfileByUsername,
+    addFriend: addFriend,
+    removeFriend: removeFriend,
   }
 }
 

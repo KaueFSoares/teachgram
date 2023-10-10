@@ -7,11 +7,14 @@ import Navbar from "../components/navbar/Navbar"
 
 interface FriendProfilePageProps {
   incrementPage: () => void
+  add: () => void
+  remove: () => void
+  isFriend: boolean
   friendData: SingleFriendProfileResponse
   postsData: PostProfileData[]
 }
 
-const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfilePageProps) => {
+const FriendProfilePage = ({ incrementPage, friendData, postsData, add, remove, isFriend }: FriendProfilePageProps) => {
   const navigate = useNavigate()
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
@@ -87,10 +90,12 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfi
 
           <button 
             className={`px-2 py-1  rounded-lg  border border-solid text-base shadow-lg flex items-center justify-center gap-2
-            ${friendData.isFriend ? "" : "text-white bg-orange border-orange"}`}
+            ${isFriend ? "" : "text-white bg-orange border-orange"}`}
+
+            onClick={isFriend ? remove : add}
           >
-            {friendData.isFriend ? "Amigos" : "Adicionar"}
-            {friendData.isFriend && <img src="/icon/gray_check.svg" alt="" className="w-3" />}
+            {isFriend ? "Amigos" : "Adicionar"}
+            {isFriend && <img src="/icon/gray_check.svg" alt="" className="w-3" />}
           </button>
         </section>
           
