@@ -7,4 +7,5 @@ export interface SingleFriendProfileResponse {
   photo: string;
   friendsCount: number;
   postsCount: number;
+  isFriend: boolean;
 }

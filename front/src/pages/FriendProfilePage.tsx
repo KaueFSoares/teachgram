@@ -4,7 +4,6 @@ import { useMediaQuery } from "react-responsive"
 import { SingleFriendProfileResponse } from "../interface/friend_profile/response/SingleFriendProfileResponse"
 import { PostProfileData } from "../interface/profile/PostProfileData"
 import Navbar from "../components/navbar/Navbar"
-import { ModalButton } from "../components/modal"
 
 interface FriendProfilePageProps {
   incrementPage: () => void
@@ -86,11 +85,13 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfi
             </span>
           </div>
 
-          <ModalButton 
-            text="Adicionar"
-            confirm
-
-          />
+          <button 
+            className={`px-2 py-1  rounded-lg  border border-solid text-base shadow-lg flex items-center justify-center gap-2
+            ${friendData.isFriend ? "" : "text-white bg-orange border-orange"}`}
+          >
+            {friendData.isFriend ? "Amigos" : "Adicionar"}
+            {friendData.isFriend && <img src="/icon/check.svg" alt="" className="w-4" />}
+          </button>
         </section>
           
         <section className="w-full grid grid-cols-3 gap-1 flex-grow">

@@ -127,9 +127,9 @@ export const useUser = () => {
   }
 
   const getProfileByUsername = async (username: string) => {
-    const friendResponse = await getAnyUserFromApi(username)
+    const userResponse = await getAnyUserFromApi(username)
 
-    return friendResponse
+    return userResponse
   }
 
   return {
