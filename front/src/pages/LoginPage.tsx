@@ -5,18 +5,20 @@ import Button from "../components/form/Button.tsx"
 import Input from "../components/form/Input.tsx"
 import { emailValidation, emptyValidation } from "../service/validation.service.ts"
 import Message from "../components/form/Message.tsx"
+import { AuthData } from "../interface/AuthData.ts"
 
 interface LoginPageProps {
   email: string
   password: string
   setEmail: Dispatch<SetStateAction<string>>
   setPassword: Dispatch<SetStateAction<string>>
-  handleSubmit: () => void
+  handleSubmit: () => Promise<AuthData | null>
 }
 
 const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: LoginPageProps) => {
   const { t } = useTranslation()
 
+  const [ showErrorMessage, setShowErrorMessage ] = useState(false)
   const [ showEmptyMessage, setShowEmptyMessage ] = useState(false)
   const [ showEmailMessage, setShowEmailMessage ] = useState(false)
 
@@ -149,13 +151,18 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
 
             {showEmptyMessage && <Message text={t("validation.empty")} />}
             {showEmailMessage && <Message text={t("validation.email")} />}
+            {showErrorMessage && <Message text={t("validation.bad_credentials")} />}
 
             <Button
               type="button"
               onClick={() => {
                 if (makeEmptyValidation()) {
                   if (makeEmailValidation()) {
-                    handleSubmit()
+                    handleSubmit().then((res) => {
+                      if (res === null) {
+                        toogleShowMessage(setShowErrorMessage)
+                      }
+                    })
                   } else {
                     toogleShowMessage(setShowEmailMessage)
                   }

@@ -66,7 +66,8 @@
         "validation": {
             "empty": "Campo não preenchido",
             "email": "E-mail inválido",
-            "phone": "Telefone deve ser (00) 0 0000-0000"
+            "phone": "Telefone deve ser (00) 0 0000-0000",
+            "bad_credentials": "E-mail ou senha incorretos"
         },
         "home": {
             "noposts": "Nenhuma postagem",

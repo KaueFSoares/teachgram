@@ -15,24 +15,25 @@ const LoginPageContainer = () => {
 
   const [ loading, setLoading ] = useState(false)
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true)
 
-    onLogin(email, password)
-      .then(() => {
+    return await onLogin(email, password)
+      .then((res) => {
         setAuthenticated(true)
         navigate("/")
+        
+        return res
       })
-      .catch((err) => {
-        err === err
+      .catch(() => {
         setLoading(false)
+        
+        return null
       })
   }
 
   return (
-    loading ? (
-      <Loading />
-    ) : (
+    <>
       <LoginPage
         email={email}
         password={password}
@@ -40,7 +41,9 @@ const LoginPageContainer = () => {
         setPassword={setPassword} 
         handleSubmit={handleSubmit}
       />
-    )
+
+      {loading && <Loading />}
+    </>
   )
 }
 
