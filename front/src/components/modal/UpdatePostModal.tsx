@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import ModalContext from "../../context/ModalContext"
 import usePosts from "../../service/post.service"
 import Loading from "../util/Loading"
@@ -17,6 +18,8 @@ const UpdatePostModal = ({ id }: UpdatePostModalProps) => {
   const post = usePosts()
 
   const { changeShowUpdatePostModal } = useContext(ModalContext)
+
+  const { t } = useTranslation()
   
   useEffect(() => {
     setLoading(true)
@@ -63,7 +66,7 @@ const UpdatePostModal = ({ id }: UpdatePostModalProps) => {
           </button>
 
           <h2 className="flex-grow font-semibold text-xl">
-            Editar publicação
+            {t("home.update_post.title")}
           </h2>
 
           <button
@@ -71,7 +74,7 @@ const UpdatePostModal = ({ id }: UpdatePostModalProps) => {
             onClick={() => updatePost()}
           >
             <p className="text-base text-orange font-semibold underline">
-              Salvar
+              {t("home.update_post.save")}
             </p>
           </button>
         </header>
@@ -90,7 +93,7 @@ const UpdatePostModal = ({ id }: UpdatePostModalProps) => {
               type="text"
               state={description}
               setState={setDescription}
-              placeholder="Escreva uma legenda..."
+              placeholder={t("home.update_post.description_placeholder")}
               border={false}
             />
           </div>

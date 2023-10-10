@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { useTranslation } from "react-i18next"
 import ModalContext from "../../context/ModalContext"
 import usePosts from "../../service/post.service"
 import Loading from "../util/Loading"
@@ -11,6 +12,8 @@ const DeletePostModal = ({ id }: DeletePostModalProps) => {
   const [ loading, setLoading ] = useState(false)
 
   const { changeShowDeletePostModal } = useContext(ModalContext)
+
+  const { t } = useTranslation()
 
   const post = usePosts()
 
@@ -36,18 +39,18 @@ const DeletePostModal = ({ id }: DeletePostModalProps) => {
             className="text-2xl font-semibold
                      lg:text-xl"
           >
-            Excluir publicação?
+            {t("home.delete_post.title")}
           </h2>
 
           <div className="flex gap-4">
             <ModalButton 
-              text="Cancelar"
+              text={t("home.delete_post.cancel")}
               confirm={false}
               onClick={() => changeShowDeletePostModal(id)}
             />
 
             <ModalButton 
-              text="Confirmar"
+              text={t("home.delete_post.confirm")}
               confirm
               onClick={deletePost}
             />

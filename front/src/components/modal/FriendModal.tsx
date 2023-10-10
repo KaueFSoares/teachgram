@@ -1,6 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import ModalContext from "../../context/ModalContext"
 import { useUser } from "../../service/user.service"
 import { FriendList } from "../../interface/friends/FriendList"
@@ -16,6 +17,8 @@ const FriendModal = () => {
   const pageSize = isDesktop ? 4 : 9
 
   const { setShowFriendsModal } = useContext(ModalContext)
+
+  const { t } = useTranslation()
   
   const user = useUser()
 
@@ -85,7 +88,7 @@ const FriendModal = () => {
               className="pb-2 text-xl font-bold text-gray-800 border-b-[3px] border-solid border-orange
                           lg:text-lg"
             >
-              Amigos
+              {t("home.friends.title")}
             </h1>
             <div className="border-b-2 border-solid border-gray/60 flex-grow" />
           </div>
@@ -122,7 +125,7 @@ const FriendModal = () => {
                 onClick={() => setShowFriendsModal(false)}
               >
                 <p className="whitespace-nowrap">
-                  Ver perfil
+                  {t("home.friends.view_profile")}
                 </p>
               </Link>              
                 

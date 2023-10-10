@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useMediaQuery } from "react-responsive"
+import { useTranslation } from "react-i18next"
 import { SingleFriendProfileResponse } from "../interface/friend_profile/response/SingleFriendProfileResponse"
 import { PostProfileData } from "../interface/profile/PostProfileData"
 import Navbar from "../components/navbar/Navbar"
@@ -18,6 +19,8 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData, add, remove, 
   const navigate = useNavigate()
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,7 +76,7 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData, add, remove, 
               {friendData.postsCount}
             </span>
             <span className="text-base text-gray font-medium">
-              Posts
+              {t("home.profile.posts")}
             </span>
           </div>
 
@@ -84,7 +87,7 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData, add, remove, 
               {friendData.friendsCount}
             </span>
             <span className="text-base text-gray font-medium">
-              Amigos
+              {t("home.profile.friends")}
             </span>
           </div>
 
@@ -94,7 +97,7 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData, add, remove, 
 
             onClick={isFriend ? remove : add}
           >
-            {isFriend ? "Amigos" : "Adicionar"}
+            {isFriend ? t("home.profile.friends"): t("home.profile.add")}
             {isFriend && <img src="/icon/gray_check.svg" alt="" className="w-3" />}
           </button>
         </section>

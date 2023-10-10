@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import ModalContext from "../../context/ModalContext"
 import usePosts from "../../service/post.service"
 import Loading from "../util/Loading"
@@ -18,6 +19,8 @@ const NewPostModal = () => {
   const navigate = useNavigate()
 
   const { setShowNewPostModal } = useContext(ModalContext)
+
+  const { t } = useTranslation()
 
   const post = usePosts()
 
@@ -81,7 +84,7 @@ const NewPostModal = () => {
             </button>
 
             <h2 className="flex-grow font-semibold text-xl">
-            Nova publicação
+              {t("home.new_post.title")}
             </h2>
 
             <button
@@ -90,7 +93,7 @@ const NewPostModal = () => {
               disabled={!imageLoaded}
             >
               <p className="text-base text-orange font-semibold underline">
-              Avançar
+                {t("home.new_post.next")}
               </p>
             </button>
           </header>
@@ -107,7 +110,7 @@ const NewPostModal = () => {
             </button>
 
             <h2 className="flex-grow font-semibold text-xl">
-            Nova publicação
+              {t("home.new_post.title")}
             </h2>
 
             <button
@@ -115,7 +118,7 @@ const NewPostModal = () => {
               onClick={() => createPost()}
             >
               <p className="text-base text-orange font-semibold underline">
-              Compartilhar
+                {t("home.new_post.share")}
               </p>
             </button>
           </header>
@@ -127,7 +130,7 @@ const NewPostModal = () => {
                           xl:w-1/3">
             <div className="flex flex-grow flex-col gap-2 lg:hidden">
               <h3 className="font-semibold text-xl">
-              Link da imagem
+                {t("home.new_post.image_link")}
               </h3>
 
           
@@ -136,7 +139,7 @@ const NewPostModal = () => {
                 type="text"
                 state={link}
                 setState={setLink}
-                placeholder="Insira aqui a url da imagem"
+                placeholder={t("home.new_post.image_link_placeholder")}
                 border={false}
               />
             </div>
@@ -144,14 +147,14 @@ const NewPostModal = () => {
             <div className="hidden w-full border-orange border border-solid rounded-lg overflow-hidden gap-4
                           lg:flex">
               <h3 className="text-sm whitespace-nowrap px-4 py-1 bg-orange text-white rounded-lg">
-                Link da imagem
+                {t("home.new_post.image_link")}
               </h3>
               <ModalInput 
                 name=""
                 type="text"
                 state={link}
                 setState={setLink}
-                placeholder="Insira aqui a url da imagem"
+                placeholder={t("home.new_post.image_link_placeholder")}
                 border={false}
               />
             </div>
@@ -162,7 +165,7 @@ const NewPostModal = () => {
               <>
                 {link.length > 0 && (
                   <p className="text-red text-sm">
-                  Link inválido
+                    {t("home.new_post.invalid_link")}
                   </p>
                 )}
               </>
@@ -182,7 +185,7 @@ const NewPostModal = () => {
                 type="text"
                 state={description}
                 setState={setDescription}
-                placeholder="Escreva uma legenda..."
+                placeholder={t("home.new_post.description_placeholder")}
                 border={false}
               />
             </div>

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect } from "react"
 import { useMediaQuery } from "react-responsive"
+import { useTranslation } from "react-i18next"
 import { PostProfileData } from "../interface/profile/PostProfileData"
 import { UserProfileData } from "../interface/profile/UserProfileData"
 import ModalContext from "../context/ModalContext"
@@ -18,6 +19,8 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" })
 
   const { setShowSettingsModal, changeShowUpdatePostModal } = useContext(ModalContext)
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,7 +83,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
               {userProfileData.postsNumber}
             </span>
             <span className="text-base text-gray font-medium">
-              Posts
+              {t("home.profile.posts")}
             </span>
           </div>
 
@@ -91,7 +94,7 @@ const ProfilePage = ({ incrementPage, userPostsData, userProfileData }: ProfileP
               {userProfileData.friendsNumber}
             </span>
             <span className="text-base text-gray font-medium">
-              Amigos
+              {t("home.profile.friends")}
             </span>
           </div>
         </section>
