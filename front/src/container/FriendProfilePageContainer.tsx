@@ -24,14 +24,18 @@ const FriendProfilePageContainer = () => {
   }
 
   const add = () => {
+    setLoading(true)
     user.addFriend(friendData.id).then(() => {
       setIsFriend(true)
+      setLoading(false)
     })
   }
 
   const remove = () => {
+    setLoading(true)
     user.removeFriend(friendData.id).then(() => {
       setIsFriend(false)
+      setLoading(false)
     })
   }
 
