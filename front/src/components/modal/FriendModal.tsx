@@ -7,6 +7,8 @@ import { FriendList } from "../../interface/friends/FriendList"
 import Loading from "../util/Loading"
 
 const FriendModal = () => {
+  const [ loading, setLoading ] = useState(false)
+
   const [ friendList, setFriendList ] = useState<FriendList>()
   const [ page, setPage ] = useState(0)
 
@@ -18,8 +20,10 @@ const FriendModal = () => {
   const user = useUser()
 
   useEffect(() => {
+    setLoading(true)
     user.getFriendList(page, pageSize).then((res) => {
       setFriendList(res)
+      setLoading(false)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ page ])
@@ -148,6 +152,8 @@ const FriendModal = () => {
           </div>
         </footer>
       </div>
+
+      {loading && <Loading />}
     </div>
   ) : (
     <Loading />

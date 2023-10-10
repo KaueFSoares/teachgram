@@ -88,18 +88,19 @@ const SettingsModal = () => {
             <p 
               className="underline text-lg text-orange"
               role="button"
+              onClick={() => hangleOnChangeLanguage()}
+            >
+              {t("settings.change_language")}
+            </p>
+            
+            <p 
+              className="underline text-lg text-orange"
+              role="button"
               onClick={() => handleOnLogout()}
             >
               {t("settings.logout")}
             </p>
 
-            <p 
-              className="underline text-lg text-orange"
-              role="button"
-              onClick={() => hangleOnChangeLanguage()}
-            >
-              {t("settings.change_language")}
-            </p>
           </main>
         </div>
         <RightImage />
