@@ -52,7 +52,7 @@ const FriendModal = () => {
     return pages
   }
 
-  return friendList ? (
+  return (!loading && friendList) ? (
     <div className="fixed w-full h-screen bg-black/50 flex items-center justify-center flex-col top-0 left-0">
       <div className="w-full h-full bg-white p-12 flex flex-col items-center justify-between
                       lg:w-2/5 lg:h-auto lg:rounded-3xl lg:p-8
