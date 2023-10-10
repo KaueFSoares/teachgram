@@ -90,7 +90,7 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfi
             ${friendData.isFriend ? "" : "text-white bg-orange border-orange"}`}
           >
             {friendData.isFriend ? "Amigos" : "Adicionar"}
-            {friendData.isFriend && <img src="/icon/check.svg" alt="" className="w-4" />}
+            {friendData.isFriend && <img src="/icon/gray_check.svg" alt="" className="w-3" />}
           </button>
         </section>
           
