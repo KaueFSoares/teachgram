@@ -118,7 +118,7 @@ public class UserService {
 
         var friendship = friendshipRepository.findByFirstUserIdAndSecondUserId(user.getId(), id).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_FRIEND_NOT_FOUND)));
 
-        user.removeFriend(friendship.getSecondUser());
+        friendshipRepository.delete(friendship);
 
         return new DeleteResponseDTO(messageService.getMessage(MESSAGE.DELETED_FRIEND));
     }
