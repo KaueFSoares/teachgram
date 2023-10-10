@@ -24,7 +24,7 @@ const FriendProfilePageContainer = () => {
 
   useEffect(() => {
     setLoading(true)
-    user.getFriendProfile(username || "_").then((res) => {
+    user.getProfileByUsername(username || "_").then((res) => {
       setFriendData(res)
       setLoading(false)
     })
@@ -32,8 +32,7 @@ const FriendProfilePageContainer = () => {
   }, [ username ])
 
   useEffect(() => {
-    setLoading(true)
-    post.getFriendPosts(page, username || "_").then((res) => {
+    post.getAnyUserPosts(page, username || "_").then((res) => {
       setPostsData((prev) => prev.concat(res))
       setLoading(false)
     })
