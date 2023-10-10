@@ -44,7 +44,7 @@ const FriendModal = () => {
                         ${page === i && "bg-orange text-white border-orange"}`}
             key={`page${i}`}
             onClick={() => setPage(i)}
-            disabled={page === i}
+            disabled={page === i || page >= friendList.totalPages - 1}
           >
             {i + 1}
           </button>,
