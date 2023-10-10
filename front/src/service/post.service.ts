@@ -36,11 +36,11 @@ const usePosts = () => {
     return postsResponse.data as ShortPostsResponse
   }
 
-  const getFriendPostsFromApi = async (page: number, username: string) => {
-    const postsResponse = await api.get(`${URL.FRIENDS_POSTS}/${username}`, {
+  const getAnyUserPostsFromApi = async (page: number, username: string) => {
+    const postsResponse = await api.get(`${URL.POSTS}/any/${username}`, {
       params: {
         page: page,
-        size: 4,
+        size: 12,
       },
     })
       .catch((error) => {
@@ -112,8 +112,8 @@ const usePosts = () => {
     }) as PostProfileData[]
   }
 
-  const getFriendPosts = async (page: number, username: string) => {
-    const postsData = await getFriendPostsFromApi(page, username)
+  const getAnyUserPosts = async (page: number, username: string) => {
+    const postsData = await getAnyUserPostsFromApi(page, username)
 
     return postsData.content.map((post) => {
       return {
@@ -166,7 +166,7 @@ const usePosts = () => {
     getPosts: getPosts,   
     savePost: savePost, 
     getOwnPosts: getOwnPosts,
-    getFriendPosts: getFriendPosts,
+    getAnyUserPosts: getAnyUserPosts,
     getSinglePost: getSinglePost,
     updatePost: updatePost,
     deletePost: deletePost,

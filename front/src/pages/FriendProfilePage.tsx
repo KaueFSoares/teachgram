@@ -20,14 +20,13 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfi
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if ((entries.some((entry) => entry.isIntersecting)) && (postsData.length > 11)) {
+        if ((entries.some((entry) => entry.isIntersecting))) {
           incrementPage()
         }
       },
-      { threshold: 1 },
     )
 
-    observer.observe(document.querySelector("#load-more") as Element)
+    observer.observe(document.querySelector("#load-more-2") as Element)
     
 
     return () => observer.disconnect()
@@ -106,7 +105,7 @@ const FriendProfilePage = ({ incrementPage, friendData, postsData }: FriendProfi
             )
           })}
         </section>
-        <div id="load-more" className="opacity-0 h-px w-2"></div>
+        <div id="load-more-2" className="opacity-0 h-px w-2"></div>
       </div>
 
       { isDesktop && <Navbar />}

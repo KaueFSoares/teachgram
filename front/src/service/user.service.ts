@@ -34,8 +34,8 @@ export const useUser = () => {
     return friendListResponse.data as FriendListResponse
   }
 
-  const getFriendFromApi = async (username: string) => {
-    const friendResponse = await api.get(`${URL.FRIENDS  }/${username}`)
+  const getAnyUserFromApi = async (username: string) => {
+    const friendResponse = await api.get(`${URL.USER}/any/${username}`)
       .catch((error) => {
         throw error
       })
@@ -126,8 +126,8 @@ export const useUser = () => {
     } as UserProfileData
   }
 
-  const getFriendProfile = async (username: string) => {
-    const friendResponse = await getFriendFromApi(username)
+  const getProfileByUsername = async (username: string) => {
+    const friendResponse = await getAnyUserFromApi(username)
 
     return friendResponse
   }
@@ -140,7 +140,7 @@ export const useUser = () => {
     updateAccountData: updateAccountData,
     updateProfileData: updateProfileData,
     getProfileData: getProfileData,
-    getFriendProfile: getFriendProfile,
+    getProfileByUsername: getProfileByUsername,
   }
 }
 
