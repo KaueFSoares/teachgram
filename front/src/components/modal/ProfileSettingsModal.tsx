@@ -39,6 +39,7 @@ const AccountSettingsModal = ({ onCancel }: Props) => {
     user.updateProfileData(photo, name, username, bio).then(() => {
       setLoading(false)
       onCancel()
+      window.location.reload()
     })
   }
 
