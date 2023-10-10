@@ -61,4 +61,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.deleteFriend(id));
     }
 
+    @GetMapping(ROUTE.ANY + "/{username}")
+    public ResponseEntity<UserProfileDTO> getAnyUser(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.getAnyUser(username));
+    }
+
 }

@@ -9,6 +9,7 @@ public class ROUTE {
     public static final String LIKE = "/like";
     public static final String DISLIKE = "/dislike";
     public static final String ME = "/me";
+    public static final String ANY = "/any";
 
     public static final String AUTH = "/auth";
     public static final String LOGIN = "/login";

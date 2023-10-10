@@ -131,4 +131,10 @@ public class PostService {
 
         return postRepository.findAllByUserAndDeletedFalse(friendship.getSecondUser(), pageable).map(ShortUserPostDetailsDTO::new);
     }
+
+    public Page<ShortUserPostDetailsDTO> getAnyUserPosts(String username, Pageable pageable) {
+        var user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
+
+        return postRepository.findAllByUserAndDeletedFalse(user, pageable).map(ShortUserPostDetailsDTO::new);
+    }
 }

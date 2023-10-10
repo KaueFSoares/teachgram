@@ -37,4 +37,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query("select count(f) from Friendship f where f.firstUser.id = :userId")
     Long countFriendsForUser(String userId);
+
+    Optional<User> findByUsername(String username);
 }

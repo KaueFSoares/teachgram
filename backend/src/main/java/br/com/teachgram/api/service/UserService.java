@@ -122,4 +122,16 @@ public class UserService {
 
         return new DeleteResponseDTO(messageService.getMessage(MESSAGE.DELETED_FRIEND));
     }
+
+    public UserProfileDTO getAnyUser(String username) {
+        var user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException(messageService.getMessage(MESSAGE.USER_NOT_FOUND)));
+
+        var friendsCount = userRepository.countFriendsForUser(user.getId());
+
+        var postsCount = postRepository.countPostsForUser(user.getId());
+
+        var isFriend = friendshipRepository.existsByFirstUserIdAndSecondUserId(getAuthenticatedUser().getId(), user.getId());
+
+        return new UserProfileDTO(user, friendsCount, postsCount, isFriend);
+    }
 }

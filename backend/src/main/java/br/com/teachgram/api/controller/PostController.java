@@ -87,4 +87,9 @@ public class PostController {
         return ResponseEntity.ok().body(postService.getFriendPosts(username, pageable));
     }
 
+    @GetMapping(ROUTE.ANY + "/{username}")
+    public ResponseEntity<Page<ShortUserPostDetailsDTO>> getAnyUserPosts(@PathVariable String username, Pageable pageable) {
+        return ResponseEntity.ok().body(postService.getAnyUserPosts(username, pageable));
+    }
+
 }
