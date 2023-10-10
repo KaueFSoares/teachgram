@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PostRepository extends JpaRepository<Post, String> {
 
-    @Query("select p from Post p where p.user = ?1 and p.deleted = false")
+    @Query("select p from Post p where p.user = ?1 and p.deleted = false order by p.createdAt desc")
     Page<Post> findAllByUserAndDeletedFalse(User user, Pageable pageable);
 
     @Query("select p from Post p where p.id = :id and p.deleted = false")
