@@ -74,6 +74,38 @@
             "post": {
                 "time": "há {{time}} {{unit}}",
                 "likes": "curtidas"
+            },
+            "delete_post": {
+                "title": "Excluir publicação?",
+                "cancel": "Cancelar",
+                "confirm": "Confirmar"
+            },
+            "friends": {
+                "title": "Amigos",
+                "view_profile": "Ver perfil"
+            },
+            "new_post": {
+                "title": "Nova publicação",
+                "next": "Avançar",
+                "share": "Compartilhar",
+                "image_link": "Link da imagem",
+                "image_link_placeholder": "Insira aqui a url da imagem",
+                "invalid_link": "Link inválido",
+                "description_placeholder": "Escreva uma legenda..."
+            },
+            "update_post": {
+                "title": "Editar publicação",
+                "save": "Salvar",
+                "description_placeholder": "Escreva uma legenda..."
+            },
+            "post_popup": {
+                "edit": "Editar",
+                "delete": "Excluir"
+            },
+            "profile": {
+                "friends": "Amigos",
+                "posts": "Posts",
+                "add": "Adicionar"
             }
         },
         "units": {

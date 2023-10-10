@@ -9,15 +9,15 @@
             "profile": "Profile"
         },
         "login": {
-            "makelogin": "Make your login",
-            "forgotpassword": "Forgot my password",
+            "makelogin": "Log in",
+            "forgotpassword": "Forgot password",
             "enter": "Enter",
             "remember": "Remember password",
             "donthaveaccount": "Don't have an account?",
             "signup": "Sign up",
-            "enterwith": "Enter with",
-            "google": "Google",
-            "apple": "Apple",
+            "enterwith": "Log in with",
+            "google": " Google",
+            "apple": " Apple",
             "input": {
                 "placeholder": {
                     "email": "Enter your email",
@@ -30,18 +30,18 @@
             }
         },
         "signup": {
-            "createaccount": "Create your account",
+            "createaccount": "Create an account",
             "next": "Next",
             "insertlink": "Insert the link to your profile picture",
             "save": "Save",
             "alreadyhaveaccount": "Already have an account?",
-            "login": "Login",
+            "login": "Log in",
             "input": {
                 "placeholder": {
                     "name": "Enter your name",
                     "email": "Enter your email",
                     "username": "@your_username",
-                    "bio": "Write a description",
+                    "bio": "Add a description",
                     "phone": "Enter your phone number",
                     "password": "Enter your password",
                     "link": "Insert your link"
@@ -72,8 +72,40 @@
             "noposts": "No posts",
             "backtotop": "Back to top",
             "post": {
-                "time": "{{time}} {{unit}} ago",
+                "time": " {{time}} {{unit}} ago",
                 "likes": "likes"
+            },
+            "delete_post": {
+                "title": "Delete post?",
+                "cancel": "Cancel",
+                "confirm": "Confirm"
+            },
+            "friends": {
+                "title": "Friends",
+                "view_profile": "View profile"
+            },
+            "new_post": {
+                "title": "New post",
+                "next": "Next",
+                "share": "Share",
+                "image_link": "Image link",
+                "image_link_placeholder": "Enter the image URL here",
+                "invalid_link": "Invalid link",
+                "description_placeholder": "Write a caption..."
+            },
+            "update_post": {
+                "title": "Edit post",
+                "save": "Save",
+                "description_placeholder": "Write a caption..."
+            },
+            "post_popup": {
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "profile": {
+                "friends": "Friends",
+                "posts": "Posts",
+                "add": "Add"
             }
         },
         "units": {
@@ -94,8 +126,8 @@
             "accountSettings": "Account settings",
             "edit": "Edit profile",
             "delete": "Delete account",
-            "logout": "Logout",
-            "change_language": "Change to portuguese",
+            "logout": "Log out",
+            "change_language": "Switch to Portuguese",
             "delete_modal": {
                 "delete": "Delete account",
                 "alert": "All your data will be deleted.",
@@ -114,7 +146,7 @@
             },
             "profile_settings": {
                 "title": "Edit profile",
-                "photo": "Profile picture",
+                "photo": "Profile photo",
                 "name": "Name",
                 "username": "Username",
                 "bio": "Description",
