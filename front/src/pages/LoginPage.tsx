@@ -208,6 +208,8 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
           <button 
             type="button"
             className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
+            // eslint-disable-next-line no-alert
+            onClick={() => alert("Not implemented yet")}
           >
             <img src="/icon/google_icon.svg" alt="Google" />
             <p>{t("login.enterwith")}{t("login.google")}</p>
@@ -216,6 +218,8 @@ const LoginPage = ({ email, password, setEmail, setPassword, handleSubmit }: Log
           <button 
             type="button"
             className="w-full flex gap-6 shadow-full py-4 justify-center rounded-lg text-gray"
+            // eslint-disable-next-line no-alert
+            onClick={() => alert("Not implemented yet")}
           >
             <img src="/icon/apple_icon.svg" alt="Apple" />
             <p>{t("login.enterwith")}{t("login.apple")}</p>
