@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom"
 import { FriendProfilePageContainer, HomePageContainer, LoginPageContainer, ProfilePageContainer, SignupPageContainer } from "../container"
 import PrivateRoutes from "./PrivateRoutes"
 import RoutesBase from "./RoutesBase"
@@ -34,6 +34,10 @@ const AppRoutes = ({ authenticated }: Props) => {
             {
               path: "/profile/:username",
               element: <FriendProfilePageContainer />,
+            },
+            {
+              path: "*",
+              element: <Navigate to="/" />,
             },
           ],
         },
