@@ -5,6 +5,7 @@ import br.com.teachgram.api.domain.user.UserSeeder;
 import br.com.teachgram.api.domain.user.dto.LoginRequestDTO;
 import br.com.teachgram.api.domain.user.dto.UpdateRequestDTO;
 import br.com.teachgram.api.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
@@ -41,15 +43,6 @@ class UserControllerTest extends TestsBase {
         this.updateRequestDTO = updateRequestDTO;
     }
 
-    @BeforeEach
-    void setUp() {
-        super.userSeeder.seed();
-    }
-
-    @AfterEach
-    void tearDown() {
-        super.userRepository.deleteAll();
-    }
 
     private String getJsonContent(String mail, String password, String username, String name, String phone, String bio, String photo) throws IOException {
         return updateRequestDTO.write(
@@ -74,6 +67,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 200 when updating a user with valid data and authenticated")
     void update1() throws Exception {
         var jsonContent = getJsonContent(
@@ -99,6 +94,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 403 when updating a user with valid data and not authenticated")
     void update2() throws Exception {
         var jsonContent = getJsonContent(
@@ -123,6 +120,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 401 when updating a user with valid data and invalid token")
     void update3() throws Exception {
         var jsonContent = getJsonContent(
@@ -148,6 +147,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 400 when updating a user with invalid data")
     void update4() throws Exception {
         var jsonContent = getJsonContent(
@@ -173,6 +174,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 409 when updating a user with an email already in use")
     void update5() throws Exception {
         var jsonContent = getJsonContent(
@@ -198,6 +201,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 409 when updating a user with an phone already in use")
     void update6() throws Exception {
         var jsonContent = getJsonContent(
@@ -223,6 +228,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 409 when updating a user with an username already in use")
     void update7() throws Exception {
         var jsonContent = getJsonContent(
@@ -248,6 +255,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 200 when deleting a user authenticated")
     void delete1() throws Exception {
         super.createTestUser();
@@ -262,6 +271,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 403 when deleting a user not authenticated")
     void delete2() throws Exception {
         super.createTestUser();
@@ -275,6 +286,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 401 when deleting a user with invalid token")
     void delete3() throws Exception {
         super.createTestUser();
@@ -289,6 +302,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 200 when getting user details authenticated")
     void details1() throws Exception {
         super.createTestUser();
@@ -303,6 +318,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 403 when getting user details not authenticated")
     void details2() throws Exception {
         super.createTestUser();
@@ -316,6 +333,8 @@ class UserControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 401 when getting user details with invalid token")
     void details3() throws Exception {
         super.createTestUser();

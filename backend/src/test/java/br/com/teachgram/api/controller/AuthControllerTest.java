@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
@@ -44,12 +45,6 @@ class AuthControllerTest extends TestsBase {
 
         this.refreshTokenRequestDTO = refreshTokenRequestDTO;
         this.signupRequestDTO = signupRequestDTO;
-    }
-
-    @AfterEach
-    void tearDown() {
-        super.userRepository.deleteAll();
-        super.userSeeder.seed();
     }
 
     private MockHttpServletResponse getResponse(String jsonContent) throws Exception {
@@ -232,6 +227,8 @@ class AuthControllerTest extends TestsBase {
     }
 
     @Test
+    @Transactional
+    @Rollback
     @DisplayName("Must return 201 when signup with valid credentials")
     public void signup1() throws Exception {
 
