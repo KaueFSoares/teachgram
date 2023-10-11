@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useUser } from "../service/user.service"
 import { SingleFriendProfileResponse } from "../interface/friend_profile/response/SingleFriendProfileResponse"
@@ -18,6 +18,8 @@ const FriendProfilePageContainer = () => {
   const post = usePosts()
 
   const { username } = useParams<{ username: string }>()
+
+  const navigate = useNavigate()
   
   const incrementPage = () => {
     setPage((prev) => prev + 1)
@@ -46,6 +48,10 @@ const FriendProfilePageContainer = () => {
       setIsFriend(res.isFriend)
       setLoading(false)
     })
+      .catch(() => {
+        setLoading(false)
+        navigate("/")
+      })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ username ])
 
