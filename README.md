@@ -2,6 +2,8 @@
 
 Olá, caro amigo(a) da 3035 Tech, tudo bem?
 
+Considerações: alguns commits foram feitos após o dia 10/10, mas são referentes apenas a alterações de README's, a respeito das intruções de como rodar o projeto.
+
 Informações específicas sobre o back ou front end, como fazer para rodar localmente, podem ser encontradas nos seus respectivos readme's
 
 Aqui vai uma listagem rápida do que consegui ou não fazer do que foi solicitado na instrução do projeto e alguns diferenciais dele:
@@ -17,6 +19,9 @@ Aqui vai uma listagem rápida do que consegui ou não fazer do que foi solicitad
   
 ### Suporte a internacionalização:
 - A fim de aproximar do que é uma rede social de fato, implementei o suporte a internacionalização, tanto no front-end quanto no back-end, através das implementações da i18n. No momento a aplicação conta com apenas dois idiomas que podem ser trocados nas configurações, mas a adição de mais idiomas é simples e rápida;
+
+### Seeding:
+- Ao subir a aplicação pela primeira vez, diversos usuários e posts são criados para fins de testes. O padrão dos usuários é e-mail: nome@nome.nome e senha: nome. Alguns usuários interessantes são julia, pedro e manuela, sendo pedro um usuário com ao menos 37 amigos e manuela sem nenhum amigo adicionado, enquanto julia tem alguns posts publicados. 
 
 ### Autenticação com Google e Apple:
 - Não consegui fazer a parte de autenticação usando as api's do google e apple. Cheguei conseguir implementar a autenticação com o google no front-end mas recebi a mensagem de que a forma que usei estava descontinuada e não era recomendada, e não consegui encontrar conteúdo o bastante para implementar no tempo que tivemos :/ .
