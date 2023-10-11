@@ -20,7 +20,7 @@ ou
   yarn
 ```
 
-4. Suba o servidor - caso opte por rodar o servidor localmente, siga as instruções na pasta destinada ao back-end - ou use o servidor que já está no ar em [teachgram-api.up.railway.app](https://teachgram-api.up.railway.app)
+4. Suba o servidor - caso opte por rodar o servidor localmente, siga as instruções na pasta destinada ao back-end - ou use o servidor que já está no ar em [teachgram-api.up.railway.app](https://teachgram-api.up.railway.app), mas me comunique para que libere o cors para a url local, uma vez que no momento ele está aceitando apenas a url que está no ar ([teachgram.kauesoares.website](https://teachgram.kauesoares.website))
 
 5. Configure as variáveis de ambiente:
 
