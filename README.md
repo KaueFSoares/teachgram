@@ -1,5 +1,7 @@
 # teachgram
 
+### *Todos os deploys foram tirados do ar devido ao fim do meu período de testes no railway :/* 
+
 Olá, caro amigo(a) da 3035 Tech, tudo bem?
 
 Considerações: alguns commits foram feitos após o dia 10/10, mas são referentes apenas a alterações de README's, a respeito das intruções de como rodar o projeto.
